@@ -1,0 +1,50 @@
+{
+    "manifest_version": 2,
+    "name": "Tab Genius",
+    "version": "0.1",
+
+    "description": "This extension assists with tab management",
+    "icons": {
+        "16": "img/icon16.png",
+        "32": "img/icon32.png",
+        "48": "img/icon48.png",
+        "128": "img/icon128.png" 
+    },
+
+    "background": {
+        "scripts": ["js/background.js"]
+    },
+    "commands": {
+        "tabs-cut": {
+            "suggested_key": {
+                "default": "Shift+Alt+X"
+            },
+            "description": "Prepare tabs to be moved"
+        },
+        "tabs-copy": {
+            "suggested_key": {
+                "default": "Shift+Alt+C"
+            },
+            "description": "Prepare tabs to be duplicated"
+        },
+        "tabs-paste": {
+            "suggested_key": {
+                "default": "Shift+Alt+V"
+            },
+            "description": "Paste prepared tabs"
+        },
+        /*"tabs-duplicate": {
+            "suggested_key": {
+                "default": "Shift+Alt+D"
+            },
+            "description": "Duplicate selected tabs in same window"
+        },*/
+        "tabs-paste-undo": {
+            "suggested_key": {
+                "default": "Shift+Alt+Z"
+            },
+            "description": "Undo last move/duplicate action"
+        }
+    },
+    "permissions": ["tabs"]
+}
