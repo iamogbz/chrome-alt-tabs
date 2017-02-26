@@ -15,7 +15,7 @@
         "scripts": ["js/background.js"]
     },
     "commands": {
-        "tabs-cut": {
+        /*"tabs-cut": {
             "suggested_key": {
                 "default": "Shift+Alt+X"
             },
@@ -33,7 +33,7 @@
             },
             "description": "Paste prepared tabs"
         },
-        /*"tabs-duplicate": {
+        "tabs-duplicate": {
             "suggested_key": {
                 "default": "Shift+Alt+D"
             },
@@ -44,6 +44,18 @@
                 "default": "Shift+Alt+Z"
             },
             "description": "Undo last move/duplicate action"
+        },
+        "tabs-move-next": {
+            "suggested_key": {
+                "default": "Shift+Alt+PageUp"
+            },
+            "description": "Move selected tabs to the next window, one is created if none exists"
+        },
+        "tabs-move-prev": {
+            "suggested_key": {
+                "default": "Shift+Alt+PageDown"
+            },
+            "description": "Move selected tabs to the previous window"
         }
     },
     "permissions": ["tabs"]

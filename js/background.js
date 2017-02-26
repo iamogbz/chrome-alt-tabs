@@ -58,6 +58,7 @@ var app = function() {
             var wId = window == undefined ? undefined : window.id;
             // perform copy/move function
             if(command == CMD_CUT) {
+                pastedTabs = [];
                 chrome.tabs.move(getTabIds(tabs), {windowId: wId, index:-1}, 
                     function (_tabs) {
                         // save pasted tabs for undo action
@@ -65,25 +66,34 @@ var app = function() {
                             pastedTabs.push(_tabs);
                         } else pastedTabs = _tabs;
                         console.log("moved tabs: ", pastedTabs);
-                        // TODO highlight tabs
+                        // set tab to active and highlight
+                        chrome.tabs.update(pastedTabs[0].id, {active:true});
+                        pastedTabs.map(function(t) {
+                            chrome.tabs.update(t.id, {highlighted:true});
+                        });
                     });
             } else if(command == CMD_COPY) {
                 // TODO use duplication and then move
                 pastedTabs = []
                 for(var i = 0; i < tabs.length; i++) {
-                    chrome.tabs.create({windowId: wId, url: tabs[i].url}, 
+                    chrome.tabs.create({windowId: wId, url: tabs[i].url, active:true}, 
                         function(tab) {
                             pastedTabs.push(tab);
+                            // set tab to active and highlight
+                            chrome.tabs.update(tab.id, {highlighted:true});
                         });
                 }
                 console.log("copied tabs: ", pastedTabs);
-                // TODO highlight tabs
             }
+            // switch to window
+            chrome.windows.update(wId, {focused:true});
         },
         undoLastCommand: function() {
             if(lastCommand == undefined) {
                 return false;
             } else {
+                // switch to source window
+                chrome.windows.update(sourceWindow.id, {focused:true});
                 if(lastCommand == CMD_COPY) {
                     chrome.tabs.remove(getTabIds(pastedTabs), function() {
                         console.log("removed tabs: ", pastedTabs);
@@ -144,8 +154,34 @@ chrome.commands.onCommand.addListener(function(command) {
             } else console.log("undo failed");
             break;
         case CMD_MOVE_NEXT:
-            break;
         case CMD_MOVE_PREV:
+            app.setPendingCommand(command);
+            chrome.windows.getLastFocused({}, function (window) {
+                console.log("move from window:", window);
+                app.setSourceWindow(window);
+                chrome.tabs.query({highlighted: true, windowId: window.id}, function(tabs){
+                    app.setSelectedTabs(tabs);
+                    chrome.windows.getAll({windowTypes: ['normal']}, function (windows){
+                        if(windows.length == 1) {
+                            chrome.windows.create({}, function (nWindow){
+                                app.pasteTabs(nWindow, tabs, CMD_CUT);
+                            });
+                        } else {
+                            var idx = 0;
+                            do {
+                                if(windows[idx].id == window.id) {
+                                    idx += (command == CMD_MOVE_NEXT ? 1 : -1);
+                                    break;
+                                }
+                            } while(++idx < windows.length);
+                            if(idx == windows.length) idx = 0;
+                            else if(idx < 0) idx = windows.length - 1;
+                            var nWindow = windows[idx];
+                            app.pasteTabs(nWindow, tabs, CMD_CUT);
+                        }
+                    });
+                });
+            });
             break;
     }
 });
