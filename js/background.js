@@ -66,7 +66,7 @@ var app = function() {
                             pastedTabs.push(_tabs);
                         } else pastedTabs = _tabs;
                         console.log("moved tabs: ", pastedTabs);
-                        // set tab to active and highlight
+                        // set first tab to active and highlight all
                         chrome.tabs.update(pastedTabs[0].id, {active:true});
                         pastedTabs.map(function(t) {
                             chrome.tabs.update(t.id, {highlighted:true});
@@ -76,10 +76,11 @@ var app = function() {
                 // TODO use duplication and then move
                 pastedTabs = []
                 for(var i = 0; i < tabs.length; i++) {
-                    chrome.tabs.create({windowId: wId, url: tabs[i].url, active:true}, 
+                    // set first tab to active and highlight all
+                    chrome.tabs.create({windowId: wId, url: tabs[i].url, 
+                        active:true}, 
                         function(tab) {
                             pastedTabs.push(tab);
-                            // set tab to active and highlight
                             chrome.tabs.update(tab.id, {highlighted:true});
                         });
                 }
@@ -89,7 +90,7 @@ var app = function() {
             chrome.windows.update(wId, {focused:true});
         },
         undoLastCommand: function() {
-            if(lastCommand == undefined) {
+            if(lastCommand == undefined || pastedTabs.length == 0) {
                 return false;
             } else {
                 // switch to source window
@@ -105,6 +106,11 @@ var app = function() {
                         {windowId: sourceWindow.id, index:-1}, 
                         function (_tabs) {
                             console.log("unmoved tabs: ", _tabs);
+                            // set first tab to active and highlight all
+                            chrome.tabs.update(_tabs[0].id, {active:true});
+                            _tabs.map(function(t) {
+                                chrome.tabs.update(t.id, {highlighted:true});
+                            });
                         });
                         pastedTabs = [];
                         sourceWindow = undefined;
@@ -122,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 chrome.commands.onCommand.addListener(function(command) {
     console.log('command listener:', command);
     switch(command) {
-        case CMD_CUT:
+        /*case CMD_CUT:
         case CMD_COPY:
             app.setPendingCommand(command);
             chrome.windows.getLastFocused({}, function (window) {
@@ -147,12 +153,13 @@ chrome.commands.onCommand.addListener(function(command) {
                 console.log("last focused window:", window);
                 app.pasteTabs(window, app.getSelectedTabs(), app.getPendingCommand());
             });
-            break;
+            break;*/
         case CMD_UNDO:
             if(app.undoLastCommand()) { 
                 console.log("undo successful");
             } else console.log("undo failed");
             break;
+        case CMD_CUT:
         case CMD_MOVE_NEXT:
         case CMD_MOVE_PREV:
             app.setPendingCommand(command);
@@ -162,10 +169,12 @@ chrome.commands.onCommand.addListener(function(command) {
                 chrome.tabs.query({highlighted: true, windowId: window.id}, function(tabs){
                     app.setSelectedTabs(tabs);
                     chrome.windows.getAll({windowTypes: ['normal']}, function (windows){
-                        if(windows.length == 1) {
-                            chrome.windows.create({}, function (nWindow){
-                                app.pasteTabs(nWindow, tabs, CMD_CUT);
-                            });
+                        if(windows.length == 1 || command == CMD_CUT) {
+                            var tabA = tabs[0];
+                            chrome.windows.create({tabId: tabA.id}, 
+                                function (nWindow){
+                                    app.pasteTabs(nWindow, tabs, CMD_CUT);
+                                });
                         } else {
                             var idx = 0;
                             do {

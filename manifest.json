@@ -15,13 +15,13 @@
         "scripts": ["js/background.js"]
     },
     "commands": {
-        /*"tabs-cut": {
+        "tabs-cut": {
             "suggested_key": {
                 "default": "Shift+Alt+X"
             },
-            "description": "Prepare tabs to be moved"
+            "description": "Move tabs out to new window"
         },
-        "tabs-copy": {
+        /*"tabs-copy": {
             "suggested_key": {
                 "default": "Shift+Alt+C"
             },
