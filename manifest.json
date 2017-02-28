@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "Tab Genius",
-    "version": "0.1",
+    "name": "Alt Tab Shortcuts",
+    "version": "1.0",
 
-    "description": "This extension assists with tab management",
+    "description": "This extension speeds up tab management with simple shortcuts",
     "icons": {
         "16": "img/icon16.png",
         "32": "img/icon32.png",
@@ -17,46 +17,34 @@
     "commands": {
         "tabs-cut": {
             "suggested_key": {
-                "default": "Shift+Alt+X"
+                "default": "Shift+Alt+Up"
             },
-            "description": "Move tabs out to new window"
+            "description": "Pop tabs out into new window"
         },
-        /*"tabs-copy": {
-            "suggested_key": {
-                "default": "Shift+Alt+C"
-            },
-            "description": "Prepare tabs to be duplicated"
-        },
-        "tabs-paste": {
-            "suggested_key": {
-                "default": "Shift+Alt+V"
-            },
-            "description": "Paste prepared tabs"
-        },
-        "tabs-duplicate": {
-            "suggested_key": {
-                "default": "Shift+Alt+D"
-            },
-            "description": "Duplicate selected tabs in same window"
-        },*/
         "tabs-paste-undo": {
             "suggested_key": {
-                "default": "Shift+Alt+Z"
+                "default": "Shift+Alt+Down"
             },
-            "description": "Undo last move/duplicate action"
+            "description": "Pop tabs back into last window"
         },
         "tabs-move-next": {
             "suggested_key": {
-                "default": "Shift+Alt+PageUp"
+                "default": "Shift+Alt+Right"
             },
-            "description": "Move selected tabs to the next window, one is created if none exists"
+            "description": "Move tabs to the next/new window"
         },
         "tabs-move-prev": {
             "suggested_key": {
-                "default": "Shift+Alt+PageDown"
+                "default": "Shift+Alt+Left"
             },
-            "description": "Move selected tabs to the previous window"
+            "description": "Move tabs to the previous window"
         }
     },
+    "options_page": "options.html",
+    "options_ui": {
+		"page": "options.html",
+		"chrome_style": true
+	},
+    "short_name": "AltTabs",
     "permissions": ["tabs"]
 }

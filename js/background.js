@@ -1,9 +1,7 @@
 /*
  *  Document    : background.js
  *  Author      : ogbizi
- *  Description : Chrome Tab Genuis background script
  *  Dependencies: chrome api
- *  Domain      : com.chrometabgenius
  */
 "use strict";
 var CMD_CUT = "tabs-cut";
@@ -105,10 +103,15 @@ var app = function() {
                     chrome.tabs.move(getTabIds(pastedTabs), 
                         {windowId: sourceWindow.id, index:-1}, 
                         function (_tabs) {
-                            console.log("unmoved tabs: ", _tabs);
+                            // account for singular tab moves
+                            var tabs = [];
+                            if(_tabs.length == undefined) {
+                                tabs.push(_tabs);
+                            } else tabs = _tabs;
+                            console.log("unmoved tabs: ", tabs);
                             // set first tab to active and highlight all
-                            chrome.tabs.update(_tabs[0].id, {active:true});
-                            _tabs.map(function(t) {
+                            chrome.tabs.update(tabs[0].id, {active:true});
+                            tabs.map(function(t) {
                                 chrome.tabs.update(t.id, {highlighted:true});
                             });
                         });
@@ -120,10 +123,6 @@ var app = function() {
         }
     };
 }();
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM loaded");
-});
 
 chrome.commands.onCommand.addListener(function(command) {
     console.log('command listener:', command);
