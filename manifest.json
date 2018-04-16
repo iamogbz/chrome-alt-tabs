@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Alt Tab Shortcuts",
-    "version": "1.0",
+    "version": "1.0.2",
 
     "description": "This extension speeds up tab management with simple shortcuts",
     "icons": {
