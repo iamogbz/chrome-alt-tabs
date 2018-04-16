@@ -23,6 +23,8 @@ var app = function () {
     var sourceWindow;
     // array of tabs just pasted
     var pastedTabs = [];
+    // map of tab ids to previous locations
+    var pastedTabsIdx = {};
     // get tab id from tab objects
     var getTabIds = function (tabs) {
         var tabIds = tabs.map(function (t) {
@@ -51,6 +53,13 @@ var app = function () {
         getSelectedTabs: function () {
             return selectedTabs;
         },
+        /**
+         * Place tabs in specified window
+         * @param window target window
+         * @param tabs list of tabs to place
+         * @param command triggered the action
+         * @returns
+         */
         pasteTabs: function (window, tabs, command) {
             console.log("paste tabs:", window, tabs, command);
             lastCommand = command;
@@ -59,6 +68,11 @@ var app = function () {
             // perform copy/move function
             if (command == CMD_CUT) {
                 pastedTabs = [];
+                pastedTabsIdx = {};
+                // save tab indexes
+                for (var i = 0; i < tabs.length; i++) {
+                    pastedTabsIdx[tabs[i].id] = tabs[i].index;
+                }
                 chrome.tabs.move(getTabIds(tabs), {
                         windowId: wId,
                         index: -1
@@ -68,7 +82,7 @@ var app = function () {
                         if (_tabs.length == undefined) {
                             pastedTabs.push(_tabs);
                         } else pastedTabs = _tabs;
-                        console.log("moved tabs: ", pastedTabs);
+                        console.log("moved tabs: ", pastedTabs, pastedTabsIdx);
                         // set first tab to active and highlight all
                         chrome.tabs.update(pastedTabs[0].id, {
                             active: true
@@ -81,7 +95,7 @@ var app = function () {
                     });
             } else if (command == CMD_COPY) {
                 // TODO use duplication and then move
-                pastedTabs = []
+                pastedTabs = [];
                 for (var i = 0; i < tabs.length; i++) {
                     // set first tab to active and highlight all
                     chrome.tabs.create({
@@ -118,32 +132,31 @@ var app = function () {
                         sourceWindow = undefined;
                     });
                 } else if (lastCommand == CMD_CUT) {
-                    chrome.tabs.move(getTabIds(pastedTabs), {
+                    for (var i = 0; i < pastedTabs.length; i++) {
+                        var tab = pastedTabs[i];
+                        chrome.tabs.move(tab.id, {
                             windowId: sourceWindow.id,
-                            index: -1
-                        },
-                        function (_tabs) {
-                            // account for singular tab moves
-                            var tabs = [];
-                            if (_tabs.length == undefined) {
-                                tabs.push(_tabs);
-                            } else tabs = _tabs;
-                            console.log("unmoved tabs: ", tabs);
-                            // set first tab to active and highlight all
-                            chrome.tabs.update(tabs[0].id, {
-                                active: true
-                            });
-                            tabs.map(function (t) {
-                                chrome.tabs.update(t.id, {
-                                    highlighted: true
-                                });
+                            index: pastedTabsIdx[tab.id]
+                        });
+                    }
+                    var tabs = pastedTabs;
+                    if (tabs.length > 0) {
+                        // set first tab to active and highlight all
+                        chrome.tabs.update(tabs[0].id, {
+                            active: true
+                        });
+                        tabs.map(function (t) {
+                            chrome.tabs.update(t.id, {
+                                highlighted: true
                             });
                         });
+                    }
                     pastedTabs = [];
+                    pastedTabsIdx = {};
                     sourceWindow = undefined;
                 }
-                return true;
             }
+            return true;
         }
     };
 }();
