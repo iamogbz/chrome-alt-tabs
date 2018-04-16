@@ -12,111 +12,135 @@ var CMD_UNDO = "tabs-paste-undo";
 var CMD_MOVE_NEXT = "tabs-move-next";
 var CMD_MOVE_PREV = "tabs-move-prev";
 
-var app = function() {
+var app = function () {
     // command to be executed
-    var pendingCommand = undefined;
+    var pendingCommand;
     // array of tabs to be pasted
     var selectedTabs = [];
     // last command executed
-    var lastCommand = undefined;
+    var lastCommand;
     // window tabs were pasted from
-    var sourceWindow = undefined;
+    var sourceWindow;
     // array of tabs just pasted
     var pastedTabs = [];
     // get tab id from tab objects
     var getTabIds = function (tabs) {
-        var tabIds = tabs.map(function (t){ return t.id; });
+        var tabIds = tabs.map(function (t) {
+            return t.id;
+        });
         console.log("tab ids: ", tabIds);
         return tabIds;
     };
-    
+
     return {
-        setSourceWindow: function(window) {
+        setSourceWindow: function (window) {
             console.log('set source window:', window);
             sourceWindow = window;
         },
-        setPendingCommand: function(command) {
+        setPendingCommand: function (command) {
             console.log('set pending command:', command);
             pendingCommand = command;
         },
-        getPendingCommand: function() {
+        getPendingCommand: function () {
             return pendingCommand;
         },
-        setSelectedTabs: function(tabs) {
+        setSelectedTabs: function (tabs) {
             console.log("set selected tabs:", tabs);
             selectedTabs = tabs;
         },
-        getSelectedTabs: function() {
+        getSelectedTabs: function () {
             return selectedTabs;
         },
-        pasteTabs: function(window, tabs, command) {
+        pasteTabs: function (window, tabs, command) {
             console.log("paste tabs:", window, tabs, command);
             lastCommand = command;
             pendingCommand = undefined;
             var wId = window == undefined ? undefined : window.id;
             // perform copy/move function
-            if(command == CMD_CUT) {
+            if (command == CMD_CUT) {
                 pastedTabs = [];
-                chrome.tabs.move(getTabIds(tabs), {windowId: wId, index:-1}, 
+                chrome.tabs.move(getTabIds(tabs), {
+                        windowId: wId,
+                        index: -1
+                    },
                     function (_tabs) {
                         // save pasted tabs for undo action
-                        if(_tabs.length == undefined) {
+                        if (_tabs.length == undefined) {
                             pastedTabs.push(_tabs);
                         } else pastedTabs = _tabs;
                         console.log("moved tabs: ", pastedTabs);
                         // set first tab to active and highlight all
-                        chrome.tabs.update(pastedTabs[0].id, {active:true});
-                        pastedTabs.map(function(t) {
-                            chrome.tabs.update(t.id, {highlighted:true});
+                        chrome.tabs.update(pastedTabs[0].id, {
+                            active: true
+                        });
+                        pastedTabs.map(function (t) {
+                            chrome.tabs.update(t.id, {
+                                highlighted: true
+                            });
                         });
                     });
-            } else if(command == CMD_COPY) {
+            } else if (command == CMD_COPY) {
                 // TODO use duplication and then move
                 pastedTabs = []
-                for(var i = 0; i < tabs.length; i++) {
+                for (var i = 0; i < tabs.length; i++) {
                     // set first tab to active and highlight all
-                    chrome.tabs.create({windowId: wId, url: tabs[i].url, 
-                        active:true}, 
-                        function(tab) {
+                    chrome.tabs.create({
+                            windowId: wId,
+                            url: tabs[i].url,
+                            active: true
+                        },
+                        function (tab) {
                             pastedTabs.push(tab);
-                            chrome.tabs.update(tab.id, {highlighted:true});
+                            chrome.tabs.update(tab.id, {
+                                highlighted: true
+                            });
                         });
                 }
                 console.log("copied tabs: ", pastedTabs);
             }
             // switch to window
-            chrome.windows.update(wId, {focused:true});
+            chrome.windows.update(wId, {
+                focused: true
+            });
         },
-        undoLastCommand: function() {
-            if(lastCommand == undefined || pastedTabs.length == 0) {
+        undoLastCommand: function () {
+            if (lastCommand == undefined || pastedTabs.length == 0) {
                 return false;
             } else {
                 // switch to source window
-                chrome.windows.update(sourceWindow.id, {focused:true});
-                if(lastCommand == CMD_COPY) {
-                    chrome.tabs.remove(getTabIds(pastedTabs), function() {
+                chrome.windows.update(sourceWindow.id, {
+                    focused: true
+                });
+                if (lastCommand == CMD_COPY) {
+                    chrome.tabs.remove(getTabIds(pastedTabs), function () {
                         console.log("removed tabs: ", pastedTabs);
                         pastedTabs = [];
                         sourceWindow = undefined;
                     });
-                } else if(lastCommand == CMD_CUT) {
-                    chrome.tabs.move(getTabIds(pastedTabs), 
-                        {windowId: sourceWindow.id, index:-1}, 
+                } else if (lastCommand == CMD_CUT) {
+                    chrome.tabs.move(getTabIds(pastedTabs), {
+                            windowId: sourceWindow.id,
+                            index: -1
+                        },
                         function (_tabs) {
                             // account for singular tab moves
                             var tabs = [];
-                            if(_tabs.length == undefined) {
+                            if (_tabs.length == undefined) {
                                 tabs.push(_tabs);
                             } else tabs = _tabs;
                             console.log("unmoved tabs: ", tabs);
                             // set first tab to active and highlight all
-                            chrome.tabs.update(tabs[0].id, {active:true});
-                            tabs.map(function(t) {
-                                chrome.tabs.update(t.id, {highlighted:true});
+                            chrome.tabs.update(tabs[0].id, {
+                                active: true
+                            });
+                            tabs.map(function (t) {
+                                chrome.tabs.update(t.id, {
+                                    highlighted: true
+                                });
                             });
                         });
-                        pastedTabs = [];
-                        sourceWindow = undefined;
+                    pastedTabs = [];
+                    sourceWindow = undefined;
                 }
                 return true;
             }
@@ -124,9 +148,9 @@ var app = function() {
     };
 }();
 
-chrome.commands.onCommand.addListener(function(command) {
+chrome.commands.onCommand.addListener(function (command) {
     console.log('command listener:', command);
-    switch(command) {
+    switch (command) {
         /*case CMD_CUT:
         case CMD_COPY:
             app.setPendingCommand(command);
@@ -154,7 +178,7 @@ chrome.commands.onCommand.addListener(function(command) {
             });
             break;*/
         case CMD_UNDO:
-            if(app.undoLastCommand()) { 
+            if (app.undoLastCommand()) {
                 console.log("undo successful");
             } else console.log("undo failed");
             break;
@@ -165,25 +189,32 @@ chrome.commands.onCommand.addListener(function(command) {
             chrome.windows.getLastFocused({}, function (window) {
                 console.log("move from window:", window);
                 app.setSourceWindow(window);
-                chrome.tabs.query({highlighted: true, windowId: window.id}, function(tabs){
+                chrome.tabs.query({
+                    highlighted: true,
+                    windowId: window.id
+                }, function (tabs) {
                     app.setSelectedTabs(tabs);
-                    chrome.windows.getAll({windowTypes: ['normal']}, function (windows){
-                        if(windows.length == 1 || command == CMD_CUT) {
+                    chrome.windows.getAll({
+                        windowTypes: ['normal']
+                    }, function (windows) {
+                        if (windows.length == 1 || command == CMD_CUT) {
                             var tabA = tabs[0];
-                            chrome.windows.create({tabId: tabA.id}, 
-                                function (nWindow){
+                            chrome.windows.create({
+                                    tabId: tabA.id
+                                },
+                                function (nWindow) {
                                     app.pasteTabs(nWindow, tabs, CMD_CUT);
                                 });
                         } else {
                             var idx = 0;
                             do {
-                                if(windows[idx].id == window.id) {
+                                if (windows[idx].id == window.id) {
                                     idx += (command == CMD_MOVE_NEXT ? 1 : -1);
                                     break;
                                 }
-                            } while(++idx < windows.length);
-                            if(idx == windows.length) idx = 0;
-                            else if(idx < 0) idx = windows.length - 1;
+                            } while (++idx < windows.length);
+                            if (idx == windows.length) idx = 0;
+                            else if (idx < 0) idx = windows.length - 1;
                             var nWindow = windows[idx];
                             app.pasteTabs(nWindow, tabs, CMD_CUT);
                         }

@@ -5,85 +5,105 @@ body {
     position: relative;
     font-family: Helvetica, Arial, Serif;
 }
+
 a {
-    text-decoration:none;
-    color:inherit;
+    text-decoration: none;
+    color: inherit;
 }
+
 a:hover {
     color: darkred;
 }
-header, footer , .container {
+
+header,
+footer,
+.container {
     display: block;
     width: calc(100% - 32px);
     padding: 16px;
 }
+
 header {
     color: white;
     height: 48px;
     background-color: darkred;
     display: none;
 }
+
 header .logo {
     height: 100%;
-    display: inline-block;
-    float:left;
+    display: block;
+    float: left;
     border-radius: 4px;
 }
+
 header .title {
     margin-left: 32px;
     font-size: 2em;
     line-height: 1.5em;
-    float:left;
-    display: inline-block;
-    height:100%;
+    float: left;
+    display: block;
+    height: 100%;
 }
-.container, .content {
-    position:relative;
-}
+
+.container,
 .content {
-    display:block;
+    position: relative;
+}
+
+.content {
+    display: block;
     max-width: 768px;
     margin: 0 auto;
     padding-bottom: 16px;
 }
+
 #commands .cmd {
-    line-height:32px;
+    line-height: 32px;
     margin-left: -24px;
 }
+
 .sc-cmd {
     color: white;
     background-color: darkred;
     padding: 4px 8px;
-    border-radius:4px;
+    border-radius: 4px;
 }
+
 .sc-name {
     display: none;
     font-weight: bold;
     margin-left: 8px;
 }
+
 .sc-desc {
     margin-left: 8px;
 }
+
 footer {
     color: #333;
     background-color: #eee;
     position: absolute;
-    bottom:0;
+    bottom: 0;
 }
+
 #change-btn {
     float: right;
 }
+
 button {
-    color:white;
-    cursor:pointer;
+    color: white;
+    cursor: pointer;
     border: maroon solid 2px;
-    border-radius:4px;
+    border-radius: 4px;
     background-color: darkred;
-    text-transform:uppercase;
+    text-transform: uppercase;
 }
+
 button:hover {
-    background-color:maroon;
+    background-color: maroon;
 }
+
 button:active {
-    color:grey;
+    color: grey;
 }
