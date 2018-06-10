@@ -54,6 +54,7 @@ header .title {
 .content {
     display: block;
     max-width: 768px;
+    min-width: 360px;
     margin: 0 auto;
     padding-bottom: 16px;
 }
