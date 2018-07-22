@@ -1,0 +1,62 @@
+{
+    "name": "boilerplate",
+    "version": "0.0.1",
+    "description": "NodeJS Boilerplate with precommit test and linting configured",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "precommit": "lint-staged"
+    },
+    "jest": {
+        "testPathIgnorePatterns": [
+            "./artifacts/",
+            "./node_modules/"
+        ],
+        "coverageDirectory": "./artifacts/coverage"
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint",
+            "stylelint",
+            "jest --bail --findRelatedTests"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iamogbz/node-js-boilerplate.git"
+    },
+    "keywords": [
+        "node",
+        "nodejs",
+        "boilerplate",
+        "testing",
+        "linting",
+        "ci",
+        "package",
+        "npm"
+    ],
+    "author": "iamogbz",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/iamogbz/node-js-boilerplate/issues"
+    },
+    "homepage": "https://github.com/iamogbz/node-js-boilerplate#readme",
+    "devDependencies": {
+        "babel-eslint": "^8.2.6",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb": "^17.0.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-import": "^2.13.0",
+        "eslint-plugin-jsx-a11y": "^6.1.1",
+        "eslint-plugin-prettier": "^2.6.2",
+        "eslint-plugin-react": "^7.10.0",
+        "jest": "^23.4.1",
+        "lint-staged": "^7.2.0",
+        "prettier": "^1.13.7",
+        "rxjs": "^6.2.2",
+        "stylelint": "^9.3.0",
+        "stylelint-config-standard": "^17.0.0",
+        "stylelint-config-styled-components": "^0.1.1",
+        "stylelint-processor-styled-components": "^1.0.0"
+    }
+}
