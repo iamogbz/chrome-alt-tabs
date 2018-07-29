@@ -4,6 +4,7 @@
     "description": "NodeJS Boilerplate with precommit test and linting configured",
     "main": "index.js",
     "scripts": {
+        "build": "webpack",
         "test": "jest",
         "precommit": "lint-staged"
     },
@@ -15,10 +16,14 @@
         "coverageDirectory": "./artifacts/coverage"
     },
     "lint-staged": {
-        "*.js": [
-            "eslint",
-            "stylelint",
-            "jest --bail --findRelatedTests"
+        "linters": {
+            "*.js": [
+                "eslint",
+                "jest --bail --findRelatedTests"
+            ]
+        },
+        "ignore": [
+            "**/lib/*"
         ]
     },
     "repository": {
@@ -64,6 +69,8 @@
         "stylelint": "^9.3.0",
         "stylelint-config-standard": "^17.0.0",
         "stylelint-config-styled-components": "^0.1.1",
-        "stylelint-processor-styled-components": "^1.0.0"
+        "stylelint-processor-styled-components": "^1.0.0",
+        "webpack": "^4.16.3",
+        "webpack-cli": "^3.1.0"
     }
 }

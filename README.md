@@ -2,6 +2,8 @@
 
 Simple node js package with linting, testing preconfigured
 
+![dependencies](https://david-dm.org/iamogbz/node-js-boilerplate.svg)
+
 ## Commands
 
 ```sh
