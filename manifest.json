@@ -12,7 +12,7 @@
     },
 
     "background": {
-        "scripts": ["js/background.js"]
+        "scripts": ["src/background.js"]
     },
     "commands": {
         "tabs-cut": {
@@ -40,9 +40,9 @@
             "description": "Move tabs to the previous window"
         }
     },
-    "options_page": "options.html",
+    "options_page": "src/options.html",
     "options_ui": {
-        "page": "options.html",
+        "page": "src/options.html",
         "chrome_style": true
     },
     "short_name": "AltTabs",

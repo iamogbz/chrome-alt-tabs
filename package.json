@@ -1,0 +1,67 @@
+{
+    "scripts": {
+        "build": "webpack",
+        "test": "jest",
+        "precommit": "lint-staged"
+    },
+    "jest": {
+        "testPathIgnorePatterns": [
+            "./artifacts/",
+            "./node_modules/"
+        ],
+        "coverageDirectory": "./artifacts/coverage"
+    },
+    "lint-staged": {
+        "linters": {
+            "*.js": [
+                "eslint",
+                "jest --bail --findRelatedTests"
+            ]
+        },
+        "ignore": [
+            "**/lib/*"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iamogbz/chrome-alt-tabs.git"
+    },
+    "keywords": [
+        "chrome",
+        "google",
+        "tabs"
+    ],
+    "author": "iamogbz",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/iamogbz/chrome-alt-tabs/issues"
+    },
+    "homepage": "https://github.com/iamogbz/chrome-alt-tabs#readme",
+    "engines": {
+        "node": ">=10.4.0",
+        "npm": ">=6.1.0"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-eslint": "^8.2.6",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-preset-env": "^1.7.0",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb": "^17.0.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-import": "^2.13.0",
+        "eslint-plugin-jsx-a11y": "^6.1.1",
+        "eslint-plugin-prettier": "^2.6.2",
+        "eslint-plugin-react": "^7.10.0",
+        "jest": "^23.4.1",
+        "lint-staged": "^7.2.0",
+        "prettier": "^1.13.7",
+        "rxjs": "^6.2.2",
+        "stylelint": "^9.3.0",
+        "stylelint-config-standard": "^17.0.0",
+        "stylelint-config-styled-components": "^0.1.1",
+        "stylelint-processor-styled-components": "^1.0.0",
+        "webpack": "^4.16.3",
+        "webpack-cli": "^3.1.0"
+    }
+}
