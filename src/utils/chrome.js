@@ -14,7 +14,7 @@ export const onCommand = (command, callback) => {
     if (!Object.keys(listeners).includes(command)) {
         listeners[command] = new Set();
     }
-    listeners[command].add(callback);
+    // listeners[command].add(callback);
 };
 
 /**

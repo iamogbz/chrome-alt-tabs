@@ -1,13 +1,32 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: "production",
-    entry: "./src",
+    entry: ["background", "options"].reduce(
+        (entries, name) =>
+            Object.assign(entries, {
+                [name]: ["@babel/polyfill", `./src/${name}`],
+            }),
+        {},
+    ),
     output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist"),
-        libraryTarget: "commonjs-module",
+        filename: "[name].js",
+        path: path.resolve(__dirname, "./dist"),
     },
+    resolve: {
+        modules: [path.resolve("./src"), path.resolve("./node_modules")],
+    },
+    plugins: [
+        new CopyWebpackPlugin([
+            { from: "./manifest.json" },
+            { from: "./assets/images/icon.*.png", to: "[name].[ext]" },
+            ...["options"].map(name => ({
+                from: `./src/${name}/index.html`,
+                to: `${name}.html`,
+            })),
+        ]),
+    ],
     module: {
         rules: [
             {
@@ -17,7 +36,7 @@ module.exports = {
                     loader: "babel-loader",
                     options: {
                         presets: ["@babel/preset-env"],
-                        plugins: ["babel-plugin-transform-class-properties"],
+                        plugins: ["transform-class-properties"],
                     },
                 },
             },

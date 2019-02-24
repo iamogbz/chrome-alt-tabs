@@ -23,7 +23,7 @@ const getCommandContext = async () => {
  * Wrap a function to be executed with the command context when activated
  * @param {Function} fn to be called with the command context
  */
-const withCommandContext = async fn => {
+const withCommandContext = fn => async () => {
     const {
         currentWindow: { id: windowId },
         selectedTabs,
@@ -55,3 +55,4 @@ const commandActions = [
     [COMMANDS.UNDO, () => handle(undo())],
 ];
 commandActions.forEach(args => onCommand(...args));
+console.log(COMMANDS)
