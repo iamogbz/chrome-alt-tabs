@@ -1,6 +1,6 @@
 # Overview
 
-> This extension speeds up tab management with simple shortcuts
+> speeds up tab management with simple shortcuts
 
 How most people move tabs between window
 
@@ -26,10 +26,9 @@ View the [options](chrome://extensions/?options=nhdnpkpelibodokklomapifnabkhbaba
 
 ## Contribute
 
-[Issues](https://github.com/iamogbz/chrome-alt-tabs/issues) are a good place to start, pull requests welcome!
-Follow the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/master/CONTRIBUTION.md) for local development and testing.
+See the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/master/CONTRIBUTION.md) for local development and testing!
 
-## Extra
+## Extras
 
 Combine with the following extensions, for the ultimate chrome tab control:
 
