@@ -39,15 +39,29 @@ export const focusOnTab = tabId =>
 
 /**
  * Move tab into a window
- * @param {[Number]} tabIds
+ * @param {Number} tabId
  * @param {Number} windowId
  * @param {Number} index position in window, defaults to last
  * @returns {Promise<[Tab]>}
  */
-export const moveTabsToWindow = (tabIds, windowId, index = -1) =>
+const moveTabToWindow = (tabId, windowId, index = -1) =>
     new Promise(resolve => {
-        chrome.tabs.move(tabIds, { windowId, index }, resolve);
+        chrome.tabs.move(tabId, { windowId, index }, resolve);
     });
+
+/**
+ * Move multiple tabs into a window restoring position if possible
+ * @param {[Tab]} tabs
+ * @param {Number} windowId
+ * @returns {Promise<[Tab]>}
+ */
+export const moveTabsToWindow = (tabs, windowId) =>
+    Promise.all(
+        tabs.map(tab => {
+            const index = tab.windowId === windowId ? tab.index : -1;
+            return moveTabToWindow(tab.id, windowId, index);
+        }),
+    );
 
 /**
  * Highlight supplied tab

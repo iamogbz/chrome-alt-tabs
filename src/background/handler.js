@@ -27,7 +27,7 @@ const doMove = async ({ tabs, to }) => {
         tabIds.push(id);
     });
     const windowId = to || (await createWindow(activeTab)).id;
-    await moveTabsToWindow(tabIds, windowId).catch(e => log.error(e));
+    await moveTabsToWindow(tabs, windowId).catch(e => log.error(e));
     await focusOnTab(activeTab || tabIds[0]);
     await selectTabs(tabIds);
     await focusOnWindow(windowId);
