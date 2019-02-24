@@ -15,13 +15,13 @@
         "scripts": ["src/background.js"]
     },
     "commands": {
-        "tabs-cut": {
+        "tabs-move-out": {
             "suggested_key": {
                 "default": "Shift+Alt+Up"
             },
             "description": "Pop tabs out into new window"
         },
-        "tabs-paste-undo": {
+        "tabs-move-back": {
             "suggested_key": {
                 "default": "Shift+Alt+Down"
             },

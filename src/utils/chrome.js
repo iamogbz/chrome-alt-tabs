@@ -7,7 +7,7 @@ chrome.commands.onCommand.addListener(command =>
 );
 /**
  * Register callback to be run on specific command
- * @param {string} command activation trigger
+ * @param {String} command activation trigger
  * @param {Function} callback to be run
  */
 export const onCommand = (command, callback) => {
@@ -19,32 +19,43 @@ export const onCommand = (command, callback) => {
 
 /**
  * Bring window to forefront
- * @param {number} windowId
+ * @param {Number} windowId
  */
 export const focusOnWindow = windowId =>
     chrome.windows.update(windowId, { focused: true });
 
 /**
  * Focus on tab using the unique chrome id
- * @param {int} tabId unique across multiple windows
+ * @param {Number} tabId unique across multiple windows
  */
-export const focusOnTab = tabId => chrome.tabs.update(tabId, { active: true });
+export const focusOnTab = tabId =>
+    new Promise(resolve =>
+        chrome.tabs.update(tabId, { active: true }, resolve),
+    );
 
 /**
  * Move tab into a window
- * @param {[number]} tabIds
- * @param {number} windowId
- * @param {number} index position in window, defaults to last
+ * @param {[Number]} tabIds
+ * @param {Number} windowId
+ * @param {Number} index position in window, defaults to last
+ * @returns {Promise<[Tab]>}
  */
 export const moveTabsToWindow = (tabIds, windowId, index = -1) =>
-    chrome.tabs.move(tabIds, { windowId, index });
+    new Promise(resolve =>
+        chrome.tabs.move(tabIds, { windowId, index }, resolve),
+    );
 
 /**
  * Select tabs by highlighting
- * @param {[number]} tabIds list of tabs to select
+ * @param {[Number]} tabIds list of tabs to select
  */
 export const selectTabs = tabIds =>
-    tabIds.forEach(id => chrome.tabs.update(id, { highlighted: true }));
+    new Promise(resolve =>
+        tabIds.forEach(
+            id => chrome.tabs.update(id, { highlighted: true }),
+            resolve,
+        ),
+    );
 
 /**
  * Get window last focused on
@@ -55,7 +66,7 @@ export const getLastFocusedWindow = () =>
 
 /**
  * Get selected tabs in specified window
- * @param {number} windowId
+ * @param {Number} windowId
  * @returns {Promise<[Tabs]>}
  */
 export const getSelectedTabsInWindow = windowId =>
@@ -70,11 +81,19 @@ export const getSelectedTabsInWindow = windowId =>
     );
 
 /**
+ * Create window from existing tab
+ * @param {Number} tabId tab to move into new window
+ * @returns {Promise<Window>}
+ */
+export const createWindow = tabId =>
+    new Promise(resolve => chrome.windows.create({ tabId }, resolve));
+
+/**
  * Get all windows of matching type
  * @param  {...string} windowTypes default to ["normal"]
  * @returns {Promise<[Window]>}
  */
-export const getAllWindows = (...windowTypes) => {
+const getAllWindows = (...windowTypes) => {
     if (windowTypes.length === 0) {
         windowTypes.push("normal");
     }
@@ -84,9 +103,66 @@ export const getAllWindows = (...windowTypes) => {
 };
 
 /**
- * Create window from existing tab
- * @param {number} tabId tab to move into new window
- * @returns {Promise<Window>}
+ * Compare two window to determine order
+ * @param {Window} windowA
+ * @param {Window} windowB
  */
-export const createWindow = tabId =>
-    new Promise(resolve => chrome.windows.create({ tabId }, resolve));
+const compareWindowPositions = (windowA, windowB) => {
+    const props = ["left", "top", "width", "height", "id"];
+    while (props.length) {
+        const prop = props.pop();
+        const valueA = windowA[prop];
+        const valueB = windowB[prop];
+        if (valueA !== undefined && valueB !== undefined && valueA !== valueB) {
+            return valueA - valueB;
+        }
+    }
+    return 0;
+};
+
+/**
+ * Get all window ids sorted
+ * @returns {Promise<[number]>}
+ */
+const getSortedWindowIds = async () => {
+    const windows = await getAllWindows();
+    windows.sort(compareWindowPositions);
+    return windows.map(({ id }) => id);
+};
+
+/**
+ * Wrap index around a specified size
+ * @param {{ index: Number, size: Number}} params
+ * @returns {Number}
+ */
+const wrapIndex = ({ index, size }) => {
+    if (index >= size) return size - index;
+    if (index < 0) return size + index;
+    return index;
+};
+
+/**
+ * Get window in the direction of the position offset from supplied window id
+ * @param {Number} windowId
+ * @param {Number} offset
+ * @returns {Promise<{ id: Number }>}
+ */
+const getWindowInPositionFrom = async (windowId, offset) => {
+    const windowIds = await getSortedWindowIds();
+    const index = windowIds.indexOf(windowId) + offset;
+    return { id: windowIds[wrapIndex({ index, size: windowIds.length })] };
+};
+
+/**
+ * Get window after supplied window id
+ * @param {Number} id
+ * @returns {Promise<{ id: Number }>}
+ */
+export const getWindowAfter = id => getWindowInPositionFrom(id, 1);
+
+/**
+ * Get window before supplied window id
+ * @param {Number} id
+ * @returns {Promise<{ id: Number }>}
+ */
+export const getWindowBefore = id => getWindowInPositionFrom(id, -1);
