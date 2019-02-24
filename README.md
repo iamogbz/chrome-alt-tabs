@@ -26,7 +26,7 @@ View the [options](chrome://extensions/?options=nhdnpkpelibodokklomapifnabkhbaba
 
 ## Contribute
 
-See the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/master/CONTRIBUTION.md) for local development and testing!
+See the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/master/CONTRIBUTING.md) for local development and testing!
 
 ## Extras
 
