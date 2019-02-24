@@ -40,7 +40,6 @@
             "description": "Move tabs to the previous window"
         }
     },
-    "options_page": "src/options.html",
     "options_ui": {
         "page": "src/options.html",
         "chrome_style": true
