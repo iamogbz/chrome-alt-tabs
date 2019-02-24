@@ -1,4 +1,4 @@
-# Chrome Alt Tab Shortcuts
+# Overview
 
 > This extension speeds up tab management with simple shortcuts
 
@@ -12,13 +12,24 @@ That's frustrating and cumbersome especially when you prefer running your browse
 
 `CATS` provides key bindings for moving multiple tabs between already open chrome windows.
 
+## Install
+
 [Chrome Web Store](https://chrome.google.com/webstore/detail/alt-tab-shortcuts/ebdcpdepkbefmgfdkdplcmhfkddagfon)
 
 ![demo](docs/images/showcase.gif)
 
+## Configure
+
 View the [options](chrome://extensions/?options=nhdnpkpelibodokklomapifnabkhbaba) page to access or change the shortcuts.
 
 ![options](docs/images/options.png)
+
+## Contribute
+
+[Issues](https://github.com/iamogbz/chrome-alt-tabs/issues) are a good place to start, pull requests welcome!
+Follow the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/master/CONTRIBUTION.md) for local development and testing.
+
+## Extra
 
 Combine with the following extensions, for the ultimate chrome tab control
 
