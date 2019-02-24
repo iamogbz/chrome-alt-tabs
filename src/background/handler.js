@@ -1,3 +1,4 @@
+import { log } from "../utils/base";
 import {
     createWindow,
     focusOnTab,
@@ -26,7 +27,7 @@ const doMove = async ({ tabs, to }) => {
         tabIds.push(id);
     });
     const windowId = to || (await createWindow(activeTab)).id;
-    await moveTabsToWindow(tabIds, windowId).catch(e => console.warn(e));
+    await moveTabsToWindow(tabIds, windowId).catch(e => log.error(e));
     if (activeTab) await focusOnTab(activeTab);
     await selectTabs(tabIds);
     await focusOnWindow(windowId);

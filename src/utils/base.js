@@ -1,4 +1,9 @@
-export const log = (...args) => console.error(...args); // eslint-disable-line
+const defaultLogger = (...args) => console.log(...args); // eslint-disable-line
+const errorLogger = (...args) => console.error(...args); // eslint-disable-line
+
+export const log = (...args) => log.default(...args);
+log.default = defaultLogger;
+log.error = errorLogger;
 
 /**
  * Wrap index around a specified size
