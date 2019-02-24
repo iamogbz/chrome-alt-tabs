@@ -66,10 +66,8 @@ Object.assign(actionHandlers, {
  * @param {[{}]} action
  */
 export default async function(action) {
-    console.log("handle", action);
     if (!action) return;
     const canUndo = await (actionHandlers[action.type] || noop)(action);
     if (canUndo) actionLog.push(action);
     if (actionLog.length > UNDO_LIMIT) actionLog.shift();
-    console.log("log", actionLog);
 }
