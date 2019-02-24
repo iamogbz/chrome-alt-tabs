@@ -1,27 +1,27 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Alt Tab Shortcuts",
-    "version": "1.0.2",
+    "version": "1.1.0",
 
     "description": "This extension speeds up tab management with simple shortcuts",
     "icons": {
-        "16": "img/icon16.png",
-        "32": "img/icon32.png",
-        "48": "img/icon48.png",
-        "128": "img/icon128.png"
+        "16": "icon.16.png",
+        "32": "icon.32.png",
+        "48": "icon.48.png",
+        "128": "icon.128.png"
     },
 
     "background": {
-        "scripts": ["js/background.js"]
+        "scripts": ["background.js"]
     },
     "commands": {
-        "tabs-cut": {
+        "tabs-move-out": {
             "suggested_key": {
                 "default": "Shift+Alt+Up"
             },
             "description": "Pop tabs out into new window"
         },
-        "tabs-paste-undo": {
+        "tabs-move-back": {
             "suggested_key": {
                 "default": "Shift+Alt+Down"
             },
@@ -40,7 +40,6 @@
             "description": "Move tabs to the previous window"
         }
     },
-    "options_page": "options.html",
     "options_ui": {
         "page": "options.html",
         "chrome_style": true
