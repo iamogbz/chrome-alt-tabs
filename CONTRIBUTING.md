@@ -29,12 +29,12 @@ Start coding!
 
 Load or reload it in your browser of choice to try out your changes. You will have to reload the extension after making changes, as browsers do not auto reload extensions yet.
 
-| Chrome                                             | Firefox                                              |
-| -------------------------------------------------- | ---------------------------------------------------- |
-| `chrome://extensions`                              | `about:debugging#addons`                             |
-| Check the <strong>Developer mode</strong> checkbox |
-| Click on the **Load unpacked extension** button    | Click on the **Load Temporary Add-on** button        |
-| Select the folder `chrome-alt-tabs/dist`           | Select the file `chrome-alt-tabs/dist/manifest.json` |
+| Chrome                                          | Firefox                                              |
+| ----------------------------------------------- | ---------------------------------------------------- |
+| `chrome://extensions`                           | `about:debugging#addons`                             |
+| Check the **Developer mode** checkbox           |
+| Click on the **Load unpacked extension** button | Click on the **Load Temporary Add-on** button        |
+| Select the folder `chrome-alt-tabs/dist`        | Select the file `chrome-alt-tabs/dist/manifest.json` |
 
 ## Writing tests [:construction:](#0)
 
