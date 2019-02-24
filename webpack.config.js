@@ -18,14 +18,23 @@ module.exports = {
         modules: [path.resolve("./src"), path.resolve("./node_modules")],
     },
     plugins: [
-        new CopyWebpackPlugin([
-            { from: "./manifest.json" },
-            { from: "./assets/images/icon.*.png", to: "[name].[ext]" },
-            ...["options"].map(name => ({
-                from: `./src/${name}/index.html`,
-                to: `${name}.html`,
-            })),
-        ]),
+        new CopyWebpackPlugin(
+            ["options"].reduce(
+                (config, name) => {
+                    config.push(
+                        ...["html", "css"].map(ext => ({
+                            from: `./src/${name}/index.${ext}`,
+                            to: `${name}.${ext}`,
+                        })),
+                    );
+                    return config;
+                },
+                [
+                    { from: "./manifest.json" },
+                    { from: "./assets/images/icon.*.png", to: "[name].[ext]" },
+                ],
+            ),
+        ),
     ],
     module: {
         rules: [
