@@ -19,7 +19,7 @@
             ]
         },
         "ignore": [
-            "**/lib/*"
+            "**/dist/*"
         ]
     },
     "repository": {
@@ -28,7 +28,9 @@
     },
     "keywords": [
         "chrome",
+        "extension",
         "google",
+        "productivity",
         "tabs"
     ],
     "author": "iamogbz",
