@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: none;
+    position: relative;
+    font-family: Helvetica, Arial, Serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: darkred;
+}
+
+footer,
+.container {
+    display: block;
+    width: calc(100% - 32px);
+    padding: 16px;
+}
+
+.container,
+.content {
+    position: relative;
+}
+
+.content {
+    display: block;
+    max-width: 768px;
+    min-width: 360px;
+    margin: 0 auto;
+    padding-bottom: 16px;
+}
+
+#commands .cmd {
+    line-height: 32px;
+    margin-left: -24px;
+}
+
+.sc-cmd {
+    color: white;
+    background-color: darkred;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.sc-name {
+    display: none;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.sc-desc {
+    margin-left: 8px;
+}
+
+footer {
+    color: #333;
+    background-color: #eee;
+    position: relative;
+    bottom: 0;
+}
+
+#change-btn {
+    float: right;
+}
+
+button {
+    color: white;
+    cursor: pointer;
+    border: maroon solid 2px;
+    border-radius: 4px;
+    background-color: darkred;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: maroon;
+}
+
+button:active {
+    color: grey;
+}

@@ -25,8 +25,8 @@ const doMove = async ({ tabs, to }) => {
         if (active) activeTab = id;
         tabIds.push(id);
     });
-    const windowId = to || (await createWindow(tabs.shift().id)).id;
-    await moveTabsToWindow(tabIds, windowId);
+    const windowId = to || (await createWindow(activeTab)).id;
+    await moveTabsToWindow(tabIds, windowId).catch(e => console.warn(e));
     if (activeTab) await focusOnTab(activeTab);
     await selectTabs(tabIds);
     await focusOnWindow(windowId);
@@ -48,9 +48,9 @@ doMove.undo = async ({ from, tabs, to }) => {
  */
 const undo = async () => {
     const lastAction = actionLog.pop();
-    const handler = actionHandlers[lastAction.type] || noop;
+    const handler = (lastAction && actionHandlers[lastAction.type]) || noop;
     if (typeof handler.undo === "function") {
-        handler.undo(lastAction);
+        await handler.undo(lastAction);
     }
     return false;
 };
@@ -66,9 +66,10 @@ Object.assign(actionHandlers, {
  * @param {[{}]} action
  */
 export default async function(action) {
+    console.log("handle", action);
     if (!action) return;
     const canUndo = await (actionHandlers[action.type] || noop)(action);
     if (canUndo) actionLog.push(action);
     if (actionLog.length > UNDO_LIMIT) actionLog.shift();
-    console.log(actionLog);
+    console.log("log", actionLog);
 }

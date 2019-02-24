@@ -52,7 +52,6 @@ const commandActions = [
             handle(moveTabs({ tabs, from, to }));
         }),
     ],
-    [COMMANDS.UNDO, () => handle(undo())],
+    [COMMANDS.BACK, () => handle(undo())],
 ];
 commandActions.forEach(args => onCommand(...args));
-console.log(COMMANDS)

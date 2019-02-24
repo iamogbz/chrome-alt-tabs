@@ -2,9 +2,9 @@
  * Bind single oncommand listener and switch based on received
  */
 const listeners = {};
-chrome.commands.onCommand.addListener(command =>
-    (listeners[command] || []).forEach(callback => callback()),
-);
+chrome.commands.onCommand.addListener(command => {
+    (listeners[command] || []).forEach(callback => callback());
+});
 /**
  * Register callback to be run on specific command
  * @param {String} command activation trigger
@@ -14,7 +14,7 @@ export const onCommand = (command, callback) => {
     if (!Object.keys(listeners).includes(command)) {
         listeners[command] = new Set();
     }
-    // listeners[command].add(callback);
+    listeners[command].add(callback);
 };
 
 /**
@@ -22,16 +22,18 @@ export const onCommand = (command, callback) => {
  * @param {Number} windowId
  */
 export const focusOnWindow = windowId =>
-    chrome.windows.update(windowId, { focused: true });
+    new Promise(resolve => {
+        chrome.windows.update(windowId, { focused: true }, resolve);
+    });
 
 /**
  * Focus on tab using the unique chrome id
  * @param {Number} tabId unique across multiple windows
  */
 export const focusOnTab = tabId =>
-    new Promise(resolve =>
-        chrome.tabs.update(tabId, { active: true }, resolve),
-    );
+    new Promise(resolve => {
+        chrome.tabs.update(tabId, { active: true }, resolve);
+    });
 
 /**
  * Move tab into a window
@@ -41,21 +43,26 @@ export const focusOnTab = tabId =>
  * @returns {Promise<[Tab]>}
  */
 export const moveTabsToWindow = (tabIds, windowId, index = -1) =>
-    new Promise(resolve =>
-        chrome.tabs.move(tabIds, { windowId, index }, resolve),
-    );
+    new Promise(resolve => {
+        chrome.tabs.move(tabIds, { windowId, index }, resolve);
+    });
+
+/**
+ * Highlight supplied tab
+ * @param {Number} tabId
+ * @returns {Promise}
+ */
+const selectTab = tabId =>
+    new Promise(resolve => {
+        chrome.tabs.update(tabId, { highlighted: true }, resolve);
+    });
 
 /**
  * Select tabs by highlighting
  * @param {[Number]} tabIds list of tabs to select
+ * @returns {Promise}
  */
-export const selectTabs = tabIds =>
-    new Promise(resolve =>
-        tabIds.forEach(
-            id => chrome.tabs.update(id, { highlighted: true }),
-            resolve,
-        ),
-    );
+export const selectTabs = tabIds => Promise.all(tabIds.map(selectTab));
 
 /**
  * Get window last focused on
