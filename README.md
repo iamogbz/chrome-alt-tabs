@@ -16,13 +16,13 @@ That's frustrating and cumbersome especially when you prefer running your browse
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/alt-tab-shortcuts/ebdcpdepkbefmgfdkdplcmhfkddagfon)
 
-![demo](docs/images/showcase.gif)
+![demo](assets/images/showcase.gif)
 
 ## Configure
 
 View the [options](chrome://extensions/?options=nhdnpkpelibodokklomapifnabkhbaba) page to access or change the shortcuts.
 
-![options](docs/images/options.png)
+![options](assets/images/options.png)
 
 ## Contribute
 
@@ -31,7 +31,7 @@ Follow the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/
 
 ## Extra
 
-Combine with the following extensions, for the ultimate chrome tab control
+Combine with the following extensions, for the ultimate chrome tab control:
 
 - [Reorder Tabs Shortcuts](https://chrome.google.com/webstore/detail/keyboard-shortcuts-to-reo/moigagbiaanpboaflikhdhgdfiifdodd)
 - [Tab to Window/Popup](https://chrome.google.com/webstore/detail/tab-to-windowpopup-keyboa/adbkphmimfcaeonicpmamfddbbnphikh)
