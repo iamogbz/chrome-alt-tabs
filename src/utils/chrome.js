@@ -20,6 +20,18 @@ export const onCommand = (command, callback) => {
 };
 
 /**
+ * Get all registered chrome commands
+ */
+export const getAllCommands = () =>
+    new Promise(resolve => chrome.commands.getAll(resolve));
+
+/**
+ * Change current tab location
+ */
+export const changeTabUrl = url =>
+    new Promise(resolve => chrome.tabs.update({ url }, resolve));
+
+/**
  * Bring window to forefront
  * @param {Number} windowId
  */

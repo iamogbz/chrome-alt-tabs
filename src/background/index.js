@@ -28,7 +28,7 @@ const withCommandContext = fn => async () => {
         currentWindow: { id: windowId },
         selectedTabs,
     } = await getCommandContext();
-    await fn({ windowId, selectedTabs });
+    return fn({ windowId, selectedTabs });
 };
 
 const commandActions = [
