@@ -1,8 +1,8 @@
-const openLink = () => {
+function openLink() {
     chrome.tabs.update({
         url: this.attributes.href.value,
     });
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("change-btn").addEventListener("click", openLink);
