@@ -14,7 +14,7 @@ Clone the repo and install dependencies:
 ```sh
 git clone git@github.com:iamogbz/chrome-alt-tabs.git
 cd chrome-alt-tabs
-npm install
+make install
 ```
 
 While making changes or switching branches, `run watch` to auto build new code:
