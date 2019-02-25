@@ -18,7 +18,6 @@ const actionHandlers = {};
  * @param {{}} action
  * @returns {Promise<Boolean>}
  */
-// TODO: save tab indexes
 const doMove = async ({ tabs, to }) => {
     const tabIds = [];
     let activeTab = null;
