@@ -3,8 +3,8 @@ import {
     getLastFocusedWindow,
     getAllTabsInWindow,
     getSelectedTabsInWindow,
-    getWindowAfter,
-    getWindowBefore,
+    getWindowIdAfter,
+    getWindowIdBefore,
 } from "../utils/chrome";
 import { COMMANDS } from "./constants";
 import { moveTabs, undo } from "./actions";
@@ -47,14 +47,14 @@ const commandActions = {
     [COMMANDS.NEXT]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
-            const { id: to } = await getWindowAfter(from);
+            const to = await getWindowIdAfter(from);
             handle(moveTabs({ tabs, from, to }));
         },
     ),
     [COMMANDS.PREV]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
-            const { id: to } = await getWindowBefore(from);
+            const to = await getWindowIdBefore(from);
             handle(moveTabs({ tabs, from, to }));
         },
     ),

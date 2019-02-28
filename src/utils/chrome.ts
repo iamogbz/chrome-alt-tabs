@@ -167,20 +167,20 @@ const getSortedWindowIds = async (): Promise<number[]> => {
 const getWindowInPositionFrom = async (
     windowId: number,
     offset: number,
-): Promise<{ id: number }> => {
+): Promise<number> => {
     const windowIds = await getSortedWindowIds();
     const index = windowIds.indexOf(windowId) + offset;
-    return { id: windowIds[wrapIndex({ index, size: windowIds.length })] };
+    return windowIds[wrapIndex({ index, size: windowIds.length })];
 };
 
 /**
  * Get window after supplied window id
  */
-export const getWindowAfter = (id: number): Promise<{ id: number }> =>
+export const getWindowIdAfter = (id: number): Promise<number> =>
     getWindowInPositionFrom(id, 1);
 
 /**
  * Get window before supplied window id
  */
-export const getWindowBefore = (id: number): Promise<{ id: number }> =>
+export const getWindowIdBefore = (id: number): Promise<number> =>
     getWindowInPositionFrom(id, -1);
