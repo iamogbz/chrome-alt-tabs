@@ -11,12 +11,29 @@
             "./artifacts/",
             "./node_modules/"
         ],
-        "coverageDirectory": "./artifacts/coverage"
+        "coverageDirectory": "./artifacts/coverage",
+            "roots": [
+              "<rootDir>/src"
+            ],
+            "transform": {
+              "^.+\\.tsx?$": "ts-jest"
+            },
+            "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+            "moduleFileExtensions": [
+                "node",
+                "js",
+                "jsx",
+                "json",
+                "ts",
+                "tsx"
+            ]
+          
     },
     "lint-staged": {
         "linters": {
-            "*.js": [
-                "eslint",
+            "*.js": ["eslint"],
+            "*.ts": [ "tslint" ],
+            "*.{js,ts}": [
                 "jest --bail --findRelatedTests"
             ]
         },
@@ -52,6 +69,7 @@
         "@babel/preset-typescript": "^7.3.3",
         "@types/chrome": "0.0.81",
         "@types/copy-webpack-plugin": "^4.4.3",
+        "@types/jest": "^24.0.9",
         "@types/node": "^11.9.5",
         "@types/webpack": "^4.4.25",
         "babel-eslint": "^8.2.6",
@@ -69,6 +87,7 @@
         "lint-staged": "^7.2.0",
         "prettier": "^1.13.7",
         "rxjs": "^6.2.2",
+        "ts-jest": "^24.0.0",
         "ts-node": "^8.0.2",
         "tslint": "^5.13.0",
         "typescript": "^3.3.3333",
