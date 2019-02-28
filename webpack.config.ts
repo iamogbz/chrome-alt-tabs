@@ -1,7 +1,8 @@
-const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+import path from "path";
+import { Configuration } from "webpack";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 
-module.exports = {
+const config: Configuration = {
     mode: "production",
     entry: ["background", "options"].reduce(
         (entries, name) =>
@@ -53,3 +54,5 @@ module.exports = {
     },
     devtool: "source-map",
 };
+
+export default config;
