@@ -48,6 +48,8 @@
         "@babel/cli": "^7.1.5",
         "@babel/core": "^7.1.6",
         "@babel/preset-env": "^7.1.6",
+        "@types/node": "^11.9.5",
+        "@types/webpack": "^4.4.25",
         "babel-eslint": "^8.2.6",
         "babel-loader": "^8.0.4",
         "babel-plugin-transform-class-properties": "^6.24.1",
@@ -67,6 +69,8 @@
         "stylelint-config-standard": "^18.2.0",
         "stylelint-config-styled-components": "^0.1.1",
         "stylelint-processor-styled-components": "^1.5.1",
+        "ts-node": "^8.0.2",
+        "typescript": "^3.3.3333",
         "webpack": "^4.16.3",
         "webpack-cli": "^3.1.0"
     },
