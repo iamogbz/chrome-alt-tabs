@@ -1,4 +1,3 @@
-import { Action, ActionHandler, Tab } from "../types";
 import { log } from "../utils/base";
 import {
     createWindow,
@@ -10,17 +9,20 @@ import {
 import { UNDO_LIMIT } from "./constants";
 import { MOVE_TABS, UNDO, moveTabs } from "./actions";
 
-const noop = () => {};
 const actionLog: Action[] = [];
-const actionHandlers: { [type: string]: ActionHandler } = {};
+const noActionOp = async (_: Action) => false;
+const doActionHandlers: { [type: string]: ActionHandler } = {};
+const undoActionHandlers: { [type: string]: ActionHandler } = {};
 
 /**
  * Handle move action
  */
-const doMove = async ({ payload: { tabs, to } }: Action): Promise<boolean> => {
+doActionHandlers[MOVE_TABS] = async ({
+    payload: { tabs, to },
+}: Action): Promise<boolean> => {
     const tabIds: number[] = [];
     let activeTab: number = null;
-    tabs.forEach(({ id, active }: Tab) => {
+    tabs.forEach(({ id, active }: ChromeTab) => {
         if (active) activeTab = id;
         tabIds.push(id);
     });
@@ -35,35 +37,29 @@ const doMove = async ({ payload: { tabs, to } }: Action): Promise<boolean> => {
 /**
  * Undo the move action
  */
-doMove.undo = async ({ payload: { from, tabs } }: Action): Promise<boolean> => {
-    await doMove(moveTabs({ tabs, to: from }));
+undoActionHandlers[MOVE_TABS] = async ({
+    payload: { from, tabs },
+}: Action): Promise<boolean> => {
+    await doActionHandlers[MOVE_TABS](moveTabs({ tabs, to: from }));
     return false;
 };
 
 /**
  * Undo last action in the log
  */
-const undo = async () => {
-    const lastAction = actionLog.pop();
-    const handler = (lastAction && actionHandlers[lastAction.type]) || noop;
-    if (typeof handler.undo === "function") {
-        await handler.undo(lastAction);
-    }
+doActionHandlers[UNDO] = async () => {
+    const lastAction = actionLog.pop() || ({} as Action);
+    const undoHandler = undoActionHandlers[lastAction.type] || noActionOp;
+    await undoHandler(lastAction);
     return false;
 };
-
-// Map action types to handlers
-Object.assign(actionHandlers, {
-    [MOVE_TABS]: doMove,
-    [UNDO]: undo,
-});
 
 /**
  * Execute action and store in log for undo if possible
  */
 export default async function(action: Action): Promise<void> {
     if (!action) return;
-    const canUndo = await (actionHandlers[action.type] || noop)(action);
+    const canUndo = await (doActionHandlers[action.type] || noActionOp)(action);
     if (canUndo) actionLog.push(action);
     if (actionLog.length > UNDO_LIMIT) actionLog.shift();
 }

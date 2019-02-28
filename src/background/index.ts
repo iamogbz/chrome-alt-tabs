@@ -5,7 +5,6 @@ import {
     getWindowAfter,
     getWindowBefore,
 } from "../utils/chrome";
-import { Tab } from "../types";
 import { COMMANDS } from "./constants";
 import { moveTabs, undo } from "./actions";
 import handle from "./handler";
@@ -14,7 +13,10 @@ import handle from "./handler";
  * Get the context of the current command activated
  * @returns {Promise}
  */
-const getCommandContext = async () => {
+const getCommandContext = async (): Promise<{
+    currentWindow: ChromeWindow;
+    selectedTabs: ChromeTab[];
+}> => {
     const currentWindow = await getLastFocusedWindow();
     const selectedTabs = await getSelectedTabsInWindow(currentWindow.id);
     return { currentWindow, selectedTabs };
@@ -35,7 +37,7 @@ const withCommandContext = (fn: (...args: any[]) => void) => async () => {
 const commandActions = {
     [COMMANDS.OUT]: withCommandContext(({ windowId, selectedTabs }) => {
         const from = windowId as number;
-        const tabs = selectedTabs as Tab[];
+        const tabs = selectedTabs as ChromeTab[];
         handle(moveTabs({ tabs, from }));
     }),
     [COMMANDS.NEXT]: withCommandContext(

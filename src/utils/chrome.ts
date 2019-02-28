@@ -1,4 +1,3 @@
-import { Tab, Window } from "../types";
 import { wrapIndex } from "./base";
 
 /**
@@ -28,7 +27,7 @@ export const getAllCommands = (): Promise<chrome.commands.Command[]> =>
 /**
  * Change current tab location
  */
-export const changeTabUrl = (url: string): Promise<Tab> =>
+export const changeTabUrl = (url: string): Promise<ChromeTab> =>
     new Promise(resolve => chrome.tabs.update({ url }, resolve));
 
 /**
@@ -42,7 +41,7 @@ export const focusOnWindow = (windowId: number) =>
 /**
  * Focus on tab using unique id; will highlight the tab by default
  */
-export const focusOnTab = (tabId: number): Promise<Tab> =>
+export const focusOnTab = (tabId: number): Promise<ChromeTab> =>
     new Promise(resolve => {
         chrome.tabs.update(tabId, { active: true }, resolve);
     });
@@ -54,7 +53,7 @@ const moveTabToWindow = (
     tabId: number,
     windowId: number,
     index: number = -1,
-): Promise<Tab> =>
+): Promise<ChromeTab> =>
     new Promise(resolve => {
         chrome.tabs.move(tabId, { windowId, index }, resolve);
     });
@@ -63,9 +62,9 @@ const moveTabToWindow = (
  * Move multiple tabs into a window restoring position if possible
  */
 export const moveTabsToWindow = (
-    tabs: Tab[],
+    tabs: ChromeTab[],
     windowId: number,
-): Promise<Tab[]> =>
+): Promise<ChromeTab[]> =>
     Promise.all(
         tabs.map(tab => {
             const index = tab.windowId === windowId ? tab.index : -1;
@@ -76,7 +75,7 @@ export const moveTabsToWindow = (
 /**
  * Highlight supplied tab
  */
-const selectTab = (tabId: number): Promise<Tab> =>
+const selectTab = (tabId: number): Promise<ChromeTab> =>
     new Promise(resolve => {
         chrome.tabs.update(tabId, { highlighted: true }, resolve);
     });
@@ -84,19 +83,21 @@ const selectTab = (tabId: number): Promise<Tab> =>
 /**
  * Select tabs by highlighting
  */
-export const selectTabs = (tabIds: number[]): Promise<Tab[]> =>
+export const selectTabs = (tabIds: number[]): Promise<ChromeTab[]> =>
     Promise.all(tabIds.map(selectTab));
 
 /**
  * Get window last focused on
  */
-export const getLastFocusedWindow = (): Promise<Window> =>
+export const getLastFocusedWindow = (): Promise<ChromeWindow> =>
     new Promise(resolve => chrome.windows.getLastFocused({}, resolve));
 
 /**
  * Get selected tabs in specified window
  */
-export const getSelectedTabsInWindow = (windowId: number): Promise<Tab[]> =>
+export const getSelectedTabsInWindow = (
+    windowId: number,
+): Promise<ChromeTab[]> =>
     new Promise(resolve =>
         chrome.tabs.query(
             {
@@ -110,13 +111,13 @@ export const getSelectedTabsInWindow = (windowId: number): Promise<Tab[]> =>
 /**
  * Create window from existing tab
  */
-export const createWindow = (tabId: number): Promise<Window> =>
+export const createWindow = (tabId: number): Promise<ChromeWindow> =>
     new Promise(resolve => chrome.windows.create({ tabId }, resolve));
 
 /**
  * Get all windows of matching type, default to ["normal"]
  */
-const getAllWindows = (...windowTypes: string[]): Promise<Window[]> => {
+const getAllWindows = (...windowTypes: string[]): Promise<ChromeWindow[]> => {
     if (windowTypes.length === 0) {
         windowTypes.push("normal");
     }
@@ -128,12 +129,15 @@ const getAllWindows = (...windowTypes: string[]): Promise<Window[]> => {
 /**
  * Compare two window to determine order
  */
-const compareWindowPositions = (windowA: Window, windowB: Window) => {
+const compareWindowPositions = (
+    windowA: ChromeWindow,
+    windowB: ChromeWindow,
+): number => {
     const props = ["left", "top", "width", "height", "id"];
     while (props.length) {
         const prop = props.pop();
-        const valueA = windowA[prop];
-        const valueB = windowB[prop];
+        const valueA: number = windowA[prop];
+        const valueB: number = windowB[prop];
         if (valueA !== undefined && valueB !== undefined && valueA !== valueB) {
             return valueA - valueB;
         }

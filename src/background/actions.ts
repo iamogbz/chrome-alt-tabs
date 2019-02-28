@@ -1,5 +1,3 @@
-import { Action, Tab } from "../types";
-
 export const MOVE_TABS = "move-tabs";
 export const UNDO = "undo";
 
@@ -8,7 +6,7 @@ export const moveTabs = ({
     from,
     to = null,
 }: {
-    tabs: Tab[];
+    tabs: ChromeTab[];
     from?: number;
     to?: number;
 }): Action => {
@@ -19,7 +17,7 @@ export const moveTabs = ({
         type: MOVE_TABS,
         payload: {
             from,
-            tabs: tabs.map((t: Tab) => ({ ...t })),
+            tabs: tabs.map((t: ChromeTab) => ({ ...t })),
             to,
         },
     };
