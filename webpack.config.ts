@@ -1,6 +1,6 @@
-import path from "path";
+import * as path from "path";
 import { Configuration } from "webpack";
-import CopyWebpackPlugin from "copy-webpack-plugin";
+import * as CopyWebpackPlugin from "copy-webpack-plugin";
 
 const config: Configuration = {
     mode: "production",
@@ -16,6 +16,7 @@ const config: Configuration = {
         path: path.resolve(__dirname, "./dist"),
     },
     resolve: {
+        extensions: [".js", ".ts"],
         modules: [path.resolve("./src"), path.resolve("./node_modules")],
     },
     plugins: [
@@ -40,13 +41,12 @@ const config: Configuration = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.tsx?$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: "babel-loader",
                     options: {
-                        presets: ["@babel/preset-env"],
-                        plugins: ["transform-class-properties"],
+                        presets: ["@babel/preset-typescript"],
                     },
                 },
             },
