@@ -17,9 +17,10 @@ const undoActionHandlers: { [type: string]: ActionHandler } = {};
 /**
  * Handle move action
  */
-doActionHandlers[MOVE_TABS] = async ({
-    payload: { tabs, to },
-}: Action): Promise<boolean> => {
+doActionHandlers[MOVE_TABS] = async (action: Action): Promise<boolean> => {
+    const {
+        payload: { tabs, to },
+    } = action;
     const tabIds: number[] = [];
     let activeTab: number = null;
     tabs.forEach(({ id, active }: ChromeTab) => {
@@ -27,6 +28,7 @@ doActionHandlers[MOVE_TABS] = async ({
         tabIds.push(id);
     });
     const windowId: number = to || (await createWindow(activeTab)).id;
+    action.payload.to = windowId
     await moveTabsToWindow(tabs, windowId).catch(e => log.error(e));
     await focusOnTab(activeTab || tabIds[0]);
     await selectTabs(tabIds);
@@ -38,9 +40,9 @@ doActionHandlers[MOVE_TABS] = async ({
  * Undo the move action
  */
 undoActionHandlers[MOVE_TABS] = async ({
-    payload: { from, tabs },
+    payload: { to, from, tabs },
 }: Action): Promise<boolean> => {
-    await doActionHandlers[MOVE_TABS](moveTabs({ tabs, to: from }));
+    await doActionHandlers[MOVE_TABS](moveTabs({ from: to, tabs, to: from }));
     return false;
 };
 

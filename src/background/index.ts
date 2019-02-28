@@ -1,6 +1,7 @@
 import {
     onCommand,
     getLastFocusedWindow,
+    getAllTabsInWindow,
     getSelectedTabsInWindow,
     getWindowAfter,
     getWindowBefore,
@@ -16,10 +17,14 @@ import handle from "./handler";
 const getCommandContext = async (): Promise<{
     currentWindow: ChromeWindow;
     selectedTabs: ChromeTab[];
+    allTabs: ChromeTab[];
 }> => {
     const currentWindow = await getLastFocusedWindow();
-    const selectedTabs = await getSelectedTabsInWindow(currentWindow.id);
-    return { currentWindow, selectedTabs };
+    const [allTabs, selectedTabs] = await Promise.all([
+        getAllTabsInWindow(currentWindow.id),
+        getSelectedTabsInWindow(currentWindow.id),
+    ]);
+    return { currentWindow, selectedTabs, allTabs };
 };
 
 /**
@@ -27,27 +32,28 @@ const getCommandContext = async (): Promise<{
  * @param {Function} fn to be called with the command context
  */
 const withCommandContext = (fn: (...args: any[]) => void) => async () => {
-    const {
-        currentWindow: { id: windowId },
-        selectedTabs,
-    } = await getCommandContext();
-    return fn({ windowId, selectedTabs });
+    const { currentWindow, selectedTabs, allTabs } = await getCommandContext();
+    const isAllTabsSelected = selectedTabs.length === allTabs.length;
+    return fn({ windowId: currentWindow.id, selectedTabs, isAllTabsSelected });
 };
 
 const commandActions = {
-    [COMMANDS.OUT]: withCommandContext(({ windowId, selectedTabs }) => {
-        const from = windowId as number;
-        const tabs = selectedTabs as ChromeTab[];
-        handle(moveTabs({ tabs, from }));
-    }),
+    [COMMANDS.OUT]: withCommandContext(
+        ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
+            const from = isAllTabsSelected ? null : (windowId as number);
+            handle(moveTabs({ tabs, from }));
+        },
+    ),
     [COMMANDS.NEXT]: withCommandContext(
-        async ({ windowId: from, selectedTabs: tabs }) => {
+        async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
+            const from = isAllTabsSelected ? null : (windowId as number);
             const { id: to } = await getWindowAfter(from);
             handle(moveTabs({ tabs, from, to }));
         },
     ),
     [COMMANDS.PREV]: withCommandContext(
-        async ({ windowId: from, selectedTabs: tabs }) => {
+        async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
+            const from = isAllTabsSelected ? null : (windowId as number);
             const { id: to } = await getWindowBefore(from);
             handle(moveTabs({ tabs, from, to }));
         },

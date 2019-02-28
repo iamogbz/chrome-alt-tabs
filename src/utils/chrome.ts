@@ -93,20 +93,27 @@ export const getLastFocusedWindow = (): Promise<ChromeWindow> =>
     new Promise(resolve => chrome.windows.getLastFocused({}, resolve));
 
 /**
+ * Query chrome tabs api
+ */
+const queryTabs = (queryInfo: chrome.tabs.QueryInfo): Promise<ChromeTab[]> =>
+    new Promise(resolve => chrome.tabs.query(queryInfo, resolve));
+
+/**
+ * Get all tabs in specified window
+ */
+export const getAllTabsInWindow = (windowId: number): Promise<ChromeTab[]> =>
+    queryTabs({ windowId });
+
+/**
  * Get selected tabs in specified window
  */
 export const getSelectedTabsInWindow = (
     windowId: number,
 ): Promise<ChromeTab[]> =>
-    new Promise(resolve =>
-        chrome.tabs.query(
-            {
-                highlighted: true,
-                windowId,
-            },
-            resolve,
-        ),
-    );
+    queryTabs({
+        highlighted: true,
+        windowId,
+    });
 
 /**
  * Create window from existing tab

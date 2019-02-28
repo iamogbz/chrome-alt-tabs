@@ -10,8 +10,8 @@ export const moveTabs = ({
     from?: number;
     to?: number;
 }): Action => {
-    if (!tabs || !tabs.length || !from) {
-        throw new Error(`Invalid Action Definition: move ${tabs} from ${from}`);
+    if (!tabs || !tabs.length) {
+        throw new Error(`Invalid Action Definition: move ${tabs} (${from} => ${to})`);
     }
     return {
         type: MOVE_TABS,
