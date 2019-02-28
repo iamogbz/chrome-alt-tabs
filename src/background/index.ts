@@ -5,6 +5,7 @@ import {
     getWindowAfter,
     getWindowBefore,
 } from "../utils/chrome";
+import { Tab } from "../types";
 import { COMMANDS } from "./constants";
 import { moveTabs, undo } from "./actions";
 import handle from "./handler";
@@ -23,7 +24,7 @@ const getCommandContext = async () => {
  * Wrap a function to be executed with the command context when activated
  * @param {Function} fn to be called with the command context
  */
-const withCommandContext = fn => async () => {
+const withCommandContext = (fn: (...args: any[]) => void) => async () => {
     const {
         currentWindow: { id: windowId },
         selectedTabs,
@@ -31,27 +32,26 @@ const withCommandContext = fn => async () => {
     return fn({ windowId, selectedTabs });
 };
 
-const commandActions = [
-    [
-        COMMANDS.OUT,
-        withCommandContext(({ windowId: from, selectedTabs: tabs }) => {
-            handle(moveTabs({ tabs, from }));
-        }),
-    ],
-    [
-        COMMANDS.NEXT,
-        withCommandContext(async ({ windowId: from, selectedTabs: tabs }) => {
+const commandActions = {
+    [COMMANDS.OUT]: withCommandContext(({ windowId, selectedTabs }) => {
+        const from = windowId as number;
+        const tabs = selectedTabs as Tab[];
+        handle(moveTabs({ tabs, from }));
+    }),
+    [COMMANDS.NEXT]: withCommandContext(
+        async ({ windowId: from, selectedTabs: tabs }) => {
             const { id: to } = await getWindowAfter(from);
             handle(moveTabs({ tabs, from, to }));
-        }),
-    ],
-    [
-        COMMANDS.PREV,
-        withCommandContext(async ({ windowId: from, selectedTabs: tabs }) => {
+        },
+    ),
+    [COMMANDS.PREV]: withCommandContext(
+        async ({ windowId: from, selectedTabs: tabs }) => {
             const { id: to } = await getWindowBefore(from);
             handle(moveTabs({ tabs, from, to }));
-        }),
-    ],
-    [COMMANDS.BACK, () => handle(undo())],
-];
-commandActions.forEach(args => onCommand(...args));
+        },
+    ),
+    [COMMANDS.BACK]: () => handle(undo()),
+};
+Object.keys(commandActions).forEach(type =>
+    onCommand(type, commandActions[type]),
+);

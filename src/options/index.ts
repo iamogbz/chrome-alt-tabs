@@ -2,9 +2,10 @@ import { changeTabUrl, getAllCommands } from "../utils/chrome";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const changeShortcutsButton = document.getElementById("change-btn");
-    changeShortcutsButton.addEventListener("click", () =>
-        changeTabUrl(changeShortcutsButton.attributes.href.value),
-    );
+    changeShortcutsButton.addEventListener("click", () => {
+        const targetAttrs = changeShortcutsButton.attributes;
+        changeTabUrl(targetAttrs.getNamedItem("href").value);
+    });
     const commands = await getAllCommands();
     document.getElementById("commands").innerHTML = commands
         .map(

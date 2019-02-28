@@ -1,3 +1,4 @@
+import { Action, ActionHandler, Tab } from "../types";
 import { log } from "../utils/base";
 import {
     createWindow,
@@ -7,25 +8,23 @@ import {
     selectTabs,
 } from "../utils/chrome";
 import { UNDO_LIMIT } from "./constants";
-import { MOVE_TABS, UNDO } from "./actions";
+import { MOVE_TABS, UNDO, moveTabs } from "./actions";
 
 const noop = () => {};
-const actionLog = [];
-const actionHandlers = {};
+const actionLog: Action[] = [];
+const actionHandlers: { [type: string]: ActionHandler } = {};
 
 /**
  * Handle move action
- * @param {{}} action
- * @returns {Promise<Boolean>}
  */
-const doMove = async ({ tabs, to }) => {
-    const tabIds = [];
-    let activeTab = null;
-    tabs.forEach(({ id, active }) => {
+const doMove = async ({ payload: { tabs, to } }: Action): Promise<boolean> => {
+    const tabIds: number[] = [];
+    let activeTab: number = null;
+    tabs.forEach(({ id, active }: Tab) => {
         if (active) activeTab = id;
         tabIds.push(id);
     });
-    const windowId = to || (await createWindow(activeTab)).id;
+    const windowId: number = to || (await createWindow(activeTab)).id;
     await moveTabsToWindow(tabs, windowId).catch(e => log.error(e));
     await focusOnTab(activeTab || tabIds[0]);
     await selectTabs(tabIds);
@@ -35,11 +34,9 @@ const doMove = async ({ tabs, to }) => {
 
 /**
  * Undo the move action
- * @param {{}} action
- * @returns {Promise<Boolean>}
  */
-doMove.undo = async ({ from, tabs, to }) => {
-    await doMove({ from: to, tabs, to: from });
+doMove.undo = async ({ payload: { from, tabs } }: Action): Promise<boolean> => {
+    await doMove(moveTabs({ tabs, to: from }));
     return false;
 };
 
@@ -63,9 +60,8 @@ Object.assign(actionHandlers, {
 
 /**
  * Execute action and store in log for undo if possible
- * @param {[{}]} action
  */
-export default async function(action) {
+export default async function(action: Action): Promise<void> {
     if (!action) return;
     const canUndo = await (actionHandlers[action.type] || noop)(action);
     if (canUndo) actionLog.push(action);
