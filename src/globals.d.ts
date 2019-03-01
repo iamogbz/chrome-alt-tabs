@@ -1,4 +1,6 @@
-type AnyObject = { [key: string]: any };
+interface AnyObject {
+    [key: string]: any;
+}
 
 type ChromeTab = chrome.tabs.Tab;
 type ChromeWindow = chrome.windows.Window & AnyObject;

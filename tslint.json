@@ -5,6 +5,7 @@
         "arrow-return-shorthand": [true, "multiline"],
         "curly": [true, "ignore-same-line"],
         "indent": [true, "spaces", 4],
+        "interface-name" : [true, "never-prefix"],
         "no-console": [true],
         "no-construct": true,
         "no-default-export": true,
