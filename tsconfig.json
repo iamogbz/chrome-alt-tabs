@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "outDir": "./built",
+        "target": "es6",
+        "allowSyntheticDefaultImports": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true
+    },
+    "include": ["./src/**/*"]
+}

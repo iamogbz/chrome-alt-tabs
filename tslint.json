@@ -1,0 +1,34 @@
+{
+    "extends": ["tslint:recommended"],
+    "rules": {
+        "arrow-parens": [true, "ban-single-arg-parens"],
+        "arrow-return-shorthand": [true, "multiline"],
+        "curly": [true, "ignore-same-line"],
+        "indent": [true, "spaces", 4],
+        "interface-name" : [true, "never-prefix"],
+        "no-console": [true],
+        "no-construct": true,
+        "no-default-export": true,
+        "no-default-import": [true],
+        "no-duplicate-imports": true,
+        "no-invalid-this": true,
+        "no-irregular-whitespace": true,
+        "no-parameter-reassignment": true,
+        "no-trailing-whitespace": true,
+        "no-unused-variable": true,
+        "no-require-imports": true,
+        "no-unnecessary-callback-wrapper": true,
+        "no-use-before-declare": true,
+        "object-literal-key-quotes": [true, "consistent-as-needed"],
+        "only-arrow-functions": true,
+        "ordered-imports": [
+            true,
+            {
+                "named-imports-order": "lowercase-last"
+            }
+        ],
+        "prefer-method-signature": true,
+        "quotemark": [true, "double"],
+        "trailing-comma": [true]
+    }
+}

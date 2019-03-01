@@ -1,8 +1,9 @@
-const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+import * as CopyWebpackPlugin from "copy-webpack-plugin";
+import * as path from "path";
+import { Configuration } from "webpack";
 
-module.exports = {
-    mode: "production",
+const configuration: Configuration = {
+    devtool: "source-map",
     entry: ["background", "options"].reduce(
         (entries, name) =>
             Object.assign(entries, {
@@ -10,12 +11,24 @@ module.exports = {
             }),
         {},
     ),
+    mode: "production",
+    module: {
+        rules: [
+            {
+                exclude: /(node_modules|bower_components)/,
+                test: /\.tsx?$/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-typescript"],
+                    },
+                },
+            },
+        ],
+    },
     output: {
         filename: "[name].js",
         path: path.resolve(__dirname, "./dist"),
-    },
-    resolve: {
-        modules: [path.resolve("./src"), path.resolve("./node_modules")],
     },
     plugins: [
         new CopyWebpackPlugin(
@@ -36,20 +49,10 @@ module.exports = {
             ),
         ),
     ],
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-env"],
-                        plugins: ["transform-class-properties"],
-                    },
-                },
-            },
-        ],
+    resolve: {
+        extensions: [".js", ".ts"],
+        modules: [path.resolve("./src"), path.resolve("./node_modules")],
     },
-    devtool: "source-map",
 };
+
+export default configuration; // tslint:disable-line
