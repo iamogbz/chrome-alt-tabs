@@ -12,27 +12,30 @@
             "./node_modules/"
         ],
         "coverageDirectory": "./artifacts/coverage",
-            "roots": [
-              "<rootDir>/src"
-            ],
-            "transform": {
-              "^.+\\.tsx?$": "ts-jest"
-            },
-            "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-            "moduleFileExtensions": [
-                "node",
-                "js",
-                "jsx",
-                "json",
-                "ts",
-                "tsx"
-            ]
-          
+        "roots": [
+            "<rootDir>/src"
+        ],
+        "transform": {
+            "^.+\\.tsx?$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+        "moduleFileExtensions": [
+            "node",
+            "js",
+            "jsx",
+            "json",
+            "ts",
+            "tsx"
+        ]
     },
     "lint-staged": {
         "linters": {
-            "*.js": ["eslint"],
-            "*.ts": [ "tslint" ],
+            "*.js": [
+                "eslint"
+            ],
+            "*.ts": [
+                "tslint"
+            ],
             "*.{js,ts}": [
                 "jest --bail --findRelatedTests"
             ]
@@ -77,12 +80,6 @@
         "babel-runtime": "^6.26.0",
         "copy-webpack-plugin": "^5.0.0",
         "eslint": "^4.19.1",
-        "eslint-config-airbnb": "^17.0.0",
-        "eslint-config-prettier": "^2.9.0",
-        "eslint-plugin-import": "^2.13.0",
-        "eslint-plugin-jsx-a11y": "^6.1.1",
-        "eslint-plugin-prettier": "^2.6.2",
-        "eslint-plugin-react": "^7.10.0",
         "jest": "^24.1.0",
         "lint-staged": "^7.2.0",
         "prettier": "^1.13.7",
