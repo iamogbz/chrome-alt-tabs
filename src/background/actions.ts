@@ -11,7 +11,9 @@ export const moveTabs = ({
     to?: number;
 }): Action => {
     if (!tabs || !tabs.length) {
-        throw new Error(`Invalid Action Definition: move ${tabs} (${from} => ${to})`);
+        throw new Error(
+            `Invalid Action Definition: move ${tabs} (${from} => ${to})`,
+        );
     }
     return {
         payload: {
