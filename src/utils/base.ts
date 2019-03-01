@@ -1,5 +1,5 @@
-const defaultLogger = (...args: any[]): void => console.log(...args); // eslint-disable-line
-const errorLogger = (...args: any[]): void => console.error(...args); // eslint-disable-line
+const defaultLogger = (...args: any[]): void => console.log(...args); // tslint:disable-line
+const errorLogger = (...args: any[]): void => console.error(...args); // tslint:disable-line
 
 export const log = (...args: any[]): void => log.default(...args);
 log.default = defaultLogger;

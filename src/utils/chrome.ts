@@ -3,15 +3,15 @@ import { wrapIndex } from "./base";
 /**
  * Bind single oncommand listener and switch based on received
  */
-const listeners: { [key: string]: Set<Function> } = {};
+const listeners: { [key: string]: Set<() => any> } = {};
 chrome.commands.onCommand.addListener(command => {
-    (listeners[command] || []).forEach((callback: Function) => callback());
+    (listeners[command] || []).forEach((callback: () => any) => callback());
 });
 
 /**
  * Register callback to be run on specific command
  */
-export const onCommand = (command: string, callback: Function): void => {
+export const onCommand = (command: string, callback: () => any): void => {
     if (!Object.keys(listeners).includes(command)) {
         listeners[command] = new Set();
     }

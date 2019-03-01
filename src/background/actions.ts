@@ -14,12 +14,12 @@ export const moveTabs = ({
         throw new Error(`Invalid Action Definition: move ${tabs} (${from} => ${to})`);
     }
     return {
-        type: MOVE_TABS,
         payload: {
             from,
             tabs: tabs.map((t: ChromeTab) => ({ ...t })),
             to,
         },
+        type: MOVE_TABS,
     };
 };
 

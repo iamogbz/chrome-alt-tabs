@@ -1,14 +1,14 @@
 import {
-    onCommand,
-    getLastFocusedWindow,
     getAllTabsInWindow,
+    getLastFocusedWindow,
     getSelectedTabsInWindow,
     getWindowIdAfter,
     getWindowIdBefore,
+    onCommand,
 } from "../utils/chrome";
-import { COMMANDS } from "./constants";
 import { moveTabs, undo } from "./actions";
-import handle from "./handler";
+import { COMMANDS } from "./constants";
+import { handleAction } from "./handler";
 
 /**
  * Get the context of the current command activated
@@ -41,24 +41,24 @@ const commandActions = {
     [COMMANDS.OUT]: withCommandContext(
         ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
-            handle(moveTabs({ tabs, from }));
+            handleAction(moveTabs({ tabs, from }));
         },
     ),
     [COMMANDS.NEXT]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
             const to = await getWindowIdAfter(from);
-            handle(moveTabs({ tabs, from, to }));
+            handleAction(moveTabs({ tabs, from, to }));
         },
     ),
     [COMMANDS.PREV]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
             const to = await getWindowIdBefore(from);
-            handle(moveTabs({ tabs, from, to }));
+            handleAction(moveTabs({ tabs, from, to }));
         },
     ),
-    [COMMANDS.BACK]: () => handle(undo()),
+    [COMMANDS.BACK]: () => handleAction(undo()),
 };
 Object.keys(commandActions).forEach(type =>
     onCommand(type, commandActions[type]),
