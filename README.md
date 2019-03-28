@@ -5,5 +5,5 @@ Simple package with some preconfigurations
 ## Shell Commands
 
 ```sh
-make precommit    # sets up your precommit hook to use the package.json script
+make precommit    # sets up your git precommit hook to use the script `.github/hooks/pre-commit`
 ```
