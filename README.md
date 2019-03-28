@@ -1,5 +1,7 @@
 # Overview
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/iamogbz/chrome-alt-tabs.svg)](https://greenkeeper.io/)
+
 > speeds up tab management with simple shortcuts
 
 How most people move tabs between window
