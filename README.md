@@ -1,5 +1,7 @@
 # NodeJS Boilerplate
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/iamogbz/node-js-boilerplate.svg)](https://greenkeeper.io/)
+
 Simple node js package with linting, testing and building preconfigured
 
 ![dependencies](https://david-dm.org/iamogbz/node-js-boilerplate.svg)
