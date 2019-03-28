@@ -1,10 +1,9 @@
 # NodeJS Boilerplate
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/iamogbz/node-js-boilerplate.svg)](https://greenkeeper.io/)
+[![Dependencies](https://david-dm.org/iamogbz/node-js-boilerplate.svg)](https://github.com/iamogbz/node-js-boilerplate)
 
 Simple node js package with linting, testing and building preconfigured
-
-![dependencies](https://david-dm.org/iamogbz/node-js-boilerplate.svg)
 
 ## Shell Commands
 
