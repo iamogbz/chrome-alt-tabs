@@ -73,7 +73,7 @@
         "@types/chrome": "0.0.81",
         "@types/copy-webpack-plugin": "^4.4.3",
         "@types/jest": "^24.0.9",
-        "@types/node": "^11.9.5",
+        "@types/node": "^11.12.2",
         "@types/source-map": "^0.5.2",
         "@types/webpack": "^4.4.25",
         "babel-eslint": "^10.0.1",
