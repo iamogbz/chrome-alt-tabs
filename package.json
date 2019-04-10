@@ -70,7 +70,7 @@
         "@babel/core": "^7.1.6",
         "@babel/preset-env": "^7.1.6",
         "@babel/preset-typescript": "^7.3.3",
-        "@types/chrome": "0.0.81",
+        "@types/chrome": "0.0.82",
         "@types/copy-webpack-plugin": "^4.4.3",
         "@types/jest": "^24.0.9",
         "@types/node": "^11.12.2",
