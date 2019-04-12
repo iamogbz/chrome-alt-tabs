@@ -5,10 +5,6 @@ Simple package with some preconfigurations
 ## Shell Commands
 
 ```sh
-make precommit    # sets up your git precommit hook to use the script `.github/hooks/pre-commit`
-```
-
-```sh
 make upstream     # adds an upstream target to fetch updates from the oss-boilerplate repo
 ```
 
