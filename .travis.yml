@@ -4,7 +4,7 @@ node_js:
 jobs:
   include:
     - stage: lint, test and build
-      name: 'commitlint'
+      name: commitlint
       script: npm run commitlint
     - name: test
       script: npm run test
