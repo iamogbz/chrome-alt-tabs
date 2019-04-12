@@ -8,10 +8,6 @@ Simple node js package with linting, testing and building preconfigured
 ## Shell Commands
 
 ```sh
-make precommit    # sets up your precommit hook to use the package.json script
-```
-
-```sh
 npm run build     # runs the webpack build script
 ```
 
