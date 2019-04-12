@@ -6,7 +6,7 @@
     "scripts": {
         "build": "webpack",
         "test": "jest",
-        "precommit": "lint-staged"
+        "commit": "git-cz"
     },
     "jest": {
         "testPathIgnorePatterns": [
@@ -14,6 +14,16 @@
             "./node_modules/"
         ],
         "coverageDirectory": "./artifacts/coverage"
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
     },
     "lint-staged": {
         "linters": {
@@ -25,6 +35,12 @@
         "ignore": [
             "**/lib/*"
         ]
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "lint-staged"
+        }
     },
     "repository": {
         "type": "git",
@@ -54,10 +70,14 @@
         "@babel/cli": "^7.2.3",
         "@babel/core": "^7.3.4",
         "@babel/preset-env": "^7.3.4",
+        "@commitlint/cli": "^7.5.2",
+        "@commitlint/config-conventional": "^7.5.0",
         "acorn": "^6.1.1",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^8.0.5",
         "babel-plugin-transform-class-properties": "^6.24.1",
+        "commitizen": "^3.0.7",
+        "cz-conventional-changelog": "^2.1.0",
         "eslint": "^5.16.0",
         "eslint-config-airbnb": "^17.1.0",
         "eslint-config-prettier": "^4.1.0",
@@ -65,6 +85,7 @@
         "eslint-plugin-jsx-a11y": "^6.2.1",
         "eslint-plugin-prettier": "^3.0.1",
         "eslint-plugin-react": "^7.12.4",
+        "husky": "^1.3.1",
         "jest": "^24.1.0",
         "lint-staged": "^8.1.4",
         "prettier": "^1.16.4",
