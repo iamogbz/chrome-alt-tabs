@@ -8,11 +8,15 @@ Simple node js package with linting, testing and building preconfigured
 ## Shell Commands
 
 ```sh
-npm run build     # runs the webpack build script
+npm run test      # run jest tests
 ```
 
 ```sh
-npm publish       # publishes your package to npm using the package.json config
+npm run commit    # run commitizen
+```
+
+```sh
+npm run build     # webpack build
 ```
 
 ## Typescript

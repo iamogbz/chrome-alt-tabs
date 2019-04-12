@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - '10'
+jobs:
+  include:
+    - stage: lint, test and build
+      name: 'commitlint'
+      script: npm run commitlint
+    - name: test
+      script: npm run test
+    - name: build
+      script: npm run build
+    - stage: deploy
+      script: npm run release
+      if: branch = master

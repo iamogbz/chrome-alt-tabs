@@ -4,9 +4,20 @@
     "description": "NodeJS Boilerplate with precommit test and linting configured",
     "main": "index.js",
     "scripts": {
+        "commitlint": "commitlint-travis",
         "build": "webpack",
         "test": "jest",
-        "commit": "git-cz"
+        "commit": "git-cz",
+        "release": "semantic-release"
+    },
+    "release": {
+        "dryRun": true,
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/github",
+            "@semantic-release/npm"
+        ]
     },
     "jest": {
         "testPathIgnorePatterns": [
@@ -72,6 +83,7 @@
         "@babel/preset-env": "^7.3.4",
         "@commitlint/cli": "^7.5.2",
         "@commitlint/config-conventional": "^7.5.0",
+        "@commitlint/travis-cli": "^7.5.2",
         "acorn": "^6.1.1",
         "babel-eslint": "^10.0.1",
         "babel-loader": "^8.0.5",
@@ -90,6 +102,7 @@
         "lint-staged": "^8.1.4",
         "prettier": "^1.16.4",
         "rxjs": "^6.4.0",
+        "semantic-release": "^15.13.3",
         "stylelint": "^9.10.1",
         "stylelint-config-standard": "^18.2.0",
         "stylelint-config-styled-components": "^0.1.1",
