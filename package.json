@@ -15,13 +15,8 @@
             [
                 "semantic-release-chrome",
                 {
-                    "prepare": {
-                        "asset": "cats.zip"
-                    },
-                    "publish": {
-                        "asset": "cats.zip",
-                        "extensionId": "ebdcpdepkbefmgfdkdplcmhfkddagfon"
-                    }
+                    "asset": "cats.zip",
+                    "extensionId": "ebdcpdepkbefmgfdkdplcmhfkddagfon"
                 }
             ],
             [
