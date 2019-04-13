@@ -10,9 +10,6 @@ jobs:
       script: npm run test
     - name: build
       script: npm run build
-      cache:
-        directories:
-          - dist
     - stage: deploy
-      script: npm run release
+      script: npm run build && npm run release
       if: branch = master
