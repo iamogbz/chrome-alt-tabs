@@ -1,8 +1,8 @@
 # Overview
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/iamogbz/chrome-alt-tabs.svg)](https://greenkeeper.io/)
-[![Dependencies](https://david-dm.org/iamogbz/chrome-alt-tabs.svg.svg)](https://github.com/iamogbz/chrome-alt-tabs.svg)
-[![Build Status](https://travis-ci.org/iamogbz/chrome-alt-tabs.svg.svg?branch=master)](https://travis-ci.org/iamogbz/chrome-alt-tabs.svg)
+[![Dependencies](https://david-dm.org/iamogbz/chrome-alt-tabs.svg)](https://github.com/iamogbz/chrome-alt-tabs.svg)
+[![Build Status](https://travis-ci.org/iamogbz/chrome-alt-tabs.svg?branch=master)](https://travis-ci.org/iamogbz/chrome-alt-tabs.svg)
 
 > speeds up tab management with simple shortcuts
 
