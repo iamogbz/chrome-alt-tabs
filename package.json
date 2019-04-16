@@ -32,6 +32,10 @@
         ]
     },
     "jest": {
+        "moduleDirectories": ["./src", "./tests", "./node_modules"],
+        "setupFilesAfterEnv": [
+            "./tests/setup.ts"
+        ],
         "testPathIgnorePatterns": [
             "./artifacts/",
             "./node_modules/"
@@ -135,6 +139,7 @@
         "rxjs": "^6.4.0",
         "semantic-release": "^15.13.12",
         "semantic-release-chrome": "^1.1.1",
+        "sinon-chrome": "^3.0.1",
         "ts-jest": "^24.0.0",
         "ts-node": "^8.0.2",
         "tslint": "^5.13.0",
