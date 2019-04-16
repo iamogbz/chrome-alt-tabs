@@ -7,7 +7,7 @@ jobs:
       name: commitlint
       script: npm run commitlint
     - name: test
-      script: npm run test
+      script: jest --coverage --coverageReporters=text-lcov | coveralls
     - name: build
       script: npm run build
     - stage: deploy
