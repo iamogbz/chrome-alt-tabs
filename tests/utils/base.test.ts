@@ -1,4 +1,4 @@
-import { log, wrapIndex } from "../base";
+import { log, wrapIndex } from "utils/base";
 
 describe("log", (): void => {
     const consoleLogSpy = jest.spyOn(console, "log");

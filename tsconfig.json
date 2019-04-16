@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "baseUrl": "./src",
         "outDir": "./built",
         "target": "es6",
         "allowSyntheticDefaultImports": true,
