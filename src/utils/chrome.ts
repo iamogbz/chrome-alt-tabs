@@ -4,9 +4,10 @@ import { wrapIndex } from "./base";
  * Bind single oncommand listener and switch based on received
  */
 const listeners: { [key: string]: Set<() => any> } = {};
-chrome.commands.onCommand.addListener(command => {
+export const commandListener = (command: string) => {
     (listeners[command] || []).forEach((callback: () => any) => callback());
-});
+};
+chrome.commands.onCommand.addListener(commandListener);
 
 /**
  * Register callback to be run on specific command
