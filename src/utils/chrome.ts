@@ -12,7 +12,7 @@ chrome.commands.onCommand.addListener(command => {
  * Register callback to be run on specific command
  */
 export const onCommand = (command: string, callback: () => any): void => {
-    if (!Object.keys(listeners).includes(command)) {
+    if (!(command in listeners)) {
         listeners[command] = new Set();
     }
     listeners[command].add(callback);
