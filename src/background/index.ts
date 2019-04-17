@@ -5,7 +5,7 @@ import {
     getWindowIdAfter,
     getWindowIdBefore,
     onCommand,
-} from "../utils/chrome";
+} from "utils/chrome";
 import { moveTabs, undo } from "./actions";
 import { COMMANDS } from "./constants";
 import { handleAction } from "./handler";
@@ -39,26 +39,28 @@ const withCommandContext = (fn: (...args: any[]) => void) => async () => {
 
 const commandActions = {
     [COMMANDS.OUT]: withCommandContext(
-        ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
+        async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
-            handleAction(moveTabs({ tabs, from }));
+            await handleAction(moveTabs({ tabs, from }));
         },
     ),
     [COMMANDS.NEXT]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
             const to = await getWindowIdAfter(from);
-            handleAction(moveTabs({ tabs, from, to }));
+            await handleAction(moveTabs({ tabs, from, to }));
         },
     ),
     [COMMANDS.PREV]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
             const to = await getWindowIdBefore(from);
-            handleAction(moveTabs({ tabs, from, to }));
+            await handleAction(moveTabs({ tabs, from, to }));
         },
     ),
-    [COMMANDS.BACK]: () => handleAction(undo()),
+    [COMMANDS.BACK]: async () => {
+        await handleAction(undo());
+    },
 };
 Object.keys(commandActions).forEach(type =>
     onCommand(type, commandActions[type]),

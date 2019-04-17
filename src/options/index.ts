@@ -1,4 +1,4 @@
-import { changeTabUrl, getAllCommands } from "../utils/chrome";
+import { changeTabUrl, getAllCommands } from "utils/chrome";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const changeShortcutsButton = document.getElementById("change-btn");

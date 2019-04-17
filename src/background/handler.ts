@@ -1,11 +1,11 @@
-import { log } from "../utils/base";
+import { log } from "utils/base";
 import {
     createWindow,
     focusOnTab,
     focusOnWindow,
     moveTabsToWindow,
     selectTabs,
-} from "../utils/chrome";
+} from "utils/chrome";
 import { MOVE_TABS, UNDO, moveTabs } from "./actions";
 import { UNDO_LIMIT } from "./constants";
 
