@@ -21,7 +21,13 @@ describe("chrome", () => {
     afterEach(chrome.flush);
 
     const expectToHaveBeenCalledWith = (stub: any, ...args: any[]) => {
-        expect(stub.withArgs(...args).calledOnce).toBe(true);
+        try {
+            expect(stub.withArgs(...args).calledOnce).toBe(true);
+        } catch (e) {
+            const prettyArgs = JSON.stringify(args).slice(1, -1);
+            e.message = `Expected: ${stub}(${prettyArgs})\nReceived: nothing`;
+            throw e;
+        }
     };
 
     describe("commands", () => {
@@ -105,12 +111,13 @@ describe("chrome", () => {
             const tabs = [8, 9, 10].map(
                 (id, index) => ({ id, index, windowId } as ChromeTab),
             );
+            tabs.push({ id: 1, windowId } as ChromeTab);
             const moveTabsPromise = moveTabsToWindow(tabs, windowId);
             chrome.tabs.move.yield();
             await moveTabsPromise;
-            tabs.forEach((t, i) =>
-                expectToHaveBeenCalledWith(chrome.tabs.move, t.id, {
-                    index: i,
+            tabs.forEach(({ id, index }) =>
+                expectToHaveBeenCalledWith(chrome.tabs.move, id, {
+                    index: index === undefined ? -1 : index,
                     windowId,
                 }),
             );
