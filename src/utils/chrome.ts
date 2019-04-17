@@ -159,7 +159,7 @@ const compareWindowPositions = (
 const getSortedWindowIds = async (): Promise<number[]> => {
     const windows = await getAllWindows();
     windows.sort(compareWindowPositions);
-    return windows.map(({ id }) => id);
+    return windows.map(({ id }) => id).filter(id => id);
 };
 
 /**
