@@ -128,5 +128,38 @@ describe("chrome", () => {
             expect(createWindow(tabId)).resolves.toBeUndefined();
             expectToHaveBeenCalledWith(chrome.windows.create, { tabId });
         });
+
+        describe("positioning", () => {
+            const mockWindows = [
+                { id: 6, top: 400, left: 400, width: 720, height: 560 },
+                { id: 1, top: 400, left: 400, width: 720, height: 560 },
+                { id: 5, top: 400, left: 400, width: 640, height: 560 },
+                { id: 2, top: 400, left: 400, width: 640, height: 480 },
+                { id: 4, top: 400, left: 300, width: 640, height: 480 },
+                { id: 3, top: 300, left: 300, width: 640, height: 480 },
+            ];
+            const order = [[6, 1], [1, 5], [5, 2], [2, 4], [4, 3], [3, 6]];
+
+            beforeEach(() =>
+                chrome.windows.getAll
+                    .withArgs({ windowTypes: ["normal"] })
+                    .yields(mockWindows),
+            );
+            afterEach(chrome.windows.getAll.flush);
+
+            it.each(order)(
+                "gets window before index %i",
+                async (index, expected) => {
+                    expect(await getWindowIdBefore(index)).toEqual(expected);
+                },
+            );
+
+            it.each(order.map(([a, b]) => [b, a]))(
+                "gets window after index %i",
+                async (index, expected) => {
+                    expect(await getWindowIdAfter(index)).toEqual(expected);
+                },
+            );
+        });
     });
 });
