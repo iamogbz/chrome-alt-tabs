@@ -143,7 +143,7 @@ const compareWindowPositions = (
 ): number => {
     const props = ["left", "top", "width", "height", "id"];
     while (props.length) {
-        const prop = props.pop();
+        const prop = props.shift();
         const valueA: number = windowA[prop];
         const valueB: number = windowB[prop];
         if (valueA !== undefined && valueB !== undefined && valueA !== valueB) {
