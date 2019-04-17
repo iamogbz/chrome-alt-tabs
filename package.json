@@ -33,7 +33,11 @@
     },
     "jest": {
         "preset": "ts-jest",
-        "moduleDirectories": ["./src", "./tests", "./node_modules"],
+        "moduleDirectories": [
+            "./src",
+            "./tests",
+            "./node_modules"
+        ],
         "setupFilesAfterEnv": [
             "./tests/setup.ts"
         ],

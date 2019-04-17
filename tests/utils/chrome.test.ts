@@ -1,8 +1,10 @@
 import * as chrome from "sinon-chrome";
 
-import { commandListener, onCommand } from "utils/chrome";
+import { commandListener, getAllCommands, onCommand } from "utils/chrome";
 
 describe("chrome", () => {
+    afterAll(chrome.flush);
+
     describe("commands", () => {
         it("registers listener to chome oncommand", () => {
             expect(chrome.commands.onCommand.hasListener(commandListener)).toBe(
@@ -23,6 +25,12 @@ describe("chrome", () => {
             expect(mockCallbackA).toHaveBeenCalledTimes(1);
             expect(mockCallbackB).toHaveBeenCalledTimes(1);
             expect(mockCallbackC).not.toHaveBeenCalled();
+        });
+
+        it("resolves to list of commands", () => {
+            const commands = ["ctrl+a", "ctrl+b"];
+            chrome.commands.getAll(commands);
+            expect(getAllCommands()).resolves.toEqual(commands);
         });
     });
 });

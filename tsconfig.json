@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": "./src",
+        "paths": { "*": ["*", "../tests/@types/*"] },
         "outDir": "./built",
         "target": "es6",
         "allowSyntheticDefaultImports": true,
@@ -8,5 +9,5 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true
     },
-    "include": ["./src/**/*", "./tests/**/*"]
+    "exclude": ["node_modules"]
 }
