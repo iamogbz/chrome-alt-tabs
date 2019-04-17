@@ -9,6 +9,7 @@ import {
     getAllCommands,
     getAllTabsInWindow,
     getLastFocusedWindow,
+    getSelectedTabsInWindow,
     getWindowIdAfter,
     getWindowIdBefore,
     moveTabsToWindow,
@@ -39,6 +40,7 @@ describe("chrome", () => {
             onCommand(mockCommand1, mockCallbackA);
             onCommand(mockCommand1, mockCallbackB);
             onCommand(mockCommand2, mockCallbackC);
+            commandListener("no-binding");
             commandListener(mockCommand1);
             expect(mockCallbackA).toHaveBeenCalledTimes(1);
             expect(mockCallbackB).toHaveBeenCalledTimes(1);
@@ -55,13 +57,21 @@ describe("chrome", () => {
 
     describe("tabs", () => {
         it("gets all tabs", async () => {
+            const windowId = 1;
             const tabs = ["mock-tab1", "mock-tab2"];
-            chrome.tabs.query.yields(tabs);
-            await getAllTabsInWindow(1);
-            expect(chrome.tabs.query.withArgs({ windowId: 1 }).calledOnce).toBe(
-                true,
-            );
-            chrome.tabs.query.flush();
+            const args = { windowId };
+            chrome.tabs.query.withArgs(args).yields(tabs);
+            await getAllTabsInWindow(windowId);
+            expectToHaveBeenCalledWith(chrome.tabs.query, args);
+        });
+
+        it("gets selected tabs", async () => {
+            const windowId = 2;
+            const tabs = ["mock-tab3", "mock-tab4"];
+            const args = { windowId, highlighted: true };
+            chrome.tabs.query.withArgs(args).yields(tabs);
+            await getSelectedTabsInWindow(windowId);
+            expectToHaveBeenCalledWith(chrome.tabs.query, args);
         });
 
         it("changes tab url", async () => {
@@ -90,7 +100,7 @@ describe("chrome", () => {
             );
         });
 
-        it("moves tabs to window", async () => {
+        it("moves tabs to window keeps index", async () => {
             const windowId = 1;
             const tabs = [8, 9, 10].map(
                 (id, index) => ({ id, index, windowId } as ChromeTab),
@@ -101,6 +111,22 @@ describe("chrome", () => {
             tabs.forEach((t, i) =>
                 expectToHaveBeenCalledWith(chrome.tabs.move, t.id, {
                     index: i,
+                    windowId,
+                }),
+            );
+        });
+
+        it("moves tabs to window places tabs at end", async () => {
+            const windowId = 1;
+            const tabs = [8, 9, 10].map(
+                (id, index) => ({ id, index, windowId: 2 } as ChromeTab),
+            );
+            const moveTabsPromise = moveTabsToWindow(tabs, windowId);
+            chrome.tabs.move.yield();
+            await moveTabsPromise;
+            tabs.forEach(t =>
+                expectToHaveBeenCalledWith(chrome.tabs.move, t.id, {
+                    index: -1,
                     windowId,
                 }),
             );
@@ -137,6 +163,7 @@ describe("chrome", () => {
                 { id: 2, top: 400, left: 400, width: 640, height: 480 },
                 { id: 4, top: 400, left: 300, width: 640, height: 480 },
                 { id: 3, top: 300, left: 300, width: 640, height: 480 },
+                {},
             ];
             const order = [[6, 1], [1, 5], [5, 2], [2, 4], [4, 3], [3, 6]];
 
