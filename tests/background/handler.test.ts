@@ -3,12 +3,15 @@ import { handleAction } from "background/handler";
 import { log } from "utils/base";
 import * as chromeUtils from "utils/chrome";
 
+jest.spyOn(log, "error").mockImplementation(jest.fn());
 const createWindowSpy = jest
     .spyOn(chromeUtils, "createWindow")
     .mockResolvedValue(null);
 jest.spyOn(chromeUtils, "focusOnTab").mockResolvedValue(null);
 jest.spyOn(chromeUtils, "focusOnWindow").mockResolvedValue(null);
-jest.spyOn(chromeUtils, "moveTabsToWindow").mockResolvedValue(null);
+const moveTabsToWindowSpy = jest
+    .spyOn(chromeUtils, "moveTabsToWindow")
+    .mockResolvedValue(null);
 jest.spyOn(chromeUtils, "selectTabs").mockResolvedValue(null);
 
 describe("handler", () => {
@@ -87,5 +90,24 @@ describe("handler", () => {
         expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(activeTabId);
         expect(chromeUtils.selectTabs).toHaveBeenCalledWith(tabIds);
         expect(chromeUtils.focusOnWindow).toHaveBeenCalledWith(newWindowId);
+    });
+
+    it("logs error and does not fail if move tabs can not complete", async () => {
+        const moveAction = moveTabs({
+            from: sourceWindowId,
+            tabs: mockTabs,
+            to: targetWindowId,
+        });
+        const mockError = new Error("move failed");
+        moveTabsToWindowSpy.mockRejectedValueOnce(mockError);
+        await handleAction(moveAction);
+        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledWith(
+            mockTabs,
+            targetWindowId,
+        );
+        expect(log.error).toHaveBeenCalledWith(mockError);
+        expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(tabIds[0]);
+        expect(chromeUtils.selectTabs).toHaveBeenCalledWith(tabIds);
+        expect(chromeUtils.focusOnWindow).toHaveBeenCalledWith(targetWindowId);
     });
 });
