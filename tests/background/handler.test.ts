@@ -110,4 +110,26 @@ describe("handler", () => {
         expect(chromeUtils.selectTabs).toHaveBeenCalledWith(tabIds);
         expect(chromeUtils.focusOnWindow).toHaveBeenCalledWith(targetWindowId);
     });
+
+    it("undoes last action", async () => {
+        const moveAction = moveTabs({
+            from: sourceWindowId,
+            tabs: mockTabs,
+            to: targetWindowId,
+        });
+        await handleAction(moveAction).then(() => handleAction(undo()));
+        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledTimes(2);
+        expect(chromeUtils.moveTabsToWindow).toHaveBeenLastCalledWith(
+            mockTabs,
+            sourceWindowId,
+        );
+        expect(chromeUtils.focusOnTab).toHaveBeenCalledTimes(2);
+        expect(chromeUtils.focusOnTab).toHaveBeenLastCalledWith(tabIds[0]);
+        expect(chromeUtils.selectTabs).toHaveBeenCalledTimes(2);
+        expect(chromeUtils.selectTabs).toHaveBeenLastCalledWith(tabIds);
+        expect(chromeUtils.focusOnWindow).toHaveBeenCalledTimes(2);
+        expect(chromeUtils.focusOnWindow).toHaveBeenLastCalledWith(
+            sourceWindowId,
+        );
+    });
 });
