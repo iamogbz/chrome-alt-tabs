@@ -15,10 +15,15 @@ describe("handler", () => {
     const sourceWindowId = 1;
     const targetWindowId = 2;
     const activeTabId = 11;
-    const tabIds = [activeTabId, 22, 33];
-    const mockTabs = tabIds.map(
-        id => ({ id, active: id === activeTabId } as ChromeTab),
-    );
+    const tabIds = [33, 22, activeTabId];
+    const mockTabs = tabIds.map(id => ({ id, active: false } as ChromeTab));
+    const mockTabsActive = mockTabs.map(tab => ({
+        ...tab,
+        active: tab.id === activeTabId,
+    }));
+
+    beforeEach(jest.clearAllMocks);
+    afterAll(jest.restoreAllMocks);
 
     it("is a noop without an action", async () => {
         await handleAction(null);
@@ -39,7 +44,7 @@ describe("handler", () => {
             mockTabs,
             targetWindowId,
         );
-        expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(activeTabId);
+        expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(tabIds[0]);
         expect(chromeUtils.selectTabs).toHaveBeenCalledWith(tabIds);
         expect(chromeUtils.focusOnWindow).toHaveBeenCalledWith(targetWindowId);
     });
@@ -54,9 +59,29 @@ describe("handler", () => {
             id: newWindowId,
         } as ChromeWindow);
         await handleAction(moveAction);
-        expect(createWindowSpy).toHaveBeenCalledWith(activeTabId);
+        expect(createWindowSpy).toHaveBeenCalledWith(null);
         expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledWith(
             mockTabs,
+            newWindowId,
+        );
+        expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(tabIds[0]);
+        expect(chromeUtils.selectTabs).toHaveBeenCalledWith(tabIds);
+        expect(chromeUtils.focusOnWindow).toHaveBeenCalledWith(newWindowId);
+    });
+
+    it("focuses on first tab if no tabs moved were active", async () => {
+        const newWindowId = 99;
+        const moveAction = moveTabs({
+            from: sourceWindowId,
+            tabs: mockTabsActive,
+        });
+        createWindowSpy.mockResolvedValueOnce({
+            id: newWindowId,
+        } as ChromeWindow);
+        await handleAction(moveAction);
+        expect(createWindowSpy).toHaveBeenCalledWith(activeTabId);
+        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledWith(
+            mockTabsActive,
             newWindowId,
         );
         expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(activeTabId);

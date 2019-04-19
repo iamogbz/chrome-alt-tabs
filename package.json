@@ -2,8 +2,9 @@
     "scripts": {
         "commitlint": "commitlint-travis",
         "build": "webpack --mode=production",
-        "watch": "webpack --mode=development  --watch",
+        "build-watch": "webpack --mode=development  --watch",
         "test": "jest",
+        "test-watch": "jest --watch",
         "typecheck": "tsc --noEmit",
         "commit": "git-cz",
         "release": "semantic-release"
