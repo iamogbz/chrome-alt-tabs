@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": "./src",
-        "paths": { "*": ["*", "../tests/@types/*"] },
+        "paths": { "*": ["*", "../tests/*", "../tests/@types/*"] },
         "outDir": "./built",
         "target": "es6",
         "allowSyntheticDefaultImports": true,
