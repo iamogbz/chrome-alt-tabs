@@ -32,22 +32,48 @@ describe("background", () => {
     });
 
     const expectedArgs = {
-        [COMMANDS.OUT]: moveTabs({ tabs: mockTabs, from: null }),
-        [COMMANDS.NEXT]: moveTabs({ tabs: selectedTabs, from: 1, to: 100 }),
-        [COMMANDS.PREV]: moveTabs({ tabs: selectedTabs, from: 1, to: 99 }),
-        [COMMANDS.BACK]: undo(),
+        [COMMANDS.OUT]: [
+            moveTabs({ tabs: selectedTabs, from: 1 }),
+            moveTabs({ tabs: mockTabs, from: null }),
+        ],
+        [COMMANDS.NEXT]: [
+            moveTabs({ tabs: selectedTabs, from: 1, to: 100 }),
+            moveTabs({ tabs: mockTabs, from: null, to: 100 }),
+        ],
+        [COMMANDS.PREV]: [
+            moveTabs({ tabs: selectedTabs, from: 1, to: 99 }),
+            moveTabs({ tabs: mockTabs, from: null, to: 99 }),
+        ],
+        [COMMANDS.BACK]: [undo(), undo()],
     };
 
     it.each(Object.values(COMMANDS).map(v => [v]))(
         "correctly handles action for '%s'",
         async command => {
-            if (command === COMMANDS.OUT) {
-                selectedTabsSpy.mockResolvedValueOnce(mockTabs);
-            }
             const commandSpy = jest.spyOn(commandActions, command);
             await commandListener(command);
             expect(commandSpy).toHaveBeenCalledTimes(1);
-            expect(handleActionSpy).toHaveBeenCalledWith(expectedArgs[command]);
+            const [expected] = expectedArgs[command];
+            expect(handleActionSpy).toHaveBeenCalledWith(expected);
+            commandSpy.mockRestore();
         },
     );
+
+    it.each(Object.values(COMMANDS).map(v => [v]))(
+        "correctly handles action for '%s' when all tabs selected",
+        async command => {
+            const commandSpy = jest.spyOn(commandActions, command);
+            selectedTabsSpy.mockResolvedValueOnce(mockTabs);
+            await commandListener(command);
+            expect(commandSpy).toHaveBeenCalledTimes(1);
+            const [, expected] = expectedArgs[command];
+            expect(handleActionSpy).toHaveBeenCalledWith(expected);
+            commandSpy.mockRestore();
+        },
+    );
+
+    it("handles undefined action", async () => {
+        await commandListener("undefined-command");
+        expect(handleActionSpy).not.toHaveBeenCalled();
+    });
 });
