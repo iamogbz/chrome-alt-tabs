@@ -11,3 +11,5 @@ interface Action {
 }
 
 type ActionHandler = (action: Action) => Promise<boolean>;
+
+declare module "options/index.html";
