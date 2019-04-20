@@ -40,7 +40,7 @@
             "./node_modules"
         ],
         "setupFilesAfterEnv": [
-            "./tests/setup.ts"
+            "./config/setupTests.ts"
         ],
         "testPathIgnorePatterns": [
             "./artifacts/",
@@ -113,7 +113,6 @@
     "devDependencies": {
         "@babel/cli": "^7.2.3",
         "@babel/core": "^7.3.4",
-        "@babel/preset-env": "^7.3.4",
         "@babel/preset-typescript": "^7.3.3",
         "@commitlint/cli": "^7.5.2",
         "@commitlint/config-conventional": "^7.5.0",
@@ -135,6 +134,7 @@
         "eslint": "^5.16.0",
         "husky": "^1.3.1",
         "jest": "^24.1.0",
+        "jest-mock-props": "^1.0.4",
         "lint-staged": "^8.1.5",
         "prettier": "^1.17.0",
         "prettier-eslint": "^8.8.2",

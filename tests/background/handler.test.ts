@@ -1,8 +1,13 @@
+import * as mockProps from "jest-mock-props";
+mockProps.extend(jest);
+
 import { moveTabs, undo } from "background/actions";
+import * as constants from "background/constants";
 import { handleAction } from "background/handler";
 import { log } from "utils/base";
 import * as chromeUtils from "utils/chrome";
 
+const undoLimitSpy = jest.spyOnProp(constants, "UNDO_LIMIT").mockValue(2);
 jest.spyOn(log, "error").mockImplementation(jest.fn());
 const createWindowSpy = jest
     .spyOn(chromeUtils, "createWindow")
@@ -43,7 +48,7 @@ describe("handler", () => {
             to: targetWindowId,
         });
         await handleAction(moveAction);
-        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledWith(
+        expect(moveTabsToWindowSpy).toHaveBeenCalledWith(
             mockTabs,
             targetWindowId,
         );
@@ -63,10 +68,7 @@ describe("handler", () => {
         } as ChromeWindow);
         await handleAction(moveAction);
         expect(createWindowSpy).toHaveBeenCalledWith(null);
-        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledWith(
-            mockTabs,
-            newWindowId,
-        );
+        expect(moveTabsToWindowSpy).toHaveBeenCalledWith(mockTabs, newWindowId);
         expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(tabIds[0]);
         expect(chromeUtils.selectTabs).toHaveBeenCalledWith(tabIds);
         expect(chromeUtils.focusOnWindow).toHaveBeenCalledWith(newWindowId);
@@ -83,7 +85,7 @@ describe("handler", () => {
         } as ChromeWindow);
         await handleAction(moveAction);
         expect(createWindowSpy).toHaveBeenCalledWith(activeTabId);
-        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledWith(
+        expect(moveTabsToWindowSpy).toHaveBeenCalledWith(
             mockTabsActive,
             newWindowId,
         );
@@ -101,7 +103,7 @@ describe("handler", () => {
         const mockError = new Error("move failed");
         moveTabsToWindowSpy.mockRejectedValueOnce(mockError);
         await handleAction(moveAction);
-        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledWith(
+        expect(moveTabsToWindowSpy).toHaveBeenCalledWith(
             mockTabs,
             targetWindowId,
         );
@@ -118,8 +120,8 @@ describe("handler", () => {
             to: targetWindowId,
         });
         await handleAction(moveAction).then(() => handleAction(undo()));
-        expect(chromeUtils.moveTabsToWindow).toHaveBeenCalledTimes(2);
-        expect(chromeUtils.moveTabsToWindow).toHaveBeenLastCalledWith(
+        expect(moveTabsToWindowSpy).toHaveBeenCalledTimes(2);
+        expect(moveTabsToWindowSpy).toHaveBeenLastCalledWith(
             mockTabs,
             sourceWindowId,
         );
@@ -131,5 +133,34 @@ describe("handler", () => {
         expect(chromeUtils.focusOnWindow).toHaveBeenLastCalledWith(
             sourceWindowId,
         );
+    });
+
+    it("undoes only up to limit", async () => {
+        const moveAction = moveTabs({
+            from: sourceWindowId,
+            tabs: mockTabs,
+            to: targetWindowId,
+        });
+        const doMove = () => handleAction(moveAction);
+        const undoMove = () => handleAction(undo());
+        await doMove()
+            .then(doMove)
+            .then(doMove);
+        expect(moveTabsToWindowSpy).toHaveBeenCalledTimes(3);
+        expect(moveTabsToWindowSpy).toHaveBeenLastCalledWith(
+            mockTabs,
+            targetWindowId,
+        );
+        expect(chromeUtils.focusOnTab).toHaveBeenLastCalledWith(tabIds[0]);
+        moveTabsToWindowSpy.mockClear();
+        await undoMove()
+            .then(undoMove)
+            .then(undoMove);
+        expect(moveTabsToWindowSpy).toHaveBeenCalledTimes(2);
+        expect(moveTabsToWindowSpy).toHaveBeenLastCalledWith(
+            mockTabs,
+            sourceWindowId,
+        );
+        undoLimitSpy.mockReset();
     });
 });
