@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "baseUrl": "./src",
+        "moduleResolution": "node",
         "outDir": "./built",
         "target": "es6",
         "allowSyntheticDefaultImports": true,
@@ -7,5 +9,5 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true
     },
-    "include": ["./src/**/*"]
+    "exclude": ["node_modules"]
 }

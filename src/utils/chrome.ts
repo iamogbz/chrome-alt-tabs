@@ -1,22 +1,10 @@
 import { wrapIndex } from "./base";
 
 /**
- * Bind single oncommand listener and switch based on received
+ * Register callback to be run on command received
  */
-const listeners: { [key: string]: Set<() => any> } = {};
-chrome.commands.onCommand.addListener(command => {
-    (listeners[command] || []).forEach((callback: () => any) => callback());
-});
-
-/**
- * Register callback to be run on specific command
- */
-export const onCommand = (command: string, callback: () => any): void => {
-    if (!Object.keys(listeners).includes(command)) {
-        listeners[command] = new Set();
-    }
-    listeners[command].add(callback);
-};
+export const onCommand = (callback: (command: string) => any): void =>
+    chrome.commands.onCommand.addListener(callback);
 
 /**
  * Get all registered chrome commands
@@ -142,7 +130,7 @@ const compareWindowPositions = (
 ): number => {
     const props = ["left", "top", "width", "height", "id"];
     while (props.length) {
-        const prop = props.pop();
+        const prop = props.shift();
         const valueA: number = windowA[prop];
         const valueB: number = windowB[prop];
         if (valueA !== undefined && valueB !== undefined && valueA !== valueB) {
@@ -158,7 +146,7 @@ const compareWindowPositions = (
 const getSortedWindowIds = async (): Promise<number[]> => {
     const windows = await getAllWindows();
     windows.sort(compareWindowPositions);
-    return windows.map(({ id }) => id);
+    return windows.map(({ id }) => id).filter(id => id);
 };
 
 /**

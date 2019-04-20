@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions move tabs creates valid action with no source 1`] = `
+Object {
+  "payload": Object {
+    "from": undefined,
+    "tabs": Array [
+      Object {
+        "id": 33,
+      },
+      Object {
+        "id": 22,
+      },
+      Object {
+        "id": 11,
+      },
+    ],
+    "to": 2,
+  },
+  "type": "move-tabs",
+}
+`;
+
+exports[`actions move tabs creates valid action with no target 1`] = `
+Object {
+  "payload": Object {
+    "from": 1,
+    "tabs": Array [
+      Object {
+        "id": 33,
+      },
+      Object {
+        "id": 22,
+      },
+      Object {
+        "id": 11,
+      },
+    ],
+    "to": null,
+  },
+  "type": "move-tabs",
+}
+`;
+
+exports[`actions move tabs fails to create invalid action for tabs: 1`] = `"Invalid Action Definition: move  (1 => 2)"`;
+
+exports[`actions move tabs fails to create invalid action for tabs:null 1`] = `"Invalid Action Definition: move null (1 => 2)"`;
+
+exports[`actions move tabs fails to create invalid action for tabs:undefined 1`] = `"Invalid Action Definition: move undefined (1 => 2)"`;
+
+exports[`actions undo creates valid action 1`] = `
+Object {
+  "type": "undo",
+}
+`;
