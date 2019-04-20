@@ -2,7 +2,6 @@ import * as chrome from "sinon-chrome";
 
 import {
     changeTabUrl,
-    commandListener,
     createWindow,
     focusOnTab,
     focusOnWindow,
@@ -31,26 +30,21 @@ describe("chrome", () => {
     };
 
     describe("commands", () => {
-        it("registers listener to chome oncommand", () => {
-            expect(chrome.commands.onCommand.hasListener(commandListener)).toBe(
-                true,
-            );
-        });
-
-        it("triggers all registered callbacks", () => {
-            const mockCommand1 = "ctrl+1";
-            const mockCommand2 = "ctrl+2";
+        it("registers callbacks", () => {
             const mockCallbackA = jest.fn();
             const mockCallbackB = jest.fn();
             const mockCallbackC = jest.fn();
-            onCommand(mockCommand1, mockCallbackA);
-            onCommand(mockCommand1, mockCallbackB);
-            onCommand(mockCommand2, mockCallbackC);
-            commandListener("no-binding");
-            commandListener(mockCommand1);
-            expect(mockCallbackA).toHaveBeenCalledTimes(1);
-            expect(mockCallbackB).toHaveBeenCalledTimes(1);
-            expect(mockCallbackC).not.toHaveBeenCalled();
+            onCommand(mockCallbackA);
+            onCommand(mockCallbackB);
+            expect(chrome.commands.onCommand.hasListener(mockCallbackA)).toBe(
+                true,
+            );
+            expect(chrome.commands.onCommand.hasListener(mockCallbackB)).toBe(
+                true,
+            );
+            expect(chrome.commands.onCommand.hasListener(mockCallbackC)).toBe(
+                false,
+            );
         });
 
         it("resolves to list of commands", async () => {

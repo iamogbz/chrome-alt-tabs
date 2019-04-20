@@ -7,7 +7,7 @@ import { handleAction } from "background/handler";
 import { log } from "utils/base";
 import * as chromeUtils from "utils/chrome";
 
-const undoLimitSpy = jest.spyOnProp(constants, "UNDO_LIMIT").mockValue(2);
+const undoLimitSpy = jest.spyOnProp(constants, "UNDO_LIMIT").mockValue(1);
 jest.spyOn(log, "error").mockImplementation(jest.fn());
 const createWindowSpy = jest
     .spyOn(chromeUtils, "createWindow")
@@ -136,6 +136,7 @@ describe("handler", () => {
     });
 
     it("undoes only up to limit", async () => {
+        undoLimitSpy.mockValue(2);
         const moveAction = moveTabs({
             from: sourceWindowId,
             tabs: mockTabs,

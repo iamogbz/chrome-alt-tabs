@@ -37,7 +37,7 @@ const withCommandContext = (fn: (...args: any[]) => void) => async () => {
     return fn({ windowId: currentWindow.id, selectedTabs, isAllTabsSelected });
 };
 
-const commandActions = {
+export const commandActions = {
     [COMMANDS.OUT]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
             const from = isAllTabsSelected ? null : (windowId as number);
@@ -62,6 +62,7 @@ const commandActions = {
         await handleAction(undo());
     },
 };
-Object.keys(commandActions).forEach(type =>
-    onCommand(type, commandActions[type]),
-);
+const noop = (): void => undefined;
+export const commandListener = (command: string): void =>
+    (commandActions[command] || noop)();
+onCommand(commandListener);

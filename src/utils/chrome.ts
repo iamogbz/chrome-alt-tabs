@@ -1,23 +1,10 @@
 import { wrapIndex } from "./base";
 
 /**
- * Bind single oncommand listener and switch based on received
+ * Register callback to be run on command received
  */
-const listeners: { [key: string]: Set<() => any> } = {};
-export const commandListener = (command: string) => {
-    (listeners[command] || []).forEach((callback: () => any) => callback());
-};
-chrome.commands.onCommand.addListener(commandListener);
-
-/**
- * Register callback to be run on specific command
- */
-export const onCommand = (command: string, callback: () => any): void => {
-    if (!(command in listeners)) {
-        listeners[command] = new Set();
-    }
-    listeners[command].add(callback);
-};
+export const onCommand = (callback: (command: string) => any): void =>
+    chrome.commands.onCommand.addListener(callback);
 
 /**
  * Get all registered chrome commands
