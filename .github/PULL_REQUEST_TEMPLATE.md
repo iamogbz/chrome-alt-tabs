@@ -1,11 +1,15 @@
 # Description
-
-Overview of my changes
+<!-- TLDR -->
 
 ## Changes
 
 - Itemised summary
 - Of all changes made
+
+### Checklist
+
+- [ ] This PR has updated documentation
+- [ ] This PR has sufficient testing
 
 ### Comments
 
