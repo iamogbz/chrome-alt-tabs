@@ -1,9 +1,6 @@
 language: node_js
 node_js:
   - '10'
-branches:
-  only:
-  - master
 jobs:
   include:
     - stage: lint, test and build
@@ -14,5 +11,5 @@ jobs:
     - name: build
       script: npm run build
     - stage: deploy
-      script: npm run build && npm run release
+      script: npm run release
       if: branch = master
