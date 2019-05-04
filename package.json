@@ -145,6 +145,7 @@
         "prettier": "^1.17.0",
         "prettier-eslint": "^8.8.2",
         "prettier-tslint": "^0.4.2",
+        "responsive-json-webpack-plugin": "^1.5.2",
         "rxjs": "^6.4.0",
         "semantic-release": "^15.13.12",
         "semantic-release-chrome": "^1.1.1",
