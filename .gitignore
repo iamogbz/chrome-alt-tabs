@@ -2,3 +2,5 @@ node_modules
 logo.ai
 logo.xd
 dist
+lib
+artifacts

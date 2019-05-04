@@ -1,10 +1,32 @@
 {
+    "author": "iamogbz",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iamogbz/chrome-alt-tabs.git"
+    },
+    "bugs": {
+        "url": "https://github.com/iamogbz/chrome-alt-tabs/issues"
+    },
+    "homepage": "https://github.com/iamogbz/chrome-alt-tabs#readme",
+    "license": "GPL-3.0",
+    "keywords": [
+        "chrome",
+        "extension",
+        "google",
+        "productivity",
+        "tabs"
+    ],
+    "engines": {
+        "node": ">=10.4.0",
+        "npm": ">=6.1.0"
+    },
     "scripts": {
         "commitlint": "commitlint-travis",
         "build": "webpack --mode=production",
         "build-watch": "webpack --mode=development  --watch",
-        "test": "jest",
+        "test": "jest --coverage",
         "test-watch": "jest --watch",
+        "coveralls": "cat ./artifacts/coverage/lcov.info | coveralls",
         "typecheck": "tsc --noEmit",
         "commit": "git-cz",
         "release": "semantic-release"
@@ -92,27 +114,6 @@
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
             "pre-commit": "lint-staged"
         }
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/iamogbz/chrome-alt-tabs.git"
-    },
-    "keywords": [
-        "chrome",
-        "extension",
-        "google",
-        "productivity",
-        "tabs"
-    ],
-    "author": "iamogbz",
-    "license": "GPL-3.0",
-    "bugs": {
-        "url": "https://github.com/iamogbz/chrome-alt-tabs/issues"
-    },
-    "homepage": "https://github.com/iamogbz/chrome-alt-tabs#readme",
-    "engines": {
-        "node": ">=10.4.0",
-        "npm": ">=6.1.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.2.3",
