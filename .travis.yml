@@ -8,7 +8,7 @@ jobs:
       script: npm run commitlint
     - name: test
       script:
-        - npm run test
+        - npm test -- --ci --coverage
         - npm run coveralls
     - name: build
       script: npm run build
