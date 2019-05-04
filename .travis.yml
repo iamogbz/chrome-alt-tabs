@@ -11,5 +11,5 @@ jobs:
     - name: build
       script: npm run build
     - stage: deploy
-      script: npm run release
+      script: npm run build && npm run release
       if: branch = master
