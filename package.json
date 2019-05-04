@@ -2,11 +2,38 @@
     "name": "boilerplate",
     "version": "0.0.1",
     "description": "NodeJS Boilerplate with precommit test and linting configured",
+    "author": "iamogbz",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iamogbz/node-js-boilerplate.git"
+    },
+    "bugs": {
+        "url": "https://github.com/iamogbz/node-js-boilerplate/issues"
+    },
+    "homepage": "https://github.com/iamogbz/node-js-boilerplate#readme",
+    "license": "GPL-3.0",
+    "keywords": [
+        "node",
+        "nodejs",
+        "boilerplate",
+        "testing",
+        "linting",
+        "ci",
+        "package",
+        "npm"
+    ],
+    "engines": {
+        "node": ">=8",
+        "npm": ">=6"
+    },
     "main": "index.js",
     "scripts": {
         "commitlint": "commitlint-travis",
-        "build": "webpack",
-        "test": "jest",
+        "build": "webpack --mode=production",
+        "build-watch": "webpack --mode=development  --watch",
+        "test": "jest --coverage",
+        "test-watch": "jest --watch",
+        "coveralls": "cat ./artifacts/coverage/lcov.info | coveralls",
         "commit": "git-cz",
         "release": "semantic-release"
     },
@@ -53,30 +80,6 @@
             "pre-commit": "lint-staged"
         }
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/iamogbz/node-js-boilerplate.git"
-    },
-    "keywords": [
-        "node",
-        "nodejs",
-        "boilerplate",
-        "testing",
-        "linting",
-        "ci",
-        "package",
-        "npm"
-    ],
-    "author": "iamogbz",
-    "license": "GPL-3.0",
-    "bugs": {
-        "url": "https://github.com/iamogbz/node-js-boilerplate/issues"
-    },
-    "homepage": "https://github.com/iamogbz/node-js-boilerplate#readme",
-    "engines": {
-        "node": ">=10.4.0",
-        "npm": ">=6.1.0"
-    },
     "devDependencies": {
         "@babel/cli": "^7.2.3",
         "@babel/core": "^7.3.4",
@@ -89,6 +92,7 @@
         "babel-loader": "^8.0.5",
         "babel-plugin-transform-class-properties": "^6.24.1",
         "commitizen": "^3.0.7",
+        "coveralls": "^3.0.3",
         "cz-conventional-changelog": "^2.1.0",
         "eslint": "^5.16.0",
         "eslint-config-airbnb": "^17.1.0",
