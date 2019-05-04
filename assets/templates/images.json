@@ -1,0 +1,23 @@
+[
+    {
+        "files": ["logo.png"],
+        "alternates": [
+            {
+                "size": 16,
+                "dest": "../icon.16"
+            },
+            {
+                "size": 32,
+                "dest": "../icon.32"
+            },
+            {
+                "size": 48,
+                "dest": "../icon.48"
+            },
+            {
+                "size": 128,
+                "dest": "../icon.128"
+            }
+        ]
+    }
+]
