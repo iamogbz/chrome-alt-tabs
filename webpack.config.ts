@@ -1,13 +1,17 @@
 import * as CopyWebpackPlugin from "copy-webpack-plugin";
 import * as path from "path";
+// import ResponsiveJSONWebpackPlugin from "responsive-json-webpack-plugin";
 import { Configuration } from "webpack";
+
+const srcFolder = path.resolve("./src");
+const outputFolder = path.resolve(__dirname, "./dist");
 
 const configuration: Configuration = {
     devtool: "source-map",
     entry: ["background", "options"].reduce(
         (entries, name) =>
             Object.assign(entries, {
-                [name]: ["@babel/polyfill", `./src/${name}`],
+                [name]: ["@babel/polyfill", path.join(srcFolder, name)],
             }),
         {},
     ),
@@ -28,7 +32,7 @@ const configuration: Configuration = {
     },
     output: {
         filename: "[name].js",
-        path: path.resolve(__dirname, "./dist"),
+        path: outputFolder,
     },
     plugins: [
         new CopyWebpackPlugin(
@@ -36,22 +40,20 @@ const configuration: Configuration = {
                 (config, name) => {
                     config.push(
                         ...["html", "css"].map(ext => ({
-                            from: `./src/${name}/index.${ext}`,
+                            from: path.join(srcFolder, name, `index.${ext}`),
                             to: `${name}.${ext}`,
                         })),
                     );
                     return config;
                 },
-                [
-                    { from: "./manifest.json" },
-                    { from: "./assets/images/icon.*.png", to: "[name].[ext]" },
-                ],
+                [{ from: "./manifest.json" }],
             ),
         ),
+        // new ResponsiveJSONWebpackPlugin({ outputFolder }),
     ],
     resolve: {
         extensions: [".js", ".ts"],
-        modules: [path.resolve("./src"), path.resolve("./node_modules")],
+        modules: [srcFolder, path.resolve("./node_modules")],
     },
 };
 
