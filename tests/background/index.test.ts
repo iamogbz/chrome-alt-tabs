@@ -32,19 +32,18 @@ describe("background", () => {
     });
 
     const expectedArgs = {
-        [COMMANDS.OUT]: [
-            moveTabs({ tabs: selectedTabs, from: 1 }),
-            moveTabs({ tabs: mockTabs, from: null }),
-        ],
-        [COMMANDS.NEXT]: [
-            moveTabs({ tabs: selectedTabs, from: 1, to: 100 }),
-            moveTabs({ tabs: mockTabs, from: null, to: 100 }),
-        ],
-        [COMMANDS.PREV]: [
-            moveTabs({ tabs: selectedTabs, from: 1, to: 99 }),
-            moveTabs({ tabs: mockTabs, from: null, to: 99 }),
-        ],
-        [COMMANDS.BACK]: [undo(), undo()],
+        [COMMANDS.OUT]: {
+            some: moveTabs({ tabs: selectedTabs, from: 1 }),
+        },
+        [COMMANDS.NEXT]: {
+            all: moveTabs({ tabs: mockTabs, from: null, to: 100 }),
+            some: moveTabs({ tabs: selectedTabs, from: 1, to: 100 }),
+        },
+        [COMMANDS.PREV]: {
+            all: moveTabs({ tabs: mockTabs, from: null, to: 99 }),
+            some: moveTabs({ tabs: selectedTabs, from: 1, to: 99 }),
+        },
+        [COMMANDS.BACK]: { all: undo(), some: undo() },
     };
 
     it.each(Object.values(COMMANDS).map(v => [v]))(
@@ -53,7 +52,7 @@ describe("background", () => {
             const commandSpy = jest.spyOn(commandActions, command);
             await commandListener(command);
             expect(commandSpy).toHaveBeenCalledTimes(1);
-            const [expected] = expectedArgs[command];
+            const expected = expectedArgs[command].some;
             expect(handleActionSpy).toHaveBeenCalledWith(expected);
             commandSpy.mockRestore();
         },
@@ -66,8 +65,12 @@ describe("background", () => {
             selectedTabsSpy.mockResolvedValueOnce(mockTabs);
             await commandListener(command);
             expect(commandSpy).toHaveBeenCalledTimes(1);
-            const [, expected] = expectedArgs[command];
-            expect(handleActionSpy).toHaveBeenCalledWith(expected);
+            const expected = expectedArgs[command].all;
+            if (!expected) {
+                expect(handleActionSpy).not.toHaveBeenCalled();
+            } else {
+                expect(handleActionSpy).toHaveBeenCalledWith(expected);
+            }
             commandSpy.mockRestore();
         },
     );

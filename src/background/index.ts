@@ -40,8 +40,8 @@ const withCommandContext = (fn: (...args: any[]) => void) => async () => {
 export const commandActions = {
     [COMMANDS.OUT]: withCommandContext(
         async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
-            const from = isAllTabsSelected ? null : (windowId as number);
-            await handleAction(moveTabs({ tabs, from }));
+            if (isAllTabsSelected) return;
+            await handleAction(moveTabs({ tabs, from: windowId }));
         },
     ),
     [COMMANDS.NEXT]: withCommandContext(
