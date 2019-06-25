@@ -1,3 +1,5 @@
+import "crx-livereload";
+
 import {
     getAllTabsInWindow,
     getLastFocusedWindow,
