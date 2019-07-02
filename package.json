@@ -139,7 +139,7 @@
         "coveralls": "^3.0.3",
         "cz-conventional-changelog": "^2.1.0",
         "eslint": "^6.0.0",
-        "husky": "^2.1.0",
+        "husky": "^3.0.0",
         "jest": "^24.1.0",
         "jest-mock-props": "^1.3.0",
         "jest-raw-loader": "^1.0.1",
