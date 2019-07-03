@@ -161,6 +161,6 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.2.5",
-        "crx-livereload": "^0.1.1"
+        "crx-livereload": "^0.2.0"
     }
 }
