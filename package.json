@@ -85,19 +85,14 @@
         ]
     },
     "lint-staged": {
-        "linters": {
-            "*.js": [
-                "eslint"
-            ],
-            "*.ts": [
-                "tslint"
-            ],
-            "*.{js,ts}": [
-                "jest --bail --findRelatedTests"
-            ]
-        },
-        "ignore": [
-            "**/dist/*"
+        "*.js": [
+            "eslint"
+        ],
+        "*.ts": [
+            "tslint"
+        ],
+        "*.{js,ts}": [
+            "jest --bail --findRelatedTests"
         ]
     },
     "commitlint": {
