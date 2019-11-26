@@ -7,6 +7,7 @@ import {
     focusOnWindow,
     getAllCommands,
     getAllTabsInWindow,
+    getAllWindows,
     getLastFocusedWindow,
     getSelectedTabsInWindow,
     getWindowIdAfter,
@@ -188,6 +189,15 @@ describe("chrome", () => {
                     expect(await getWindowIdAfter(index)).toEqual(expected);
                 },
             );
+
+            it("gets all windows", async () => {
+                const windowType = "popup";
+                const mockPopupWindows = mockWindows.slice(0, 2);
+                chrome.windows.getAll
+                    .withArgs({ windowTypes: [windowType] })
+                    .yields(mockPopupWindows);
+                expect(await getAllWindows(windowType)).toEqual(mockPopupWindows);
+            });
         });
     });
 });

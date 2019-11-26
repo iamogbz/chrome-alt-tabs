@@ -18,7 +18,6 @@
         "no-unused-variable": true,
         "no-require-imports": true,
         "no-unnecessary-callback-wrapper": true,
-        "no-use-before-declare": true,
         "object-literal-key-quotes": [true, "consistent-as-needed"],
         "only-arrow-functions": true,
         "ordered-imports": [
