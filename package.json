@@ -130,7 +130,7 @@
         "babel-loader": "^8.0.6",
         "babel-runtime": "^6.26.0",
         "commitizen": "^4.0.3",
-        "copy-webpack-plugin": "^5.0.5",
+        "copy-webpack-plugin": "^5.1.0",
         "coveralls": "^3.0.9",
         "cz-conventional-changelog": "^3.0.2",
         "eslint": "^6.7.2",
