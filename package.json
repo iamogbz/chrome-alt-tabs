@@ -121,7 +121,7 @@
         "@semantic-release/changelog": "^3.0.6",
         "@types/chrome": "^0.0.91",
         "@types/copy-webpack-plugin": "^5.0.0",
-        "@types/jest": "^24.0.24",
+        "@types/jest": "^24.0.25",
         "@types/node": "^13.1.1",
         "@types/webpack": "^4.41.0",
         "acorn": "^7.1.0",
