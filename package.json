@@ -117,7 +117,7 @@
         "@babel/preset-typescript": "^7.7.7",
         "@commitlint/cli": "^8.3.3",
         "@commitlint/config-conventional": "^8.3.3",
-        "@commitlint/travis-cli": "^8.3.3",
+        "@commitlint/travis-cli": "^8.3.4",
         "@semantic-release/changelog": "^3.0.6",
         "@types/chrome": "^0.0.91",
         "@types/copy-webpack-plugin": "^5.0.0",
