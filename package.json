@@ -155,7 +155,7 @@
         "webpack-cli": "^3.3.11"
     },
     "dependencies": {
-        "@babel/polyfill": "^7.8.3",
+        "@babel/polyfill": "^7.8.7",
         "crx-livereload": "^0.2.1"
     }
 }
