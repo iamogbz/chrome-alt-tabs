@@ -140,7 +140,7 @@
         "jest-raw-loader": "^1.0.1",
         "lint-staged": "^10.2.6",
         "prettier": "^1.19.1",
-        "prettier-eslint": "^10.1.0",
+        "prettier-eslint": "^10.1.1",
         "prettier-tslint": "^0.4.2",
         "responsive-json-webpack-plugin": "^1.5.2",
         "rxjs": "^6.5.5",
