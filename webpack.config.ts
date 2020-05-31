@@ -35,8 +35,8 @@ const configuration: Configuration = {
         path: path.resolve(__dirname, "./dist"),
     },
     plugins: [
-        new CopyWebpackPlugin(
-            ["options"].reduce(
+        new CopyWebpackPlugin({
+            patterns: ["options"].reduce(
                 (config, name) => {
                     config.push(
                         ...["html", "css"].map(ext => ({
@@ -48,7 +48,7 @@ const configuration: Configuration = {
                 },
                 [{ from: "./manifest.json" }],
             ),
-        ),
+        }),
         new ResponsiveJSONWebpackPlugin({
             outputFolder: ".",
             sourceImages: "./assets/images",
