@@ -123,7 +123,7 @@
         "@types/copy-webpack-plugin": "^6.0.0",
         "@types/jest": "^25.2.3",
         "@types/node": "^14.0.6",
-        "@types/webpack": "^4.41.13",
+        "@types/webpack": "^4.41.16",
         "acorn": "^7.2.0",
         "ajv": "^6.12.2",
         "babel-eslint": "^10.1.0",
