@@ -122,7 +122,7 @@
         "@types/chrome": "^0.0.114",
         "@types/copy-webpack-plugin": "^6.0.0",
         "@types/jest": "^25.2.3",
-        "@types/node": "^14.0.10",
+        "@types/node": "^14.0.11",
         "@types/webpack": "^4.41.17",
         "acorn": "^7.2.0",
         "ajv": "^6.12.2",
