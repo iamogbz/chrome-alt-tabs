@@ -124,7 +124,7 @@
         "@types/jest": "^26.0.0",
         "@types/node": "^14.0.13",
         "@types/webpack": "^4.41.17",
-        "acorn": "^7.2.0",
+        "acorn": "^7.3.1",
         "ajv": "^6.12.2",
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.1.0",
