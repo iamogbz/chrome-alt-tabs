@@ -114,7 +114,7 @@
     "devDependencies": {
         "@babel/cli": "^7.10.3",
         "@babel/core": "^7.10.3",
-        "@babel/preset-typescript": "^7.10.1",
+        "@babel/preset-typescript": "^7.10.4",
         "@commitlint/cli": "^9.0.1",
         "@commitlint/config-conventional": "^9.0.1",
         "@commitlint/travis-cli": "^9.0.1",
