@@ -96,6 +96,9 @@
         ]
     },
     "commitlint": {
+        "rules": {
+            "header-max-length": [0, "always", 999],
+        },
         "extends": [
             "@commitlint/config-conventional"
         ]
