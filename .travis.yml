@@ -14,7 +14,7 @@ jobs:
       script: npm run build
     - stage: commitlint
       script: npm run commitlint
-      if: commit_message !~ /^chore\(deps/
+      if: commit_message !~ /^build\(deps/
     - stage: deploy
       script: npm run build && npm run release
       if: branch = master
