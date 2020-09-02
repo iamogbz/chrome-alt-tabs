@@ -4,14 +4,17 @@ node_js:
 jobs:
   include:
     - stage: lint, test and build
-      name: commitlint
-      script: npm run commitlint
+      name: lint
+      script: npm run lint
     - name: test
       script:
         - npm test -- --ci --coverage
         - npm run coveralls
     - name: build
       script: npm run build
+    - stage: commitlint
+      script: npm run commitlint
+      if: commit_message !~ /^chore\(deps/
     - stage: deploy
       script: npm run build && npm run release
       if: branch = master
