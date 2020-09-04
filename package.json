@@ -142,7 +142,7 @@
         "jest": "^26.4.2",
         "jest-mock-props": "^1.7.3",
         "jest-raw-loader": "^1.0.1",
-        "lint-staged": "^10.2.11",
+        "lint-staged": "^10.3.0",
         "prettier": "^1.19.1",
         "prettier-eslint": "^11.0.0",
         "prettier-tslint": "^0.4.2",
