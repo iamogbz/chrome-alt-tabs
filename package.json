@@ -137,7 +137,7 @@
         "copy-webpack-plugin": "^6.1.0",
         "coveralls": "^3.1.0",
         "cz-conventional-changelog": "^3.3.0",
-        "eslint": "^7.8.1",
+        "eslint": "^7.9.0",
         "husky": "^4.3.0",
         "jest": "^26.4.2",
         "jest-mock-props": "^1.7.3",
