@@ -29,8 +29,14 @@ describe("handler", () => {
         ...tab,
         active: tab.id === activeTabId,
     }));
+    const undoMove = () => handleAction(undo());
 
-    beforeEach(jest.clearAllMocks);
+    beforeEach(async () => {
+        for (let i = 0; i < constants.UNDO_LIMIT; i++) {
+            await undoMove();
+        }
+        jest.clearAllMocks();
+    });
     afterAll(jest.restoreAllMocks);
 
     it("is a noop without an action", async () => {
@@ -119,7 +125,7 @@ describe("handler", () => {
             tabs: mockTabs,
             to: targetWindowId,
         });
-        await handleAction(moveAction).then(() => handleAction(undo()));
+        await handleAction(moveAction).then(undoMove);
         expect(moveTabsToWindowSpy).toHaveBeenCalledTimes(2);
         expect(moveTabsToWindowSpy).toHaveBeenLastCalledWith(
             mockTabs,
@@ -143,7 +149,6 @@ describe("handler", () => {
             to: targetWindowId,
         });
         const doMove = () => handleAction(moveAction);
-        const undoMove = () => handleAction(undo());
         await doMove()
             .then(doMove)
             .then(doMove);
@@ -162,6 +167,5 @@ describe("handler", () => {
             mockTabs,
             sourceWindowId,
         );
-        undoLimitSpy.mockReset();
     });
 });
