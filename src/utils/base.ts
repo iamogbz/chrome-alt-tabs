@@ -1,7 +1,7 @@
-const defaultLogger = (...args: any[]): void => console.log(...args); // tslint:disable-line
-const errorLogger = (...args: any[]): void => console.error(...args); // tslint:disable-line
+const defaultLogger = (...args: unknown[]): void => console.log(...args); // eslint-disable-line no-console
+const errorLogger = (...args: unknown[]): void => console.error(...args); // eslint-disable-line no-console
 
-export const log = (...args: any[]): void => log.default(...args);
+export const log = (...args: unknown[]): void => log.default(...args);
 log.default = defaultLogger;
 log.error = errorLogger;
 
@@ -9,9 +9,9 @@ log.error = errorLogger;
  * Wrap index around a specified size
  */
 export const wrapIndex = ({
-    index,
-    size,
+  index,
+  size,
 }: {
-    index: number;
-    size: number;
+  index: number;
+  size: number;
 }): number => (index < 0 ? size : 0) + (index % size);

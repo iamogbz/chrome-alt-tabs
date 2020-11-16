@@ -3,9 +3,11 @@ node_js:
   - '10'
 jobs:
   include:
-    - stage: lint, test and build
-      name: lint
-      script: npm run lint
+    - stage: checks
+      name: analysis
+      script:
+        - npm run lint
+        - npm run typecheck
     - name: test
       script:
         - npm test -- --ci --coverage

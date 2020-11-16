@@ -2,27 +2,27 @@ export const MOVE_TABS = "move-tabs";
 export const UNDO = "undo";
 
 export const moveTabs = ({
-    tabs,
-    from,
-    to = null,
+  tabs,
+  from,
+  to = null,
 }: {
-    tabs: ChromeTab[];
-    from?: number;
-    to?: number;
+  tabs: ChromeTab[];
+  from?: number;
+  to?: number;
 }): Action => {
-    if (!tabs || !tabs.length) {
-        throw new Error(
-            `Invalid Action Definition: move ${tabs} (${from} => ${to})`,
-        );
-    }
-    return {
-        payload: {
-            from,
-            tabs: tabs.map((t: ChromeTab) => ({ ...t })),
-            to,
-        },
-        type: MOVE_TABS,
-    };
+  if (!tabs || !tabs.length) {
+    throw new Error(
+      `Invalid Action Definition: move ${tabs} (${from} => ${to})`
+    );
+  }
+  return {
+    payload: {
+      from,
+      tabs: tabs.map((t: ChromeTab) => ({ ...t })),
+      to,
+    },
+    type: MOVE_TABS,
+  };
 };
 
 /**
