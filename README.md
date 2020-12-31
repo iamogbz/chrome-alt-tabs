@@ -2,8 +2,8 @@
 
 [![Dependabot badge](https://badgen.net/github/dependabot/iamogbz/chrome-alt-tabs/)](https://app.dependabot.com)
 [![Dependencies](https://img.shields.io/librariesio/github/iamogbz/chrome-alt-tabs)](https://github.com/iamogbz/chrome-alt-tabs)
-[![Build Status](https://travis-ci.org/iamogbz/chrome-alt-tabs.svg?branch=master)](https://travis-ci.org/iamogbz/chrome-alt-tabs.svg)
-[![Coverage Status](https://coveralls.io/repos/github/iamogbz/chrome-alt-tabs/badge.svg?branch=master)](https://coveralls.io/github/iamogbz/chrome-alt-tabs)
+[![Build Status](https://github.com/iamogbz/chrome-alt-tabs/workflows/Build/badge.svg)](https://github.com/iamogbz/chrome-alt-tabs/actions?query=workflow%3ABuild)
+[![Coverage Status](https://coveralls.io/repos/github/iamogbz/chrome-alt-tabs/badge.svg)](https://coveralls.io/github/iamogbz/chrome-alt-tabs)
 
 > speeds up tab management with simple shortcuts
 
