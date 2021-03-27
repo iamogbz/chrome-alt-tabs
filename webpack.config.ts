@@ -2,7 +2,7 @@ import * as CopyWebpackPlugin from "copy-webpack-plugin";
 import * as path from "path";
 // @ts-expect-error tsc does not play nice with the package
 import * as ResponsiveJSONWebpackPlugin from "responsive-json-webpack-plugin";
-import { Configuration } from "webpack";
+import { Configuration, WebpackPluginInstance } from "webpack";
 
 const srcFolder = path.resolve("./src");
 
@@ -35,7 +35,7 @@ const configuration: Configuration = {
     path: path.resolve(__dirname, "./dist"),
   },
   plugins: [
-    new CopyWebpackPlugin({
+    (new CopyWebpackPlugin({
       patterns: ["options"].reduce(
         (config, name) => {
           config.push(
@@ -48,7 +48,7 @@ const configuration: Configuration = {
         },
         [{ from: "./manifest.json" }]
       ),
-    }),
+    }) as unknown) as WebpackPluginInstance,
     new ResponsiveJSONWebpackPlugin({
       outputFolder: ".",
       sourceImages: "./assets/images",
