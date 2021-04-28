@@ -14,4 +14,4 @@ export const wrapIndex = ({
 }: {
   index: number;
   size: number;
-}): number => (index < 0 ? size : 0) + (index % size);
+}): number => ((index % size) + size) % size;
