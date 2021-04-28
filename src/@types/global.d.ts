@@ -1,14 +1,17 @@
-interface AnyObject {
-  // eslint-ignore-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
-
 type ChromeTab = chrome.tabs.Tab;
-type ChromeWindow = chrome.windows.Window & AnyObject;
+type ChromeWindow = chrome.windows.Window;
 
 interface Action {
   type: string;
-  payload?: AnyObject;
+  payload?: unknown;
+}
+
+interface MoveTabAction extends Action {
+  payload: {
+    from?: number;
+    tabs: ChromeTab[];
+    to?: number;
+  };
 }
 
 type ActionHandler = (action: Action) => Promise<boolean>;

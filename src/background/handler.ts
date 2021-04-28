@@ -10,14 +10,16 @@ import { MOVE_TABS, UNDO, moveTabs } from "./actions";
 import { UNDO_LIMIT } from "./constants";
 
 const actionLog: Action[] = [];
-const noActionOp = async (_: Action) => false;
+const noActionOp = async () => false;
 const doActionHandlers: { [type: string]: ActionHandler } = {};
 const undoActionHandlers: { [type: string]: ActionHandler } = {};
 
 /**
  * Handle move action
  */
-doActionHandlers[MOVE_TABS] = async (action: Action): Promise<boolean> => {
+doActionHandlers[MOVE_TABS] = async (
+  action: MoveTabAction
+): Promise<boolean> => {
   const {
     payload: { tabs, to },
   } = action;
@@ -41,7 +43,7 @@ doActionHandlers[MOVE_TABS] = async (action: Action): Promise<boolean> => {
  */
 undoActionHandlers[MOVE_TABS] = async ({
   payload: { to, from, tabs },
-}: Action): Promise<boolean> => {
+}: MoveTabAction): Promise<boolean> => {
   await doActionHandlers[MOVE_TABS](moveTabs({ from: to, tabs, to: from }));
   return false;
 };
