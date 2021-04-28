@@ -5,11 +5,7 @@ export const moveTabs = ({
   tabs,
   from,
   to = null,
-}: {
-  tabs: ChromeTab[];
-  from?: number;
-  to?: number;
-}): Action => {
+}: MoveTabAction["payload"]): MoveTabAction => {
   if (!tabs || !tabs.length) {
     throw new Error(
       `Invalid Action Definition: move ${tabs} (${from} => ${to})`
@@ -18,7 +14,7 @@ export const moveTabs = ({
   return {
     payload: {
       from,
-      tabs: tabs.map((t: ChromeTab) => ({ ...t })),
+      tabs: tabs.map((t) => ({ ...t })),
       to,
     },
     type: MOVE_TABS,

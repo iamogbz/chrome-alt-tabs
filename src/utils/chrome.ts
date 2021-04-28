@@ -130,9 +130,8 @@ const compareWindowPositions = (
   windowA: ChromeWindow,
   windowB: ChromeWindow
 ): number => {
-  const props = ["left", "top", "width", "height", "id"];
-  while (props.length) {
-    const prop = props.shift();
+  const props = ["left", "top", "width", "height", "id"] as const;
+  for (const prop of props) {
     const valueA: number = windowA[prop];
     const valueB: number = windowB[prop];
     if (valueA !== undefined && valueB !== undefined && valueA !== valueB) {
