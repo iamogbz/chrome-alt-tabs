@@ -17,10 +17,10 @@ cd chrome-alt-tabs
 npm install
 ```
 
-While making changes or switching branches, `run watch` to auto build new code:
+While making changes or switching branches, `run build-watch` to auto build new code:
 
 ```sh
-npm run watch
+npm run build-watch
 ```
 
 Start coding!
