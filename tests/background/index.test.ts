@@ -34,11 +34,11 @@ describe("background", () => {
       some: moveTabs({ tabs: selectedTabs, from: 1 }),
     },
     [COMMANDS.NEXT]: {
-      all: moveTabs({ tabs: mockTabs, from: null, to: 100 }),
+      all: moveTabs({ tabs: mockTabs, from: 1, to: 100 }),
       some: moveTabs({ tabs: selectedTabs, from: 1, to: 100 }),
     },
     [COMMANDS.PREV]: {
-      all: moveTabs({ tabs: mockTabs, from: null, to: 99 }),
+      all: moveTabs({ tabs: mockTabs, from: 1, to: 99 }),
       some: moveTabs({ tabs: selectedTabs, from: 1, to: 99 }),
     },
     [COMMANDS.BACK]: { all: undo(), some: undo() },
