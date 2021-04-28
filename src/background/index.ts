@@ -14,7 +14,6 @@ import { handleAction } from "./handler";
 
 /**
  * Get the context of the current command activated
- * @returns {Promise}
  */
 const getCommandContext = async (): Promise<{
   currentWindow: ChromeWindow;
@@ -31,9 +30,14 @@ const getCommandContext = async (): Promise<{
 
 /**
  * Wrap a function to be executed with the command context when activated
- * @param {Function} fn to be called with the command context
  */
-const withCommandContext = (fn: (...args: unknown[]) => void) => async () => {
+const withCommandContext = (
+  fn: (arg: {
+    windowId: number;
+    selectedTabs: ChromeTab[];
+    isAllTabsSelected: boolean;
+  }) => void
+) => async () => {
   const { currentWindow, selectedTabs, allTabs } = await getCommandContext();
   const isAllTabsSelected = selectedTabs.length === allTabs.length;
   return fn({ windowId: currentWindow.id, selectedTabs, isAllTabsSelected });
@@ -47,15 +51,15 @@ export const commandActions = {
     }
   ),
   [COMMANDS.NEXT]: withCommandContext(
-    async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
-      const from = isAllTabsSelected ? null : (windowId as number);
+    async ({ windowId, selectedTabs: tabs }) => {
+      const from = windowId;
       const to = await getWindowIdAfter(from);
       await handleAction(moveTabs({ tabs, from, to }));
     }
   ),
   [COMMANDS.PREV]: withCommandContext(
-    async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
-      const from = isAllTabsSelected ? null : (windowId as number);
+    async ({ windowId, selectedTabs: tabs }) => {
+      const from = windowId;
       const to = await getWindowIdBefore(from);
       await handleAction(moveTabs({ tabs, from, to }));
     }
