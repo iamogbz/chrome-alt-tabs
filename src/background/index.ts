@@ -31,17 +31,19 @@ const getCommandContext = async (): Promise<{
 /**
  * Wrap a function to be executed with the command context when activated
  */
-const withCommandContext = (
-  fn: (arg: {
-    windowId: number;
-    selectedTabs: ChromeTab[];
-    isAllTabsSelected: boolean;
-  }) => void
-) => async () => {
-  const { currentWindow, selectedTabs, allTabs } = await getCommandContext();
-  const isAllTabsSelected = selectedTabs.length === allTabs.length;
-  return fn({ windowId: currentWindow.id, selectedTabs, isAllTabsSelected });
-};
+const withCommandContext =
+  (
+    fn: (arg: {
+      windowId: number;
+      selectedTabs: ChromeTab[];
+      isAllTabsSelected: boolean;
+    }) => void
+  ) =>
+  async () => {
+    const { currentWindow, selectedTabs, allTabs } = await getCommandContext();
+    const isAllTabsSelected = selectedTabs.length === allTabs.length;
+    return fn({ windowId: currentWindow.id, selectedTabs, isAllTabsSelected });
+  };
 
 export const commandActions = {
   [COMMANDS.OUT]: withCommandContext(

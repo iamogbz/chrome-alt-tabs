@@ -35,7 +35,7 @@ const configuration: Configuration = {
     path: path.resolve(__dirname, "./dist"),
   },
   plugins: [
-    (new CopyWebpackPlugin({
+    new CopyWebpackPlugin({
       patterns: ["options"].reduce(
         (config, name) => {
           config.push(
@@ -48,7 +48,7 @@ const configuration: Configuration = {
         },
         [{ from: "./manifest.json" }]
       ),
-    }) as unknown) as WebpackPluginInstance,
+    }) as unknown as WebpackPluginInstance,
     new ResponsiveJSONWebpackPlugin({
       outputFolder: ".",
       sourceImages: "./assets/images",
