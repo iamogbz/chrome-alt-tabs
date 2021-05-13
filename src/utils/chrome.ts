@@ -113,7 +113,7 @@ export const createWindow = (tabId: number): Promise<ChromeWindow> =>
  * Get all windows of matching type, default to ["normal"]
  */
 export const getAllWindows = (
-  ...windowTypes: string[]
+  ...windowTypes: chrome.windows.windowTypeEnum[]
 ): Promise<ChromeWindow[]> => {
   if (windowTypes.length === 0) {
     windowTypes.push("normal");
