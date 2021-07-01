@@ -1,6 +1,6 @@
-node_modules
+node_modules/
+artifacts/
+dist/
+lib/
 logo.ai
 logo.xd
-dist
-lib
-artifacts
