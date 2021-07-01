@@ -12,31 +12,36 @@ jobs:
     - name: Setup
       uses: actions/setup-node@v1
       with:
-        node-version: 10
+        node-version: 14.x
+    - uses: pnpm/action-setup@v2.0.1
+      with:
+        version: 6.0.2
+        run_install: |
+            args: [--frozen-lockfile]
     - name: Install
       run: |
-        npm install
+        pnpm install
     - name: Lint
       run: |
-        npm run lint
+        pnpm run lint
     - name: Typecheck
       run: |
-        npm run typecheck
+        pnpm run typecheck
     - name: Test
       env:
         CI: true
       run: |
-        npm test -- --ci --coverage
+        pnpm test -- --ci --coverage
     - name: Report
       if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
       env:
         COVERALLS_GIT_BRANCH: ${{ github.ref }}
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       run: |
-        npm run coveralls
+        pnpm run coveralls
     - name: Build
       run: |
-        npm run build
+        pnpm run build
     - name: Deploy
       if: github.ref == 'refs/heads/master' && github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
       env:
@@ -45,4 +50,4 @@ jobs:
         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
         GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
       run: |
-        npm run release
+        pnpm run release

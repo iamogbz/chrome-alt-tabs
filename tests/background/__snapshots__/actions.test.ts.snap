@@ -42,7 +42,7 @@ Object {
 }
 `;
 
-exports[`actions move tabs fails to create invalid action for tabs: 1`] = `"Invalid Action Definition: move  (1 => 2)"`;
+exports[`actions move tabs fails to create invalid action for tabs:[] 1`] = `"Invalid Action Definition: move  (1 => 2)"`;
 
 exports[`actions move tabs fails to create invalid action for tabs:null 1`] = `"Invalid Action Definition: move null (1 => 2)"`;
 

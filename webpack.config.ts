@@ -1,7 +1,6 @@
-import * as CopyWebpackPlugin from "copy-webpack-plugin";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 import * as path from "path";
-// @ts-expect-error tsc does not play nice with the package
-import * as ResponsiveJSONWebpackPlugin from "responsive-json-webpack-plugin";
+import ResponsiveJSONWebpackPlugin from "@rundik/responsive-json-webpack-plugin";
 import { Configuration, WebpackPluginInstance } from "webpack";
 
 const srcFolder = path.resolve("./src");
@@ -11,7 +10,11 @@ const configuration: Configuration = {
   entry: ["background", "options"].reduce(
     (entries, name) =>
       Object.assign(entries, {
-        [name]: ["@babel/polyfill", path.join(srcFolder, name)],
+        [name]: [
+          "core-js/stable",
+          "regenerator-runtime/runtime",
+          path.join(srcFolder, name),
+        ],
       }),
     {}
   ),

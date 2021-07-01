@@ -1,5 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import "options";
-import * as optionsHTML from "options/index.html";
+import optionsHTML from "options/index.html";
 import * as chromeUtils from "utils/chrome";
 
 const changeTabUrlSpy = jest.spyOn(chromeUtils, "changeTabUrl");

@@ -2,6 +2,7 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./src",
+        "esModuleInterop": true,
         "moduleResolution": "node",
         "noImplicitAny": true,
         "noImplicitReturns": true,
