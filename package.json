@@ -147,7 +147,7 @@
         "webpack-cli": "^4.8.0"
     },
     "dependencies": {
-        "core-js": "^3.17.3",
+        "core-js": "^3.18.0",
         "crx-livereload": "^0.2.1",
         "regenerator-runtime": "^0.13.9"
     }
