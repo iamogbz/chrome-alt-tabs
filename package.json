@@ -108,7 +108,7 @@
         "@babel/preset-typescript": "^7.15.0",
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
-        "@commitlint/travis-cli": "^13.1.0",
+        "@commitlint/travis-cli": "^13.2.0",
         "@rundik/responsive-json-webpack-plugin": "^1.5.3",
         "@semantic-release/changelog": "^6.0.0",
         "@types/chrome": "^0.0.158",
