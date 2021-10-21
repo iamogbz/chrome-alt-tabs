@@ -120,7 +120,7 @@
         "@typescript-eslint/parser": "^5.1.0",
         "acorn": "^8.5.0",
         "ajv": "^8.6.3",
-        "babel-loader": "^8.2.2",
+        "babel-loader": "^8.2.3",
         "babel-runtime": "^6.26.0",
         "commitizen": "^4.2.4",
         "copy-webpack-plugin": "^9.0.1",
