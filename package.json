@@ -114,7 +114,7 @@
         "@types/chrome": "^0.0.164",
         "@types/copy-webpack-plugin": "^8.0.1",
         "@types/jest": "^27.0.3",
-        "@types/node": "^16.11.9",
+        "@types/node": "^16.11.10",
         "@types/webpack": "^5.28.0",
         "@typescript-eslint/eslint-plugin": "^5.4.0",
         "@typescript-eslint/parser": "^5.4.0",
