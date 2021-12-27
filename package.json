@@ -118,7 +118,7 @@
         "@types/webpack": "^5.28.0",
         "@typescript-eslint/eslint-plugin": "^5.8.0",
         "@typescript-eslint/parser": "^5.8.0",
-        "acorn": "^8.6.0",
+        "acorn": "^8.7.0",
         "ajv": "^8.8.2",
         "babel-loader": "^8.2.3",
         "babel-runtime": "^6.26.0",
