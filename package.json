@@ -106,7 +106,7 @@
         "@babel/cli": "^7.16.0",
         "@babel/core": "^7.16.5",
         "@babel/preset-typescript": "^7.16.5",
-        "@commitlint/cli": "^16.0.0",
+        "@commitlint/cli": "^16.0.1",
         "@commitlint/config-conventional": "^16.0.0",
         "@commitlint/travis-cli": "^16.0.0",
         "@rundik/responsive-json-webpack-plugin": "^1.5.3",
