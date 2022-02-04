@@ -111,7 +111,7 @@
         "@commitlint/travis-cli": "^16.1.0",
         "@rundik/responsive-json-webpack-plugin": "^1.5.3",
         "@semantic-release/changelog": "^6.0.1",
-        "@types/chrome": "^0.0.177",
+        "@types/chrome": "^0.0.178",
         "@types/copy-webpack-plugin": "^10.1.0",
         "@types/jest": "^27.4.0",
         "@types/node": "^17.0.14",
