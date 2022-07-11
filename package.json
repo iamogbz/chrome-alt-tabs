@@ -138,7 +138,7 @@
         "prettier-eslint": "^15.0.1",
         "rxjs": "^7.5.5",
         "semantic-release": "^19.0.3",
-        "semantic-release-chrome": "^3.0.0",
+        "semantic-release-chrome": "^3.1.0",
         "sinon-chrome": "^3.0.1",
         "ts-jest": "^27.1.4",
         "ts-node": "^10.8.2",
