@@ -113,7 +113,7 @@
         "@semantic-release/changelog": "^6.0.1",
         "@types/chrome": "^0.0.196",
         "@types/copy-webpack-plugin": "^10.1.0",
-        "@types/jest": "^29.0.1",
+        "@types/jest": "^29.0.2",
         "@types/node": "^18.7.17",
         "@types/webpack": "^5.28.0",
         "@typescript-eslint/eslint-plugin": "^5.37.0",
