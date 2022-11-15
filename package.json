@@ -119,7 +119,7 @@
         "@typescript-eslint/eslint-plugin": "^5.40.1",
         "@typescript-eslint/parser": "^5.40.1",
         "acorn": "^8.8.0",
-        "ajv": "^8.11.0",
+        "ajv": "^8.11.2",
         "babel-loader": "^8.2.5",
         "babel-runtime": "^6.26.0",
         "commitizen": "^4.2.5",
