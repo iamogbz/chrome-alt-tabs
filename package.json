@@ -116,7 +116,7 @@
         "@types/jest": "^29.2.3",
         "@types/node": "^18.11.9",
         "@types/webpack": "^5.28.0",
-        "@typescript-eslint/eslint-plugin": "^5.44.0",
+        "@typescript-eslint/eslint-plugin": "^5.45.0",
         "@typescript-eslint/parser": "^5.44.0",
         "acorn": "^8.8.1",
         "ajv": "^8.11.2",
