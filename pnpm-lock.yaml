@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^6.0.2
     version: 6.0.3(semantic-release@19.0.5)
   '@types/chrome':
-    specifier: ^0.0.203
-    version: 0.0.203
+    specifier: ^0.0.238
+    version: 0.0.238
   '@types/copy-webpack-plugin':
     specifier: ^10.1.0
     version: 10.1.0(webpack@5.88.0)
@@ -1532,8 +1532,8 @@ packages:
       '@types/responselike': 1.0.0
     dev: true
 
-  /@types/chrome@0.0.203:
-    resolution: {integrity: sha512-JlQNebwpBETVc8U1Rr2inDFuOTtn0lahRAhnddx1dd0S5RrLAFJEEsyIu7AXI14mkCgSunksnuLGioH8kvBqRA==}
+  /@types/chrome@0.0.238:
+    resolution: {integrity: sha512-WManYZwAkCjaBcJXV/Dj/UwGOUm1qFpqyasovWmqSlvbTWzjYFUUZW4IRnZsjxmu2r5VtNWWHexgFcHVFbWGuQ==}
     dependencies:
       '@types/filesystem': 0.0.31
       '@types/har-format': 1.2.6
