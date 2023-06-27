@@ -115,7 +115,7 @@
         "@types/copy-webpack-plugin": "^10.1.0",
         "@types/jest": "^29.2.4",
         "@types/node": "^18.11.11",
-        "@types/webpack": "^5.28.0",
+        "@types/webpack": "^5.28.1",
         "@typescript-eslint/eslint-plugin": "^5.60.1",
         "@typescript-eslint/parser": "^5.45.1",
         "acorn": "^8.8.1",
