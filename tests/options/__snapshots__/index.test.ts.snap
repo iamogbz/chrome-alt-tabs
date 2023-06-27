@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`options renders all commands 1`] = `
-"<li class=\\"cmd\\">
-                <span class=\\"sc-cmd\\">ctrl+1</span>
-                <span class=\\"sc-name\\">Command1</span>
-                <span class=\\"sc-desc\\">mock command 1</span>
-                </li><li class=\\"cmd\\">
-                <span class=\\"sc-cmd\\">ctrl+2</span>
-                <span class=\\"sc-name\\">Command2</span>
-                <span class=\\"sc-desc\\">mock command 2</span>
-                </li><li class=\\"cmd\\">
-                <span class=\\"sc-cmd\\">ctrl+3</span>
-                <span class=\\"sc-name\\">Command3</span>
-                <span class=\\"sc-desc\\">mock command 3</span>
+"<li class="cmd">
+                <span class="sc-cmd">ctrl+1</span>
+                <span class="sc-name">Command1</span>
+                <span class="sc-desc">mock command 1</span>
+                </li><li class="cmd">
+                <span class="sc-cmd">ctrl+2</span>
+                <span class="sc-name">Command2</span>
+                <span class="sc-desc">mock command 2</span>
+                </li><li class="cmd">
+                <span class="sc-cmd">ctrl+3</span>
+                <span class="sc-name">Command3</span>
+                <span class="sc-desc">mock command 3</span>
                 </li>"
 `;
