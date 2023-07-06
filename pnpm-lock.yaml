@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   core-js:
-    specifier: ^3.26.1
-    version: 3.31.0
+    specifier: ^3.31.1
+    version: 3.31.1
   crx-livereload:
     specifier: ^0.2.1
     version: 0.2.1
@@ -3023,8 +3023,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /core-js@3.31.0:
-    resolution: {integrity: sha512-NIp2TQSGfR6ba5aalZD+ZQ1fSxGhDo/s1w0nx3RYzf2pnJxt7YynxFlFScP6eV7+GZsKO95NSjGxyJsU3DZgeQ==}
+  /core-js@3.31.1:
+    resolution: {integrity: sha512-2sKLtfq1eFST7l7v62zaqXacPc7uG8ZAya8ogijLhTtaKNcpzpB4TMoTw2Si+8GYKRwFPMMtUT0263QFWFfqyQ==}
     requiresBuild: true
     dev: false
 
