@@ -112,7 +112,7 @@
         "@glen/jest-raw-loader": "^2.0.0",
         "@rundik/responsive-json-webpack-plugin": "^1.5.3",
         "@semantic-release/changelog": "^6.0.2",
-        "@types/chrome": "^0.0.239",
+        "@types/chrome": "^0.0.240",
         "@types/jest": "^29.2.4",
         "@types/node": "^20.4.0",
         "@types/webpack": "^5.28.0",
