@@ -114,7 +114,7 @@
         "@semantic-release/changelog": "^6.0.2",
         "@types/chrome": "^0.0.243",
         "@types/jest": "^29.5.3",
-        "@types/node": "^20.4.7",
+        "@types/node": "^20.4.8",
         "@types/webpack": "^5.28.0",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
         "@typescript-eslint/parser": "^5.62.0",
