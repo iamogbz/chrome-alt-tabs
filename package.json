@@ -149,6 +149,6 @@
     "dependencies": {
         "core-js": "^3.32.0",
         "crx-livereload": "^0.2.1",
-        "regenerator-runtime": "^0.13.11"
+        "regenerator-runtime": "^0.14.0"
     }
 }
