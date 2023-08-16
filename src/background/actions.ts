@@ -8,7 +8,7 @@ export const moveTabs = ({
 }: MoveTabAction["payload"]): MoveTabAction => {
   if (!tabs || !tabs.length) {
     throw new Error(
-      `Invalid Action Definition: move ${tabs} (${from} => ${to})`
+      `Invalid Action Definition: move ${tabs} (${from} => ${to})`,
     );
   }
   return {

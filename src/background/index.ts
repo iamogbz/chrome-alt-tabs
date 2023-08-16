@@ -37,7 +37,7 @@ const withCommandContext =
       windowId: number;
       selectedTabs: ChromeTab[];
       isAllTabsSelected: boolean;
-    }) => void
+    }) => void,
   ) =>
   async () => {
     const { currentWindow, selectedTabs, allTabs } = await getCommandContext();
@@ -50,21 +50,21 @@ export const commandActions = {
     async ({ windowId, selectedTabs: tabs, isAllTabsSelected }) => {
       if (isAllTabsSelected) return;
       await handleAction(moveTabs({ tabs, from: windowId }));
-    }
+    },
   ),
   [COMMANDS.NEXT]: withCommandContext(
     async ({ windowId, selectedTabs: tabs }) => {
       const from = windowId;
       const to = await getWindowIdAfter(from);
       await handleAction(moveTabs({ tabs, from, to }));
-    }
+    },
   ),
   [COMMANDS.PREV]: withCommandContext(
     async ({ windowId, selectedTabs: tabs }) => {
       const from = windowId;
       const to = await getWindowIdBefore(from);
       await handleAction(moveTabs({ tabs, from, to }));
-    }
+    },
   ),
   [COMMANDS.BACK]: async (): Promise<void> => {
     await handleAction(undo());

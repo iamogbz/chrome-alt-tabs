@@ -6,7 +6,7 @@ import { COMMANDS } from "background/constants";
 import * as handlers from "background/handler";
 import * as chromeUtils from "utils/chrome";
 
-const mockTabs = [11, 22, 33].map((id) => ({ id } as ChromeTab));
+const mockTabs = [11, 22, 33].map((id) => ({ id }) as ChromeTab);
 const selectedTabs = mockTabs.slice(1);
 const mockWindow = { id: 1 } as ChromeWindow;
 
@@ -53,7 +53,7 @@ describe("background", () => {
       const expected = expectedArgs[command].some;
       expect(handleActionSpy).toHaveBeenCalledWith(expected);
       commandSpy.mockRestore();
-    }
+    },
   );
 
   it.each(Object.values(COMMANDS).map((v) => [v]))(
@@ -70,7 +70,7 @@ describe("background", () => {
         expect(handleActionSpy).toHaveBeenCalledWith(expected);
       }
       commandSpy.mockRestore();
-    }
+    },
   );
 
   it("handles undefined action", async () => {

@@ -40,6 +40,6 @@ describe("wrapIndex", () => {
     "returns correctly wrapped index for index [%s] in size (%s)",
     (index, size, expected) => {
       expect(wrapIndex({ index, size })).toEqual(expected);
-    }
+    },
   );
 });

@@ -96,14 +96,14 @@ describe("chrome", () => {
       tabIds.forEach((tabId) =>
         expectToHaveBeenCalledWith(chrome.tabs.update, tabId, {
           highlighted: true,
-        })
+        }),
       );
     });
 
     it("moves tabs to window keeps index", async () => {
       const windowId = 1;
       const tabs = [8, 9, 10].map(
-        (id, index) => ({ id, index, windowId } as ChromeTab)
+        (id, index) => ({ id, index, windowId }) as ChromeTab,
       );
       tabs.push({ id: 1, windowId } as ChromeTab);
       const moveTabsPromise = moveTabsToWindow(tabs, windowId);
@@ -113,14 +113,14 @@ describe("chrome", () => {
         expectToHaveBeenCalledWith(chrome.tabs.move, id, {
           index: index === undefined ? -1 : index,
           windowId,
-        })
+        }),
       );
     });
 
     it("moves tabs to window places tabs at end", async () => {
       const windowId = 1;
       const tabs = [8, 9, 10].map(
-        (id, index) => ({ id, index, windowId: 2 } as ChromeTab)
+        (id, index) => ({ id, index, windowId: 2 }) as ChromeTab,
       );
       const moveTabsPromise = moveTabsToWindow(tabs, windowId);
       chrome.tabs.move.yield();
@@ -129,7 +129,7 @@ describe("chrome", () => {
         expectToHaveBeenCalledWith(chrome.tabs.move, t.id, {
           index: -1,
           windowId,
-        })
+        }),
       );
     });
   });
@@ -178,7 +178,7 @@ describe("chrome", () => {
       beforeEach(() =>
         chrome.windows.getAll
           .withArgs({ windowTypes: ["normal"] })
-          .yields(mockWindows)
+          .yields(mockWindows),
       );
       afterEach(chrome.windows.getAll.flush);
 
@@ -190,7 +190,7 @@ describe("chrome", () => {
         "gets window after index %i",
         async (index, expected) => {
           expect(await getWindowIdAfter(index)).toEqual(expected);
-        }
+        },
       );
 
       it("gets all windows", async () => {

@@ -18,7 +18,7 @@ const undoActionHandlers: { [type: string]: ActionHandler } = {};
  * Handle move action
  */
 doActionHandlers[MOVE_TABS] = async (
-  action: MoveTabAction
+  action: MoveTabAction,
 ): Promise<boolean> => {
   const {
     payload: { tabs, to },

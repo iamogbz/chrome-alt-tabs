@@ -8,6 +8,7 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "outDir": "./built",
+        "resolveJsonModule": true,
         "skipLibCheck": true,
         "target": "es6"
     },

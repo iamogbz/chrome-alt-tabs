@@ -26,7 +26,7 @@ describe("handler", () => {
   const targetWindowId = 2;
   const activeTabId = 11;
   const tabIds = [33, 22, activeTabId];
-  const mockTabs = tabIds.map((id) => ({ id, active: false } as ChromeTab));
+  const mockTabs = tabIds.map((id) => ({ id, active: false }) as ChromeTab);
   const mockTabsActive = mockTabs.map((tab) => ({
     ...tab,
     active: tab.id === activeTabId,
@@ -92,7 +92,7 @@ describe("handler", () => {
     expect(createWindowSpy).toHaveBeenCalledWith(activeTabId);
     expect(moveTabsToWindowSpy).toHaveBeenCalledWith(
       mockTabsActive,
-      newWindowId
+      newWindowId,
     );
     expect(chromeUtils.focusOnTab).toHaveBeenCalledWith(activeTabId);
     expect(chromeUtils.selectTabs).toHaveBeenCalledWith(tabIds);
@@ -125,7 +125,7 @@ describe("handler", () => {
     expect(moveTabsToWindowSpy).toHaveBeenCalledTimes(2);
     expect(moveTabsToWindowSpy).toHaveBeenLastCalledWith(
       mockTabs,
-      sourceWindowId
+      sourceWindowId,
     );
     expect(chromeUtils.focusOnTab).toHaveBeenCalledTimes(2);
     expect(chromeUtils.focusOnTab).toHaveBeenLastCalledWith(tabIds[0]);
@@ -147,7 +147,7 @@ describe("handler", () => {
     expect(moveTabsToWindowSpy).toHaveBeenCalledTimes(3);
     expect(moveTabsToWindowSpy).toHaveBeenLastCalledWith(
       mockTabs,
-      targetWindowId
+      targetWindowId,
     );
     expect(chromeUtils.focusOnTab).toHaveBeenLastCalledWith(tabIds[0]);
     moveTabsToWindowSpy.mockClear();
@@ -155,7 +155,7 @@ describe("handler", () => {
     expect(moveTabsToWindowSpy).toHaveBeenCalledTimes(2);
     expect(moveTabsToWindowSpy).toHaveBeenLastCalledWith(
       mockTabs,
-      sourceWindowId
+      sourceWindowId,
     );
   });
 });

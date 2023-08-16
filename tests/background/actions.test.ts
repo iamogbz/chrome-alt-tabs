@@ -3,7 +3,7 @@ import { moveTabs, undo } from "background/actions";
 describe("actions", () => {
   describe("move tabs", () => {
     const tabIds = [33, 22, 11];
-    const mockTabs = tabIds.map((id) => ({ id } as ChromeTab));
+    const mockTabs = tabIds.map((id) => ({ id }) as ChromeTab);
 
     it("creates valid action with no target", () => {
       expect(moveTabs({ tabs: mockTabs, from: 1 })).toMatchSnapshot();
@@ -19,7 +19,7 @@ describe("actions", () => {
         expect(() => {
           moveTabs({ tabs, from: 1, to: 2 });
         }).toThrowErrorMatchingSnapshot();
-      }
+      },
     );
   });
 

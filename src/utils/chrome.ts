@@ -40,7 +40,7 @@ export const focusOnTab = (tabId: number): Promise<ChromeTab> =>
 const moveTabToWindow = (
   tabId: number,
   windowId: number,
-  index = -1
+  index = -1,
 ): Promise<ChromeTab> =>
   new Promise((resolve) => {
     chrome.tabs.move(tabId, { windowId, index }, resolve);
@@ -51,13 +51,13 @@ const moveTabToWindow = (
  */
 export const moveTabsToWindow = (
   tabs: ChromeTab[],
-  windowId: number
+  windowId: number,
 ): Promise<ChromeTab[]> =>
   Promise.all(
     tabs.map((tab) => {
       const index = tab.windowId === windowId ? tab.index : -1;
       return moveTabToWindow(tab.id, windowId, index);
-    })
+    }),
   );
 
 /**
@@ -96,7 +96,7 @@ export const getAllTabsInWindow = (windowId: number): Promise<ChromeTab[]> =>
  * Get selected tabs in specified window
  */
 export const getSelectedTabsInWindow = (
-  windowId: number
+  windowId: number,
 ): Promise<ChromeTab[]> =>
   queryTabs({
     highlighted: true,
@@ -128,7 +128,7 @@ export const getAllWindows = (
  */
 const compareWindowPositions = (
   windowA: ChromeWindow,
-  windowB: ChromeWindow
+  windowB: ChromeWindow,
 ): number => {
   const props = ["left", "top", "width", "height", "id"] as const;
   for (const prop of props) {
@@ -155,7 +155,7 @@ const getSortedWindowIds = async (): Promise<number[]> => {
  */
 const getWindowInPositionFrom = async (
   windowId: number,
-  offset: number
+  offset: number,
 ): Promise<number> => {
   const windowIds = await getSortedWindowIds();
   const index = windowIds.indexOf(windowId) + offset;

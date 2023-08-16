@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <span class='sc-cmd'>${cmd.shortcut}</span>
                 <span class='sc-name'>${cmd.name}</span>
                 <span class='sc-desc'>${cmd.description}</span>
-                </li>`
+                </li>`,
     )
     .join("");
 });

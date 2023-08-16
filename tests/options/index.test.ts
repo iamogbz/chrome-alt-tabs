@@ -29,7 +29,7 @@ describe("options", () => {
   it("changes tab url", async () => {
     document.getElementById("change-btn").click();
     expect(changeTabUrlSpy).toHaveBeenCalledWith(
-      "chrome://extensions/configureCommands"
+      "chrome://extensions/configureCommands",
     );
   });
 });
