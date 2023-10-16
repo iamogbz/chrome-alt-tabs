@@ -32,8 +32,8 @@ devDependencies:
     specifier: ^17.8.0
     version: 17.8.0
   '@commitlint/travis-cli':
-    specifier: ^17.7.2
-    version: 17.7.2
+    specifier: ^17.8.0
+    version: 17.8.0
   '@glen/jest-raw-loader':
     specifier: ^2.0.0
     version: 2.0.0(jest@29.7.0)
@@ -694,34 +694,10 @@ packages:
       '@commitlint/types': 17.4.4
     dev: true
 
-  /@commitlint/load@17.7.2:
-    resolution: {integrity: sha512-XA7WTnsjHZ4YH6ZYsrnxgLdXzriwMMq+utZUET6spbOEEIPBCDLdOQXS26P+v3TTO4hUHOEhzUquaBv3jbBixw==}
-    engines: {node: '>=v14'}
-    requiresBuild: true
-    dependencies:
-      '@commitlint/config-validator': 17.6.7
-      '@commitlint/execute-rule': 17.4.0
-      '@commitlint/resolve-extends': 17.6.7
-      '@commitlint/types': 17.4.4
-      '@types/node': 20.5.1
-      chalk: 4.1.2
-      cosmiconfig: 8.2.0
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.2.0)(ts-node@10.9.1)(typescript@5.2.2)
-      lodash.isplainobject: 4.0.6
-      lodash.merge: 4.6.2
-      lodash.uniq: 4.5.0
-      resolve-from: 5.0.0
-      ts-node: 10.9.1(@types/node@20.5.1)(typescript@5.2.2)
-      typescript: 5.2.2
-    transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-    dev: true
-    optional: true
-
   /@commitlint/load@17.8.0:
     resolution: {integrity: sha512-9VnGXYJCP4tXmR4YrwP8n5oX6T5ZsHfPQq6WuUQOvAI+QsDQMaTGgTRXr7us+xsjz+b+mMBSagogqfUx2aixyw==}
     engines: {node: '>=v14'}
+    requiresBuild: true
     dependencies:
       '@commitlint/config-validator': 17.6.7
       '@commitlint/execute-rule': 17.4.0
@@ -803,8 +779,8 @@ packages:
       find-up: 5.0.0
     dev: true
 
-  /@commitlint/travis-cli@17.7.2:
-    resolution: {integrity: sha512-rniRfYRi0yMLACNmWUwVMrtjIjh3H4r82y6CVr7AnFPw5hjJYJwc3cmI/MNaC/X5x/ncO6WIpnRO7eirn4WjrA==}
+  /@commitlint/travis-cli@17.8.0:
+    resolution: {integrity: sha512-dBGIYdg3V+xv/P4RH+CZEFJ4I9nKmMQIRh7beLXjT5u1s9JBHmOSdapiu8P1NuB1Iw5cfibX08n8h2RChSsG8w==}
     engines: {node: '>=v14'}
     hasBin: true
     dependencies:
@@ -3112,7 +3088,7 @@ packages:
       longest: 2.0.1
       word-wrap: 1.2.5
     optionalDependencies:
-      '@commitlint/load': 17.7.2
+      '@commitlint/load': 17.8.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
