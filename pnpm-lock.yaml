@@ -41,8 +41,8 @@ devDependencies:
     specifier: ^6.0.3
     version: 6.0.3(semantic-release@22.0.8)
   '@types/chrome':
-    specifier: ^0.0.251
-    version: 0.0.251
+    specifier: ^0.0.252
+    version: 0.0.252
   '@types/jest':
     specifier: ^29.5.8
     version: 29.5.8
@@ -1728,8 +1728,8 @@ packages:
       '@types/responselike': 1.0.0
     dev: true
 
-  /@types/chrome@0.0.251:
-    resolution: {integrity: sha512-UF+yr0LEKWWGsKxQ5A3XOSF5SNoU1ctW3pXcWJPpT8OOUTEspYeaLU8spDKe+6xalXeMTS0TBrX1g0b6qlWmkw==}
+  /@types/chrome@0.0.252:
+    resolution: {integrity: sha512-bnVY4Vtz01Dd/KDAn6LgxhGPqBMMxvqjUe3PdbP65/aBvyh3Fuw2qgKooiPFHRVT8uL7SJC0n7EAWcXAjCC+Ug==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.11
