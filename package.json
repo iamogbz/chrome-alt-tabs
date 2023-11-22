@@ -112,7 +112,7 @@
         "@glen/jest-raw-loader": "^2.0.0",
         "@semantic-release/changelog": "^6.0.3",
         "@types/chrome": "^0.0.252",
-        "@types/jest": "^29.5.9",
+        "@types/jest": "^29.5.10",
         "@types/node": "^20.9.2",
         "@types/webpack": "^5.28.5",
         "@typescript-eslint/eslint-plugin": "^6.11.0",
