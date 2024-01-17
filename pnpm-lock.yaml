@@ -95,8 +95,8 @@ devDependencies:
     specifier: ^8.0.3
     version: 8.0.3
   image-minimizer-webpack-plugin:
-    specifier: ^3.8.3
-    version: 3.8.3(sharp@0.32.6)(webpack@5.89.0)
+    specifier: ^4.0.0
+    version: 4.0.0(sharp@0.32.6)(webpack@5.89.0)
   jest:
     specifier: ^29.7.0
     version: 29.7.0(@types/node@20.11.5)(ts-node@10.9.2)
@@ -4348,9 +4348,9 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /image-minimizer-webpack-plugin@3.8.3(sharp@0.32.6)(webpack@5.89.0):
-    resolution: {integrity: sha512-Ex0cjNJc2FUSuwN7WHNyxkIZINP0M9lrN+uWJznMcsehiM5Z7ELwk+SEkSGEookK1GUd2wf+09jy1PEH5a5XmQ==}
-    engines: {node: '>= 12.13.0'}
+  /image-minimizer-webpack-plugin@4.0.0(sharp@0.32.6)(webpack@5.89.0):
+    resolution: {integrity: sha512-gBpAw9E1LxqlQ0/y72xHq3/3qWKh7xeIvhmNJOQEhj1hJPz2m/eQxREyuRkSIWJyN8ee8ZkwGnnNHe05jSmQrg==}
+    engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@squoosh/lib': '*'
       imagemin: '*'
@@ -4368,7 +4368,7 @@ packages:
         optional: true
     dependencies:
       schema-utils: 4.2.0
-      serialize-javascript: 6.0.1
+      serialize-javascript: 6.0.2
       sharp: 0.32.6
       webpack: 5.89.0(webpack-cli@5.1.4)
     dev: true
@@ -6943,12 +6943,6 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
-    dev: true
-
-  /serialize-javascript@6.0.1:
-    resolution: {integrity: sha512-owoXEFjWRllis8/M1Q+Cw5k8ZH40e3zhp/ovX+Xr/vi1qj6QesbyXXViFbpNvWvPNAD62SutwEXavefrLJWj7w==}
-    dependencies:
-      randombytes: 2.1.0
     dev: true
 
   /serialize-javascript@6.0.2:
