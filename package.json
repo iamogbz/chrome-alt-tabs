@@ -106,7 +106,7 @@
         "@babel/cli": "^7.23.4",
         "@babel/core": "^7.23.7",
         "@babel/preset-typescript": "^7.23.3",
-        "@commitlint/cli": "^18.4.4",
+        "@commitlint/cli": "^18.5.0",
         "@commitlint/config-conventional": "^18.5.0",
         "@commitlint/travis-cli": "^18.4.4",
         "@glen/jest-raw-loader": "^2.0.0",
