@@ -32,8 +32,8 @@ devDependencies:
     specifier: ^19.1.0
     version: 19.1.0
   '@commitlint/travis-cli':
-    specifier: ^19.2.0
-    version: 19.2.0(@types/node@20.11.29)(typescript@5.4.2)
+    specifier: ^19.2.1
+    version: 19.2.1(@types/node@20.11.29)(typescript@5.4.2)
   '@glen/jest-raw-loader':
     specifier: ^2.0.0
     version: 2.0.0(jest@29.7.0)
@@ -833,8 +833,8 @@ packages:
       find-up: 7.0.0
     dev: true
 
-  /@commitlint/travis-cli@19.2.0(@types/node@20.11.29)(typescript@5.4.2):
-    resolution: {integrity: sha512-WDK4T2tD5+fupDqlyyAcTQWFw8IwmAew7+ZPVmYbcDrbDZqMoxxLZ6cChQgLaIeupX13UU7OhTuMOzjYmhJRMQ==}
+  /@commitlint/travis-cli@19.2.1(@types/node@20.11.29)(typescript@5.4.2):
+    resolution: {integrity: sha512-XeDocXIQNV4nSRUyTYOhsPwFi4Kq5GNXtVaQjbW/X4cCKJxRpV+UVSt4SEhALyYGVJk3sd3ygvvU4sOwNWQoHQ==}
     engines: {node: '>=v18'}
     hasBin: true
     dependencies:
