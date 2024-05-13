@@ -111,7 +111,7 @@
         "@commitlint/travis-cli": "^19.3.0",
         "@glen/jest-raw-loader": "^2.0.0",
         "@semantic-release/changelog": "^6.0.3",
-        "@types/chrome": "^0.0.267",
+        "@types/chrome": "^0.0.268",
         "@types/jest": "^29.5.12",
         "@types/node": "^20.12.11",
         "@types/webpack": "^5.28.5",
