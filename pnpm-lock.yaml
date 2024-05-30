@@ -95,8 +95,8 @@ devDependencies:
     specifier: ^9.0.11
     version: 9.0.11
   image-minimizer-webpack-plugin:
-    specifier: ^4.0.0
-    version: 4.0.0(sharp@0.32.6)(webpack@5.91.0)
+    specifier: ^4.0.1
+    version: 4.0.1(sharp@0.32.6)(webpack@5.91.0)
   jest:
     specifier: ^29.7.0
     version: 29.7.0(@types/node@20.12.12)(ts-node@10.9.2)
@@ -4413,8 +4413,8 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /image-minimizer-webpack-plugin@4.0.0(sharp@0.32.6)(webpack@5.91.0):
-    resolution: {integrity: sha512-gBpAw9E1LxqlQ0/y72xHq3/3qWKh7xeIvhmNJOQEhj1hJPz2m/eQxREyuRkSIWJyN8ee8ZkwGnnNHe05jSmQrg==}
+  /image-minimizer-webpack-plugin@4.0.1(sharp@0.32.6)(webpack@5.91.0):
+    resolution: {integrity: sha512-sKANrcwFTGyFlyir0Ke4ZTwrvjxb+VeFhh7P/Mbo0zJ+t0/AxpT/JSTptCXU+LbTaY34g61P7Aez7+T/itKt5w==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@squoosh/lib': '*'
