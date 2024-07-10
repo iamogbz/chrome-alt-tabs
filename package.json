@@ -141,7 +141,7 @@
         "semantic-release-chrome": "^3.2.0",
         "sharp": "^0.32.6",
         "sinon-chrome": "^3.0.1",
-        "ts-jest": "^29.1.5",
+        "ts-jest": "^29.2.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.5.2",
         "webpack": "^5.92.1",
