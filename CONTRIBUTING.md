@@ -5,6 +5,7 @@ Suggestions and pull requests are highly encouraged! [Open issues](https://githu
 ## Required reading [:notebook:](#1)
 
 - You will need to be familiar with [npm](https://docs.npmjs.com/getting-started/), [webpack](https://webpack.js.org/guides/getting-started/) and [jest](https://jestjs.io/docs/en/getting-started).
+- [Chrome webstore authentication credentials](https://github.com/GabeDuarteM/semantic-release-chrome/blob/master/Authentication.md).
 - The extension can be build and loaded into Chrome or Firefox locally for QA
 
 ## Getting started [:electric_plug:](#2)
