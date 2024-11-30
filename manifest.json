@@ -1,5 +1,6 @@
 {
     "action": {
+        "default_icon": "icon.128.png",
         "default_popup": "options.html"
     },
     "background": {
