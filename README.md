@@ -31,7 +31,7 @@ View the [options](chrome://extensions/?options=nhdnpkpelibodokklomapifnabkhbaba
 
 ## Contribute
 
-See the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/master/CONTRIBUTING.md) for local development and testing!
+See the [contribution guide](https://github.com/iamogbz/chrome-alt-tabs/blob/HEAD/CONTRIBUTING.md) for local development and testing!
 
 ## Privacy
 
@@ -47,7 +47,7 @@ please feel free to contact us at [iamogbz/chrome-alt-tabs](https://github.com/i
 
 Thank you for using Chrome Alt Tabs extension!
 
-See [privacy policy](https://github.com/iamogbz/chrome-alt-tabs/blob/master/PRIVACY.md) for updated details including the revision date!
+See [privacy policy](https://github.com/iamogbz/chrome-alt-tabs/blob/HEAD/PRIVACY.md) for updated details including the revision date!
 
 ## Extras
 
