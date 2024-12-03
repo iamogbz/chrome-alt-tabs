@@ -1,6 +1,6 @@
 {
   "assets/images/logo.png": {
-    "name": "icon.[size]",
-    "sizes": [16,32,48,128]
+    "name": "icon.",
+    "sizes": [16, 32, 48, 128]
   }
 }
