@@ -42,9 +42,7 @@
     "manifest_version": 3,
     "name": "Alt Tab Shortcuts",
     "options_page": "options.html",
-    "permissions": [
-        "tabs"
-    ],
+    "permissions": [],
     "short_name": "AltTabs",
     "version": "0.0.0"
 }
