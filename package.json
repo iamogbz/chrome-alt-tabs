@@ -108,7 +108,7 @@
         "@babel/preset-typescript": "^7.26.0",
         "@commitlint/cli": "^19.6.0",
         "@commitlint/config-conventional": "^19.6.0",
-        "@commitlint/travis-cli": "^19.6.0",
+        "@commitlint/travis-cli": "^19.6.1",
         "@glen/jest-raw-loader": "^2.0.0",
         "@semantic-release/changelog": "^6.0.3",
         "@types/chrome": "^0.0.287",
