@@ -115,7 +115,7 @@
         "@types/jest": "^29.5.14",
         "@types/node": "^22.10.2",
         "@types/webpack": "^5.28.5",
-        "@typescript-eslint/eslint-plugin": "^8.18.2",
+        "@typescript-eslint/eslint-plugin": "^8.19.0",
         "@typescript-eslint/parser": "^8.19.0",
         "babel-loader": "^9.2.1",
         "babel-runtime": "^6.26.0",
