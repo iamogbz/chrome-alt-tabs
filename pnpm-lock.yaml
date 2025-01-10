@@ -43,8 +43,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3(semantic-release@24.2.1(typescript@5.7.2))
       '@types/chrome':
-        specifier: ^0.0.290
-        version: 0.0.290
+        specifier: ^0.0.293
+        version: 0.0.293
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -982,8 +982,8 @@ packages:
   '@types/cacheable-request@6.0.3':
     resolution: {integrity: sha512-IQ3EbTzGxIigb1I3qPZc1rWJnH0BmSKv5QYTalEwweFvyBDLSAe24zP0le/hyi7ecGfZVlIVAg4BZqb8WBwKqw==}
 
-  '@types/chrome@0.0.290':
-    resolution: {integrity: sha512-N92vsAdlwoWameDQ8D4K0EZXXvxsJ1+gJg+4TWjUUsZ6gpontVmwl1XVtysA3mso45Fcn5UPiX/yqiT8GcBV3A==}
+  '@types/chrome@0.0.293':
+    resolution: {integrity: sha512-pghCOLVHsnePWcMEHCxkAfMRx8qJWmj4lUoyF3ZpANniKz8AucIGLSld7smsrTdLUkk/p5JjOCGVDRdUDHx+uA==}
 
   '@types/conventional-commits-parser@5.0.0':
     resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==}
@@ -5653,7 +5653,7 @@ snapshots:
       '@types/node': 22.10.5
       '@types/responselike': 1.0.0
 
-  '@types/chrome@0.0.290':
+  '@types/chrome@0.0.293':
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.11
