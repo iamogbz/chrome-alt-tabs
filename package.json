@@ -133,7 +133,7 @@
         "jest-environment-jsdom": "^30.0.2",
         "jest-mock-props": "^1.9.1",
         "lint-staged": "^16.1.2",
-        "prettier": "^3.5.3",
+        "prettier": "^3.6.0",
         "prettier-eslint": "^16.4.2",
         "rxjs": "^7.8.2",
         "semantic-release": "^24.2.5",
