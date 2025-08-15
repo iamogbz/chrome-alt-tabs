@@ -103,7 +103,7 @@
         }
     },
     "devDependencies": {
-        "@babel/cli": "^7.28.0",
+        "@babel/cli": "^7.28.3",
         "@babel/core": "^7.28.0",
         "@babel/preset-typescript": "^7.27.1",
         "@commitlint/cli": "^19.8.1",
