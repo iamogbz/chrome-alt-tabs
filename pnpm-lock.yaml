@@ -34,8 +34,8 @@ importers:
         specifier: ^20.3.0
         version: 20.3.0
       '@commitlint/travis-cli':
-        specifier: ^20.3.0
-        version: 20.3.0(@types/node@25.0.3)(typescript@5.9.3)
+        specifier: ^20.3.1
+        version: 20.3.1(@types/node@25.0.3)(typescript@5.9.3)
       '@glen/jest-raw-loader':
         specifier: ^2.0.0
         version: 2.0.0(jest@30.0.5(@types/node@25.0.3)(ts-node@10.9.2(@types/node@25.0.3)(typescript@5.9.3)))
@@ -465,8 +465,8 @@ packages:
     resolution: {integrity: sha512-drXaPSP2EcopukrUXvUXmsQMu3Ey/FuJDc/5oiW4heoCfoE5BdLQyuc7veGeE3aoQaTVqZnh4D5WTWe2vefYKg==}
     engines: {node: '>=v18'}
 
-  '@commitlint/travis-cli@20.3.0':
-    resolution: {integrity: sha512-3jNod25K7+AHSEZRg41o9DcHCCMijboOcNprh3AEldr4NbCjjW4mWLTdr9RUqHDrWLhTg3HUY4twEPI0TsEHEg==}
+  '@commitlint/travis-cli@20.3.1':
+    resolution: {integrity: sha512-yB6xM2e+O58gNx7QXjeaYISRIBW/5Csl+ILa4awhk91O9fv9BLQDopJr69vophTmyb4gQ+rmpDri16PiUZPOIA==}
     engines: {node: '>=v18'}
     hasBin: true
 
@@ -5292,7 +5292,7 @@ snapshots:
     dependencies:
       find-up: 7.0.0
 
-  '@commitlint/travis-cli@20.3.0(@types/node@25.0.3)(typescript@5.9.3)':
+  '@commitlint/travis-cli@20.3.1(@types/node@25.0.3)(typescript@5.9.3)':
     dependencies:
       '@commitlint/cli': 20.3.1(@types/node@25.0.3)(typescript@5.9.3)
       tinyexec: 1.0.2
